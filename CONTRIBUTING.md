@@ -1,35 +1,43 @@
-# Contributing
+# Contributing to DeckGym
 
-The main contribution is to implement attacks and abilities, making cards usable in the Website.
+Thank you for considering contributing to DeckGym! We welcome contributions from everyone. Below are some guidelines to help you get started.
 
-## Implementing Missing Cards
+## How to Contribute
 
-Cards appear as "Not Implemented" in the UI if they are missing an Attack or Ability.
+1. **Fork the repository**: Click the "Fork" button at the top right of the repository page.
+2. **Clone your fork**:
+   ```sh
+   git clone https://github.com/your-username/deckgym-core.git
+   ```
+3. **Create a branch**:
+   ```sh
+   git checkout -b my-feature-branch
+   ```
+4. **Make your changes**: Implement your feature or bug fix (see main [README](./README.md) for more information).
+5. **Commit your changes**:
+   ```sh
+   git commit -am 'Add new feature'
+   ```
+6. **Push to your branch**:
+   ```sh
+   git push origin my-feature-branch
+   ```
+7. **Create a Pull Request**: Go to the repository on GitHub and click "New Pull Request".
 
-### Implement Attacks
+## Reporting Issues
 
-- In `attacks.rs` add the attack to the `AttackId` enum and the `ATTACK_ID_MAP` map (with the correct index).
-- Implement the attack logic in `forecast_attack_action` in `apply_attack_action.rs`.
-- Build the project, the card should now be selectable in the UI.
-  - In one tab, run the Next.JS app: `cd deckgym-web && npm install && npm run dev`
-  - In another tab, build the Rust and WASM components with `make`.
+If you find a bug or have a feature request, please create an issue on GitHub. Provide as much detail as possible to help us understand and address the issue.
 
-### Implement Abilities
+## Style Guide
 
-TODO
+Rust code uses the built-in `cargo fmt`.
 
-### Implement Trainer / Support Cards
+## Testing
 
-- Implement the "move generation" logic. This is the logic that checks if
-  the user can play a card (e.g. Misty can only be used if Water pokemon in play),
-  and how many ways it can be played (e.g. a Potion can be applied to the active, bench 1, bench 2 or so).
-  - Visit `move_generation_trainer.rs`. Its often the case the Trainer/Support can
-    always be played, so just add to this case in the switch.
-- Implement the "apply action" logic. This is the code that actually runs when
-  a user is played.
-  - Visit `apply_trainer_action.rs`.
-  - Often its just "applying an effect" in the field (like Leaf). For this, just
-    add the card in the `.turn_effects` field in the state. Then implement the actual
-    effect in `hooks.rs` or another place if necessary.
+To ensure changes don't break existing functionality, run the test suite with:
 
-## Appendix
+```sh
+cargo test
+```
+
+Thank you for your contributions!

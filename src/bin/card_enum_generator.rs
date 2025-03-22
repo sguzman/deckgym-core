@@ -18,7 +18,7 @@ fn main() {
     let args = Args::parse();
 
     // Read the JSON file into Card structs
-    let mut file = File::open("../web/src/database.json").expect("Unable to open file");
+    let mut file = File::open("./database.json").expect("database.json should be there");
     let mut json_string = String::new();
     file.read_to_string(&mut json_string)
         .expect("Unable to read string");
