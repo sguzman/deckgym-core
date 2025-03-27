@@ -75,6 +75,9 @@ fn forecast_effect_attack(
         AttackId::A1052CentiskorchFireBlast => energy_discard_attack(0, vec![EnergyType::Fire]),
         AttackId::A1055BlastoiseHydroPump => hydro_pump_attack(acting_player, state, 80),
         AttackId::A1056BlastoiseExHydroBazooka => hydro_pump_attack(acting_player, state, 100),
+        AttackId::A1063TentacruelPoisonTentacles => {
+            damage_status_attack(50, StatusCondition::Poisoned)
+        }
         AttackId::A1096PikachuExCircleCircuit => {
             bench_count_attack(acting_player, state, 0, 30, Some(EnergyType::Lightning))
         }
