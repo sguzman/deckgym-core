@@ -10,6 +10,7 @@ pub enum AttackId {
     A1022ExeggutorStomp,
     A1023ExeggutorExTropicalSwing,
     A1024TangelaAbsorb,
+    A1026PinsirDoubleHorn,
     A1029PetililBlot,
     A1031Skiddo,
     A1033CharmanderEmber,
@@ -43,6 +44,7 @@ lazy_static::lazy_static! {
         m.insert(("A1 022", 0), AttackId::A1022ExeggutorStomp);
         m.insert(("A1 023", 0), AttackId::A1023ExeggutorExTropicalSwing);
         m.insert(("A1 024", 0), AttackId::A1024TangelaAbsorb);
+        m.insert(("A1 026", 0), AttackId::A1026PinsirDoubleHorn);
         m.insert(("A1 029", 0), AttackId::A1029PetililBlot);
         m.insert(("A1 031", 0), AttackId::A1031Skiddo);
         m.insert(("A1 033", 0), AttackId::A1033CharmanderEmber);
@@ -61,6 +63,7 @@ lazy_static::lazy_static! {
         m.insert(("A1 196", 0), AttackId::A1196MeowthPayDay);
         m.insert(("A1 203", 0), AttackId::A1203KangaskhanDizzyPunch);
         // Full Arts A1
+        m.insert(("A1 229", 0), AttackId::A1026PinsirDoubleHorn);
         m.insert(("A1 230", 0), AttackId::A1033CharmanderEmber);
         m.insert(("A1 246", 0), AttackId::A1196MeowthPayDay);
         m.insert(("A1 251", 1), AttackId::A1004VenusaurExGiantBloom);

@@ -58,6 +58,9 @@ fn forecast_effect_attack(
             probabilistic_damage_attack(vec![0.5, 0.5], vec![40, 80])
         }
         AttackId::A1024TangelaAbsorb => self_heal_attack(10, index),
+        AttackId::A1026PinsirDoubleHorn => {
+            probabilistic_damage_attack(vec![0.25, 0.5, 0.25], vec![0, 50, 100])
+        }
         AttackId::A1029PetililBlot => self_heal_attack(10, index),
         AttackId::A1031Skiddo => probabilistic_damage_attack(vec![0.5, 0.5], vec![0, 40]),
         AttackId::A1033CharmanderEmber => energy_discard_attack(0, vec![EnergyType::Fire]),
