@@ -70,6 +70,7 @@ fn forecast_effect_attack(
         AttackId::A1036CharizardExCrimsonStorm => {
             energy_discard_attack(1, vec![EnergyType::Fire, EnergyType::Fire])
         }
+        AttackId::A1038NinetalesFlamethrower => energy_discard_attack(0, vec![EnergyType::Fire]),
         AttackId::A1055BlastoiseHydroPump => hydro_pump_attack(acting_player, state, 80),
         AttackId::A1056BlastoiseExHydroBazooka => hydro_pump_attack(acting_player, state, 100),
         AttackId::A1096PikachuExCircleCircuit => {
