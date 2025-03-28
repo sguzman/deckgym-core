@@ -20,6 +20,7 @@ pub enum AttackId {
     A1040ArcanineHeatTackle,
     A1041ArcanineExInfernoOnrush,
     A1045FlareonFlamethrower,
+    A1046MoltresSkyAttack,
     A1052CentiskorchFireBlast,
     A1055BlastoiseHydroPump,
     A1056BlastoiseExHydroBazooka,
@@ -60,6 +61,7 @@ lazy_static::lazy_static! {
         m.insert(("A1 040", 0), AttackId::A1040ArcanineHeatTackle);
         m.insert(("A1 041", 0), AttackId::A1041ArcanineExInfernoOnrush);
         m.insert(("A1 045", 0), AttackId::A1045FlareonFlamethrower);
+        m.insert(("A1 046", 0), AttackId::A1046MoltresSkyAttack);
         m.insert(("A1 052", 0), AttackId::A1052CentiskorchFireBlast);
         m.insert(("A1 055", 0), AttackId::A1055BlastoiseHydroPump);
         m.insert(("A1 056", 1), AttackId::A1056BlastoiseExHydroBazooka);

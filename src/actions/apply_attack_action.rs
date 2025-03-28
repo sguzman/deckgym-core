@@ -74,6 +74,9 @@ fn forecast_effect_attack(
         AttackId::A1040ArcanineHeatTackle => self_damage_attack(100, 20),
         AttackId::A1041ArcanineExInfernoOnrush => self_damage_attack(120, 20),
         AttackId::A1045FlareonFlamethrower => energy_discard_attack(0, vec![EnergyType::Fire]),
+        AttackId::A1046MoltresSkyAttack => {
+            probabilistic_damage_attack(vec![0.5, 0.5], vec![0, 130])
+        }
         AttackId::A1052CentiskorchFireBlast => energy_discard_attack(0, vec![EnergyType::Fire]),
         AttackId::A1055BlastoiseHydroPump => hydro_pump_attack(acting_player, state, 80),
         AttackId::A1056BlastoiseExHydroBazooka => hydro_pump_attack(acting_player, state, 100),
