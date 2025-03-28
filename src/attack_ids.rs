@@ -17,6 +17,7 @@ pub enum AttackId {
     A1035CharizardFireSpin,
     A1036CharizardExCrimsonStorm,
     A1038NinetalesFlamethrower,
+    A1040ArcanineHeatTackle,
     A1045FlareonFlamethrower,
     A1052CentiskorchFireBlast,
     A1055BlastoiseHydroPump,
@@ -55,6 +56,7 @@ lazy_static::lazy_static! {
         m.insert(("A1 035", 0), AttackId::A1035CharizardFireSpin);
         m.insert(("A1 036", 1), AttackId::A1036CharizardExCrimsonStorm);
         m.insert(("A1 038", 0), AttackId::A1038NinetalesFlamethrower);
+        m.insert(("A1 040", 0), AttackId::A1040ArcanineHeatTackle);
         m.insert(("A1 045", 0), AttackId::A1045FlareonFlamethrower);
         m.insert(("A1 052", 0), AttackId::A1052CentiskorchFireBlast);
         m.insert(("A1 055", 0), AttackId::A1055BlastoiseHydroPump);
