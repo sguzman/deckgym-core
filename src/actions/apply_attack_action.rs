@@ -72,6 +72,7 @@ fn forecast_effect_attack(
         }
         AttackId::A1038NinetalesFlamethrower => energy_discard_attack(0, vec![EnergyType::Fire]),
         AttackId::A1040ArcanineHeatTackle => self_damage_attack(100, 20),
+        AttackId::A1041ArcanineExInfernoOnrush => self_damage_attack(120, 20),
         AttackId::A1045FlareonFlamethrower => energy_discard_attack(0, vec![EnergyType::Fire]),
         AttackId::A1052CentiskorchFireBlast => energy_discard_attack(0, vec![EnergyType::Fire]),
         AttackId::A1055BlastoiseHydroPump => hydro_pump_attack(acting_player, state, 80),
