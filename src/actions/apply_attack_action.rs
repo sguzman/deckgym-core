@@ -71,6 +71,8 @@ fn forecast_effect_attack(
             energy_discard_attack(1, vec![EnergyType::Fire, EnergyType::Fire])
         }
         AttackId::A1038NinetalesFlamethrower => energy_discard_attack(0, vec![EnergyType::Fire]),
+        AttackId::A1040ArcanineHeatTackle => self_damage_attack(100, 20),
+        AttackId::A1041ArcanineExInfernoOnrush => self_damage_attack(120, 20),
         AttackId::A1045FlareonFlamethrower => energy_discard_attack(0, vec![EnergyType::Fire]),
         AttackId::A1052CentiskorchFireBlast => energy_discard_attack(0, vec![EnergyType::Fire]),
         AttackId::A1055BlastoiseHydroPump => hydro_pump_attack(acting_player, state, 80),
@@ -220,6 +222,14 @@ fn energy_discard_attack(
         for energy in to_discard.iter() {
             active.discard_energy(energy);
         }
+    })
+}
+
+/// For attacks that deal damage to opponent and also damage themselves
+fn self_damage_attack(damage: u32, self_damage: u32) -> (Probabilities, Mutations) {
+    damage_effect_doutcome(damage, move |_, state, action| {
+        let active = state.get_active_mut(action.actor);
+        active.apply_damage(self_damage);
     })
 }
 
