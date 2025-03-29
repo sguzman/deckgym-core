@@ -114,7 +114,7 @@ fn apply_pokemon_checkup(
     }
     for (player, in_play_idx) in poisons_to_handle {
         let opponent = (player + 1) % 2;
-        handle_attack_damage(mutated_state, opponent, 10, in_play_idx);
+        handle_attack_damage(mutated_state, opponent, &vec![(10, in_play_idx)]);
     }
     // Advance turn
     mutated_state.advance_turn();
@@ -136,49 +136,65 @@ fn generate_boolean_vectors(n: usize) -> Vec<Vec<bool>> {
 pub(crate) fn handle_attack_damage(
     state: &mut State,
     attacking_player: usize,
-    damage: u32,
-    receiving_pokemon_idx: usize,
+    targets: &Vec<(u32, usize)>, // damage, in_play_idx
 ) {
-    if damage == 0 {
-        return;
-    }
-
-    // Apply damage to opponent's pokemon (without surpassing 0 HP)
     let opponent = (attacking_player + 1) % 2;
-    let receiving_pokemon = state.in_play_pokemon[opponent][receiving_pokemon_idx]
-        .as_mut()
-        .expect("Damage Receiving Pokemon should be there...");
-    receiving_pokemon.apply_damage(damage);
-    debug!(
-        "Dealt {} damage to opponent's {} Pokemon. Remaining HP: {}",
-        damage, receiving_pokemon_idx, receiving_pokemon.remaining_hp
-    );
+    let mut knockouts: Vec<usize> = vec![];
+    for (damage, receiving_pokemon_idx) in targets {
+        if *damage == 0 {
+            continue;
+        }
 
-    if receiving_pokemon.remaining_hp > 0 {
-        return;
+        // Apply damage to opponent's pokemon (without surpassing 0 HP)
+        let receiving_pokemon = state.in_play_pokemon[opponent][*receiving_pokemon_idx]
+            .as_mut()
+            .expect("Pokemon should be there if receiving damage");
+        receiving_pokemon.apply_damage(*damage);
+        debug!(
+            "Dealt {} damage to opponent's {} Pokemon. Remaining HP: {}",
+            damage, receiving_pokemon_idx, receiving_pokemon.remaining_hp
+        );
+
+        // TODO: If pokemon is active and has counterattack mechanisms, apply.
+        if receiving_pokemon.remaining_hp > 0 {
+            continue; // nothing to do
+        }
+        knockouts.push(*receiving_pokemon_idx);
     }
 
-    // If K.O. handle
-    let points_won = if receiving_pokemon.card.is_ex() { 2 } else { 1 };
-    state.points[attacking_player] += points_won;
-    debug!(
-        "Opponent's Pokemon {} fainted. Won {} points for a total of {}",
-        receiving_pokemon_idx, points_won, state.points[attacking_player]
-    );
+    // Handle knockouts: Discard cards and award points (to potentially short-circuit promotions)
+    // TODO: Could be a counter-attack knockout too.
+    for receiving_pokemon_idx in knockouts.clone() {
+        let receiving_pokemon = state.in_play_pokemon[opponent][receiving_pokemon_idx]
+            .as_mut()
+            .expect("Pokemon should be there if knocked out");
+
+        // Sum points
+        let points_won = if receiving_pokemon.card.is_ex() { 2 } else { 1 };
+        state.points[attacking_player] += points_won;
+        debug!(
+            "Opponent's Pokemon {} fainted. Won {} points for a total of {}",
+            receiving_pokemon_idx, points_won, state.points[attacking_player]
+        );
+
+        // Move card (and evolution chain) into discard pile
+        let mut cards_to_discard = receiving_pokemon.cards_behind.clone();
+        cards_to_discard.push(receiving_pokemon.card.clone());
+        debug!("Discarding: {:?}", cards_to_discard);
+        state.discard_piles[opponent].extend(cards_to_discard);
+        state.in_play_pokemon[opponent][receiving_pokemon_idx] = None;
+    }
+
+    // TODO: Could be tie because of counterattack knockouts
     if state.points[attacking_player] >= 3 {
         state.winner = Some(attacking_player); // the next ticker should end the game
         return;
     }
 
-    // Move card (and evolution chain) into discard pile
-    let mut cards_to_discard = receiving_pokemon.cards_behind.clone();
-    cards_to_discard.push(receiving_pokemon.card.clone());
-    debug!("Discarding: {:?}", cards_to_discard);
-    state.discard_piles[opponent].extend(cards_to_discard);
-    state.in_play_pokemon[opponent][receiving_pokemon_idx] = None;
-
-    // If K.O. was Active and opponent hasn't win, check if can select from Bench
-    if receiving_pokemon_idx == 0 {
+    // Queue up promotion actions if the game is still on after a knockout
+    // TODO: Attacker might also need to promote.
+    if knockouts.contains(&0) {
+        // If K.O. was Active and opponent hasn't win, check if can select from Bench
         let enumerated_bench_pokemon = state.enumerate_bench_pokemon(opponent).collect::<Vec<_>>();
         if enumerated_bench_pokemon.is_empty() {
             // If no bench pokemon, opponent loses

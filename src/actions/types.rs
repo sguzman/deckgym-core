@@ -47,8 +47,7 @@ pub enum SimpleAction {
         amount: u32,
     },
     ApplyDamage {
-        in_play_idx: usize,
-        damage: u32,
+        targets: Vec<(u32, usize)>, // Vec of (damage, in_play_idx)
     },
     Activate {
         in_play_idx: usize,
@@ -89,11 +88,13 @@ impl fmt::Display for SimpleAction {
                 in_play_idx,
                 amount,
             } => write!(f, "Heal({}, {})", in_play_idx, amount),
-            SimpleAction::ApplyDamage {
-                in_play_idx,
-                damage,
-            } => {
-                write!(f, "ApplyDamage({}, {})", in_play_idx, damage)
+            SimpleAction::ApplyDamage { targets } => {
+                let targets_str = targets
+                    .iter()
+                    .map(|(damage, in_play_idx)| format!("({}, {})", damage, in_play_idx))
+                    .collect::<Vec<_>>()
+                    .join(", ");
+                write!(f, "ApplyDamage({})", targets_str)
             }
             SimpleAction::Activate { in_play_idx } => write!(f, "Activate({})", in_play_idx),
         }

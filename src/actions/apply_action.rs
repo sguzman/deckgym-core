@@ -112,11 +112,8 @@ fn apply_deterministic_action(state: &mut State, action: &Action) {
         SimpleAction::Retreat(position) => {
             apply_retreat(action.actor, state, *position, false);
         }
-        SimpleAction::ApplyDamage {
-            in_play_idx,
-            damage,
-        } => {
-            handle_attack_damage(state, action.actor, *damage, *in_play_idx);
+        SimpleAction::ApplyDamage { targets } => {
+            handle_attack_damage(state, action.actor, targets);
         }
         // Trainer-Specific Actions
         SimpleAction::Heal {
