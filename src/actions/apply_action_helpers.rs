@@ -161,12 +161,12 @@ pub(crate) fn handle_attack_damage(
                 knockouts.push((defending_player, *target_pokemon_idx));
             }
 
-            let counter_damage = if *target_pokemon_idx == 0 {
-                get_counterattack_damage(&target_pokemon)
+            
+            if *target_pokemon_idx == 0 {
+                get_counterattack_damage(target_pokemon)
             } else {
                 0
-            };
-            counter_damage
+            }
         };
 
         // If pokemon not active, don't even look at counter-attack logic.

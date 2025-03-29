@@ -18,5 +18,5 @@ pub(crate) fn get_counterattack_damage(card: &PlayedCard) -> u32 {
         _ => {}
     }
 
-    return total_damage;
+    total_damage
 }
