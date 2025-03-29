@@ -61,9 +61,8 @@ pub fn generate_possible_actions(state: &State) -> (usize, Vec<Action>) {
             .for_each(|(i, x)| {
                 if x.is_some() {
                     actions.push(SimpleAction::Attach {
-                        in_play_idx: i,
-                        energy,
-                        amount: 1,
+                        attachments: vec![(1, energy, i)],
+                        is_turn_energy: true,
                     });
                 }
             })

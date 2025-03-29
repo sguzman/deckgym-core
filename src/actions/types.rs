@@ -35,9 +35,8 @@ pub enum SimpleAction {
 
     // Atomic actions as part of different effects.
     Attach {
-        in_play_idx: usize,
-        energy: EnergyType,
-        amount: u32,
+        attachments: Vec<(u32, EnergyType, usize)>, // (amount, energy_type, in_play_idx)
+        is_turn_energy: bool, // true if this is the energy from the zone that can be once per turn
     },
     AttachTool {
         in_play_idx: usize,
@@ -68,10 +67,18 @@ impl fmt::Display for SimpleAction {
             SimpleAction::Retreat(index) => write!(f, "Retreat({})", index),
             SimpleAction::EndTurn => write!(f, "EndTurn"),
             SimpleAction::Attach {
-                in_play_idx,
-                energy,
-                amount,
-            } => write!(f, "Attach({}, {:?}, {})", in_play_idx, energy, amount),
+                attachments,
+                is_turn_energy,
+            } => {
+                let attachments_str = attachments
+                    .iter()
+                    .map(|(amount, energy_type, in_play_idx)| {
+                        format!("({}, {:?}, {})", amount, energy_type, in_play_idx)
+                    })
+                    .collect::<Vec<_>>()
+                    .join(", ");
+                write!(f, "Attach({:?}, {})", attachments_str, is_turn_energy)
+            }
             SimpleAction::AttachTool {
                 in_play_idx,
                 tool_id,

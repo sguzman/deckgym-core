@@ -99,9 +99,8 @@ fn misty_outcomes() -> (Probabilities, Mutations) {
                     .enumerate_in_play_pokemon(action.actor)
                     .filter(|(_, x)| x.get_energy_type() == Some(EnergyType::Water))
                     .map(|(i, _)| SimpleAction::Attach {
-                        in_play_idx: i,
-                        energy: EnergyType::Water,
-                        amount: j,
+                        attachments: vec![(j, EnergyType::Water, i)],
+                        is_turn_energy: false,
                     })
                     .collect::<Vec<_>>();
                 if !possible_moves.is_empty() {

@@ -175,9 +175,8 @@ fn test_attach_action() {
 
     let current_player = state.current_player;
     let action = SimpleAction::Attach {
-        in_play_idx: 0,
-        energy: EnergyType::Grass,
-        amount: 1,
+        attachments: vec![(1, EnergyType::Grass, 0)],
+        is_turn_energy: true,
     };
     assert_eq!(
         &state.in_play_pokemon[current_player][0]

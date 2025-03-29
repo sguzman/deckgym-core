@@ -74,6 +74,10 @@ fn forecast_effect_attack(
         AttackId::A1040ArcanineHeatTackle => self_damage_attack(100, 20),
         AttackId::A1041ArcanineExInfernoOnrush => self_damage_attack(120, 20),
         AttackId::A1045FlareonFlamethrower => energy_discard_attack(0, vec![EnergyType::Fire]),
+        AttackId::A1046MoltresSkyAttack => {
+            probabilistic_damage_attack(vec![0.5, 0.5], vec![0, 130])
+        }
+        AttackId::A1047MoltresExInfernoDance => moltres_inferno_dance(),
         AttackId::A1052CentiskorchFireBlast => energy_discard_attack(0, vec![EnergyType::Fire]),
         AttackId::A1055BlastoiseHydroPump => hydro_pump_attack(acting_player, state, 80),
         AttackId::A1056BlastoiseExHydroBazooka => hydro_pump_attack(acting_player, state, 100),
@@ -111,6 +115,103 @@ fn forecast_effect_attack(
     }
 }
 
+fn moltres_inferno_dance() -> (Probabilities, Mutations) {
+    let probabilities = vec![0.125, 0.375, 0.375, 0.125]; // 0,1,2,3 heads
+    let mutations = probabilities
+        .iter()
+        .enumerate()
+        .map(|(heads, _)| {
+            damage_effect_mutation(0, move |_, state, action| {
+                if heads == 0 {
+                    return;
+                }
+
+                // First collect all eligible fire pokemon in bench
+                let mut fire_bench_idx = Vec::new();
+                for (in_play_idx, pokemon) in state.enumerate_bench_pokemon(action.actor) {
+                    if pokemon.get_energy_type() == Some(EnergyType::Fire) {
+                        fire_bench_idx.push(in_play_idx);
+                    }
+                }
+
+                if fire_bench_idx.is_empty() {
+                    return;
+                }
+
+                let all_choices = generate_energy_distributions(&fire_bench_idx, heads);
+                if !all_choices.is_empty() {
+                    state
+                        .move_generation_stack
+                        .push((action.actor, all_choices));
+                }
+            })
+        })
+        .collect();
+    (probabilities, mutations)
+}
+
+fn generate_energy_distributions(fire_bench_idx: &[usize], heads: usize) -> Vec<SimpleAction> {
+    let mut all_choices = Vec::new();
+
+    // Generate all possible ways to distribute the energy
+    let mut distributions = Vec::new();
+    generate_distributions(
+        fire_bench_idx,
+        heads,
+        0,
+        &mut vec![0; fire_bench_idx.len()],
+        &mut distributions,
+    );
+
+    // Convert each distribution into an Attach action
+    for dist in distributions {
+        let mut attachments = Vec::new();
+        for (i, &pokemon_idx) in fire_bench_idx.iter().enumerate() {
+            if dist[i] > 0 {
+                attachments.push((dist[i] as u32, EnergyType::Fire, pokemon_idx));
+            }
+        }
+        all_choices.push(SimpleAction::Attach {
+            attachments,
+            is_turn_energy: false,
+        });
+    }
+
+    all_choices
+}
+
+// Helper function to generate all possible distributions of 'heads' energy
+// across the available Pokémon
+fn generate_distributions(
+    fire_bench_idx: &[usize],
+    remaining: usize,
+    start_idx: usize,
+    current: &mut Vec<usize>,
+    result: &mut Vec<Vec<usize>>,
+) {
+    if remaining == 0 {
+        result.push(current.clone());
+        return;
+    }
+
+    if start_idx >= fire_bench_idx.len() {
+        return;
+    }
+
+    // Try different amounts for the current Pokémon
+    for amount in 0..=remaining {
+        current[start_idx] = amount;
+        generate_distributions(
+            fire_bench_idx,
+            remaining - amount,
+            start_idx + 1,
+            current,
+            result,
+        );
+    }
+    current[start_idx] = 0;
+}
+
 /// Deal damage and attach energy to a pokemon of choice in the bench.
 fn energy_bench_attack(
     attack_index: usize,
@@ -121,9 +222,8 @@ fn energy_bench_attack(
         let mut choices = Vec::new();
         for (in_play_idx, _) in state.enumerate_bench_pokemon(action.actor) {
             choices.push(SimpleAction::Attach {
-                in_play_idx,
-                energy,
-                amount,
+                attachments: vec![(amount, energy, in_play_idx)],
+                is_turn_energy: false,
             });
         }
         if choices.is_empty() {
@@ -448,5 +548,81 @@ mod test {
         lazy_mutations.remove(0)(&mut rng, &mut state, &action);
 
         assert_eq!(state.get_active(1).remaining_hp, 70);
+    }
+
+    #[test]
+    fn test_generate_energy_distributions() {
+        // 1 pokemon, 1 head
+        let fire_pokemon = vec![1];
+        let choices = generate_energy_distributions(&fire_pokemon, 1);
+        assert_eq!(choices.len(), 1);
+        if let SimpleAction::Attach { attachments, .. } = &choices[0] {
+            assert_eq!(attachments, &[(1, EnergyType::Fire, 1)]);
+        } else {
+            panic!("Expected SimpleAction::Attach");
+        }
+
+        // 1 pokemon, 2 heads
+        let choices = generate_energy_distributions(&fire_pokemon, 2);
+        assert_eq!(choices.len(), 1);
+        if let SimpleAction::Attach { attachments, .. } = &choices[0] {
+            assert_eq!(attachments, &[(2, EnergyType::Fire, 1)]);
+        } else {
+            panic!("Expected SimpleAction::Attach");
+        }
+
+        // 2 pokemon, 2 heads
+        let fire_pokemon = vec![1, 2];
+        let choices = generate_energy_distributions(&fire_pokemon, 2);
+        assert_eq!(choices.len(), 3);
+        let expected_distributions = [
+            vec![(2, EnergyType::Fire, 2)],
+            vec![(1, EnergyType::Fire, 1), (1, EnergyType::Fire, 2)],
+            vec![(2, EnergyType::Fire, 1)],
+        ];
+        for (i, choice) in choices.iter().enumerate() {
+            if let SimpleAction::Attach { attachments, .. } = choice {
+                assert_eq!(attachments, &expected_distributions[i]);
+            } else {
+                panic!("Expected SimpleAction::Attach");
+            }
+        }
+
+        // 2 pokemon, 3 heads
+        let choices = generate_energy_distributions(&fire_pokemon, 3);
+        assert_eq!(choices.len(), 4);
+        let expected_distributions = [
+            vec![(3, EnergyType::Fire, 2)],
+            vec![(1, EnergyType::Fire, 1), (2, EnergyType::Fire, 2)],
+            vec![(2, EnergyType::Fire, 1), (1, EnergyType::Fire, 2)],
+            vec![(3, EnergyType::Fire, 1)],
+        ];
+        for (i, choice) in choices.iter().enumerate() {
+            if let SimpleAction::Attach { attachments, .. } = choice {
+                assert_eq!(attachments, &expected_distributions[i]);
+            } else {
+                panic!("Expected SimpleAction::Attach");
+            }
+        }
+
+        // 3 pokemon, 2 heads
+        let fire_pokemon = vec![1, 2, 3];
+        let choices = generate_energy_distributions(&fire_pokemon, 2);
+        assert_eq!(choices.len(), 6);
+        let expected_distributions = [
+            vec![(2, EnergyType::Fire, 3)],
+            vec![(1, EnergyType::Fire, 2), (1, EnergyType::Fire, 3)],
+            vec![(2, EnergyType::Fire, 2)],
+            vec![(1, EnergyType::Fire, 1), (1, EnergyType::Fire, 3)],
+            vec![(1, EnergyType::Fire, 1), (1, EnergyType::Fire, 2)],
+            vec![(2, EnergyType::Fire, 1)],
+        ];
+        for (i, choice) in choices.iter().enumerate() {
+            if let SimpleAction::Attach { attachments, .. } = choice {
+                assert_eq!(attachments, &expected_distributions[i]);
+            } else {
+                panic!("Expected SimpleAction::Attach");
+            }
+        }
     }
 }
