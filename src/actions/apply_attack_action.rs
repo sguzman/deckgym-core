@@ -82,6 +82,7 @@ fn forecast_effect_attack(
         AttackId::A1052CentiskorchFireBlast => energy_discard_attack(0, vec![EnergyType::Fire]),
         AttackId::A1055BlastoiseHydroPump => hydro_pump_attack(acting_player, state, 80),
         AttackId::A1056BlastoiseExHydroBazooka => hydro_pump_attack(acting_player, state, 100),
+        AttackId::A1057PsyduckHeadache => damage_and_turn_effect_attack(0, 1),
         AttackId::A1063TentacruelPoisonTentacles => {
             damage_status_attack(50, StatusCondition::Poisoned)
         }
@@ -99,7 +100,7 @@ fn forecast_effect_attack(
             energy_discard_attack(index, vec![EnergyType::Psychic, EnergyType::Psychic])
         }
         AttackId::A1154HitmonleeStretchKick => direct_damage(30, true),
-        AttackId::A1165ArbokCorner => damage_and_turn_effect_attack(index),
+        AttackId::A1165ArbokCorner => damage_and_turn_effect_attack(index, 1),
         AttackId::A1196MeowthPayDay => draw_and_damage_outcome(10),
         AttackId::A1203KangaskhanDizzyPunch => {
             probabilistic_damage_attack(vec![0.25, 0.5, 0.25], vec![0, 30, 60])
@@ -391,10 +392,11 @@ fn self_heal_attack(heal: u32, index: usize) -> (Probabilities, Mutations) {
     })
 }
 
-fn damage_and_turn_effect_attack(index: usize) -> (Probabilities, Mutations) {
-    index_damage_doutcome(index, |_, state, action| {
+fn damage_and_turn_effect_attack(index: usize, effect_duration: u8) -> (Probabilities, Mutations) {
+    index_damage_doutcome(index, move |_, state, action| {
         let active = state.get_active(action.actor);
-        state.turn_effects.push(active.card.clone());
+        // TODO: Maybe create an EffectId enum and have a mapping between card,attack_idx to effect?
+        state.add_turn_effect(active.card.clone(), effect_duration);
     })
 }
 
