@@ -12,6 +12,7 @@ pub enum AttackId {
     A1024TangelaAbsorb,
     A1026PinsirDoubleHorn,
     A1029PetililBlot,
+    A1030LilligantLeafSupply,
     A1031Skiddo,
     A1033CharmanderEmber,
     A1035CharizardFireSpin,
@@ -54,6 +55,7 @@ lazy_static::lazy_static! {
         m.insert(("A1 024", 0), AttackId::A1024TangelaAbsorb);
         m.insert(("A1 026", 0), AttackId::A1026PinsirDoubleHorn);
         m.insert(("A1 029", 0), AttackId::A1029PetililBlot);
+        m.insert(("A1 030", 0), AttackId::A1030LilligantLeafSupply);
         m.insert(("A1 031", 0), AttackId::A1031Skiddo);
         m.insert(("A1 033", 0), AttackId::A1033CharmanderEmber);
         m.insert(("A1 035", 0), AttackId::A1035CharizardFireSpin);
