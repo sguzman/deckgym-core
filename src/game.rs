@@ -1,5 +1,5 @@
 use colored::Colorize;
-use log::{debug, info};
+use log::{debug, info, trace};
 use rand::{rngs::StdRng, SeedableRng};
 
 use crate::{
@@ -119,7 +119,7 @@ impl Game {
 
     fn print_state(&self) {
         if self.debug {
-            debug!("{}", self.state.debug_string());
+            trace!("{}", self.state.debug_string());
         }
     }
 

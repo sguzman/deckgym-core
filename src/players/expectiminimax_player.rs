@@ -1,4 +1,4 @@
-use log::debug;
+use log::{debug, trace, LevelFilter};
 use rand::rngs::StdRng;
 use std::fmt::Debug;
 
@@ -19,6 +19,8 @@ impl Player for ExpectiMiniMaxPlayer {
         state: &State,
         possible_actions: Vec<Action>,
     ) -> Action {
+        let original_level = log::max_level();
+        log::set_max_level(LevelFilter::Error); // Temporarily silence debug and trace logs
         let myself = possible_actions[0].actor;
         // Get value for each possible action
         let scores: Vec<f64> = possible_actions
@@ -33,6 +35,7 @@ impl Player for ExpectiMiniMaxPlayer {
             .max_by(|(_, a), (_, b)| a.partial_cmp(b).unwrap())
             .unwrap()
             .0;
+        log::set_max_level(original_level); // Restore the original logging level
         possible_actions[best_idx].clone()
     }
 
@@ -48,7 +51,7 @@ fn expected_value_function(
     depth: usize,
     myself: usize,
 ) -> f64 {
-    debug!("E({}) depth left: {} action: {:?}", myself, depth, action);
+    trace!("E({}) depth left: {} action: {:?}", myself, depth, action);
     let (probabilities, mutations) = forecast_action(state, action);
     let mut outcomes: Vec<State> = vec![];
     for mutation in mutations {

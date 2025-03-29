@@ -73,11 +73,13 @@ pub(crate) fn get_damage_from_attack(
 
     // If attack is 0, not even Giovanni takes it to 10.
     if attack.fixed_damage == 0 {
+        debug!("Attack is 0, returning 0");
         return attack.fixed_damage;
     }
 
     // If its bench attack, don't apply multipliers
     if receiving_index != 0 {
+        debug!("Bench attack, returning fixed {}", attack.fixed_damage);
         return attack.fixed_damage;
     }
 
@@ -104,6 +106,10 @@ pub(crate) fn get_damage_from_attack(
         }
     }
 
+    debug!(
+        "Attack: {:?}, Weakness: {}, Giovanni: {}",
+        attack.fixed_damage, weakness_modifier, giovanni_modifier
+    );
     attack.fixed_damage + weakness_modifier + giovanni_modifier
 }
 

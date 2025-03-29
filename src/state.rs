@@ -63,18 +63,13 @@ impl State {
 
     pub fn debug_string(&self) -> String {
         format!(
-            "P1H:\t{:?}\n\
-            P1B:\t{:?}\n\
-            P1A:\t{}\n\
-            \n\
-            P2A:\t{}\n\
-            P2B:\t{:?}\n\
-            P2H:\t{:?}",
+            "P1 Hand:\t{:?}\n\
+            P1 InPlay:\t{:?}\n\
+            P2 InPlay:\t{:?}\n\
+            P2 Hand:\t{:?}",
             to_canonical_names(self.hands[0].as_slice()),
-            format_cards(&self.in_play_pokemon[0][1..]),
-            format_card(&self.in_play_pokemon[0][0]).blue(),
-            format_card(&self.in_play_pokemon[1][0]).green(),
-            format_cards(&self.in_play_pokemon[1][1..]),
+            format_cards(&self.in_play_pokemon[0]),
+            format_cards(&self.in_play_pokemon[1]),
             to_canonical_names(self.hands[1].as_slice())
         )
     }
@@ -260,11 +255,10 @@ fn format_cards(played_cards: &[Option<PlayedCard>]) -> Vec<String> {
 fn format_card(x: &Option<PlayedCard>) -> String {
     match x {
         Some(played_card) => format!(
-            "{}({}hp,{:?},{:?})",
+            "{}({}hp,{:?})",
             played_card.get_name(),
             played_card.remaining_hp,
             played_card.attached_energy.len(),
-            played_card.cards_behind.len()
         ),
         None => "".to_string(),
     }
