@@ -85,7 +85,7 @@ pub(crate) fn get_damage_from_attack(
 
     // Giovanni's Modifier
     let mut giovanni_modifier = 0;
-    let giovanni_ids = vec![CardId::A1223Giovanni, CardId::A1270Giovanni];
+    let giovanni_ids = [CardId::A1223Giovanni, CardId::A1270Giovanni];
     if state
         .get_current_turn_effects()
         .iter()
