@@ -39,6 +39,7 @@ pub enum AttackId {
     A1154HitmonleeStretchKick,
     A1165ArbokCorner,
     A1171NidokingPoisonHorn,
+    A1195WigglytuffSleepySong,
     A1196MeowthPayDay,
     A1203KangaskhanDizzyPunch,
     A1a030DedenneThunderShock,
@@ -86,6 +87,7 @@ lazy_static::lazy_static! {
         m.insert(("A1 154", 0), AttackId::A1154HitmonleeStretchKick);
         m.insert(("A1 165", 0), AttackId::A1165ArbokCorner);
         m.insert(("A1 171", 0), AttackId::A1171NidokingPoisonHorn);
+        m.insert(("A1 195", 0), AttackId::A1195WigglytuffSleepySong);
         m.insert(("A1 196", 0), AttackId::A1196MeowthPayDay);
         m.insert(("A1 203", 0), AttackId::A1203KangaskhanDizzyPunch);
         // Full Arts A1
@@ -103,8 +105,10 @@ lazy_static::lazy_static! {
         m.insert(("A1 260", 1), AttackId::A1104ZapdosExThunderingHurricane);
         m.insert(("A1 262", 1), AttackId::A1129MewtwoExPsydrive);
         m.insert(("A1 264", 0), AttackId::A1153MarowakExBonemerang);
+        m.insert(("A1 265", 0), AttackId::A1195WigglytuffSleepySong);
         m.insert(("A1 274", 0), AttackId::A1047MoltresExInfernoDance);
         m.insert(("A1 276", 1), AttackId::A1104ZapdosExThunderingHurricane);
+        m.insert(("A1 279", 0), AttackId::A1195WigglytuffSleepySong);
         m.insert(("A1 280", 1), AttackId::A1036CharizardExCrimsonStorm);
         m.insert(("A1 281", 0), AttackId::A1096PikachuExCircleCircuit);
         m.insert(("A1 282", 1), AttackId::A1129MewtwoExPsydrive);
