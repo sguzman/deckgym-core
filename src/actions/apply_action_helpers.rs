@@ -157,11 +157,10 @@ pub(crate) fn handle_attack_damage(
                 "Dealt {} damage to opponent's {} Pokemon. Remaining HP: {}",
                 damage, target_pokemon_idx, target_pokemon.remaining_hp
             );
-            if target_pokemon.remaining_hp <= 0 {
+            if target_pokemon.remaining_hp == 0 {
                 knockouts.push((defending_player, *target_pokemon_idx));
             }
 
-            
             if *target_pokemon_idx == 0 {
                 get_counterattack_damage(target_pokemon)
             } else {
@@ -179,7 +178,7 @@ pub(crate) fn handle_attack_damage(
                 "Dealt {} counterattack damage to active Pokemon. Remaining HP: {}",
                 counter_damage, attacking_pokemon.remaining_hp
             );
-            if attacking_pokemon.remaining_hp <= 0 {
+            if attacking_pokemon.remaining_hp == 0 {
                 knockouts.push((attacking_player, 0));
             }
         }
