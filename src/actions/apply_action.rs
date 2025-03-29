@@ -71,16 +71,19 @@ fn apply_deterministic_action(state: &mut State, action: &Action) {
             state.maybe_draw_card(action.actor);
         }
         SimpleAction::Attach {
-            in_play_idx,
-            energy,
-            amount,
+            attachments,
+            is_turn_energy,
         } => {
-            state.in_play_pokemon[action.actor][*in_play_idx]
-                .as_mut()
-                .expect("Pokemon should be there if attaching energy to it")
-                .attached_energy
-                .extend(std::iter::repeat(*energy).take(*amount as usize));
-            state.current_energy = None;
+            for (amount, energy, in_play_idx) in attachments {
+                state.in_play_pokemon[action.actor][*in_play_idx]
+                    .as_mut()
+                    .expect("Pokemon should be there if attaching energy to it")
+                    .attached_energy
+                    .extend(std::iter::repeat(*energy).take(*amount as usize));
+            }
+            if *is_turn_energy {
+                state.current_energy = None;
+            }
         }
         SimpleAction::AttachTool {
             in_play_idx,

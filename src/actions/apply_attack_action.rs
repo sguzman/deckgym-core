@@ -142,7 +142,7 @@ fn moltres_inferno_dance() -> (Probabilities, Mutations) {
                 if !all_choices.is_empty() {
                     state
                         .move_generation_stack
-                        .push((action.actor, all_choices.into_iter().flatten().collect()));
+                        .push((action.actor, all_choices));
                 }
             })
         })
@@ -150,40 +150,66 @@ fn moltres_inferno_dance() -> (Probabilities, Mutations) {
     (probabilities, mutations)
 }
 
-fn generate_energy_distributions(fire_pokemon: &[usize], heads: usize) -> Vec<Vec<SimpleAction>> {
+fn generate_energy_distributions(fire_pokemon: &[usize], heads: usize) -> Vec<SimpleAction> {
     let mut all_choices = Vec::new();
 
-    // For each pokemon
-    for (i, pokemon_idx) in fire_pokemon.iter().enumerate() {
-        // Can attach 1 to heads energies to this pokemon
-        for energy_count in 1..=heads {
-            let choice = SimpleAction::Attach {
-                in_play_idx: *pokemon_idx,
-                energy: EnergyType::Fire,
-                amount: energy_count as u32,
-            };
+    // Generate all possible ways to distribute the energy
+    let mut distributions = Vec::new();
+    generate_distributions(
+        fire_pokemon,
+        heads,
+        0,
+        &mut vec![0; fire_pokemon.len()],
+        &mut distributions,
+    );
 
-            // If we used all heads, this is a valid choice by itself
-            if energy_count == heads {
-                all_choices.push(vec![choice.clone()]);
-            }
-
-            // If we have remaining heads and more pokemon, distribute the rest
-            if energy_count < heads && i < fire_pokemon.len() - 1 {
-                for later_pokemon_idx in &fire_pokemon[i + 1..] {
-                    let remaining = heads - energy_count;
-                    let second_choice = SimpleAction::Attach {
-                        in_play_idx: *later_pokemon_idx,
-                        energy: EnergyType::Fire,
-                        amount: remaining as u32,
-                    };
-                    all_choices.push(vec![choice.clone(), second_choice]);
-                }
+    // Convert each distribution into an Attach action
+    for dist in distributions {
+        let mut attachments = Vec::new();
+        for (i, &pokemon_idx) in fire_pokemon.iter().enumerate() {
+            if dist[i] > 0 {
+                attachments.push((dist[i] as u32, EnergyType::Fire, pokemon_idx));
             }
         }
+        all_choices.push(SimpleAction::Attach {
+            attachments,
+            is_turn_energy: false,
+        });
     }
 
     all_choices
+}
+
+// Helper function to generate all possible distributions of 'heads' energy
+// across the available Pokémon
+fn generate_distributions(
+    fire_pokemon: &[usize],
+    remaining: usize,
+    start_idx: usize,
+    current: &mut Vec<usize>,
+    result: &mut Vec<Vec<usize>>,
+) {
+    if remaining == 0 {
+        result.push(current.clone());
+        return;
+    }
+
+    if start_idx >= fire_pokemon.len() {
+        return;
+    }
+
+    // Try different amounts for the current Pokémon
+    for amount in 0..=remaining {
+        current[start_idx] = amount;
+        generate_distributions(
+            fire_pokemon,
+            remaining - amount,
+            start_idx + 1,
+            current,
+            result,
+        );
+    }
+    current[start_idx] = 0;
 }
 
 /// Deal damage and attach energy to a pokemon of choice in the bench.
@@ -196,9 +222,8 @@ fn energy_bench_attack(
         let mut choices = Vec::new();
         for (in_play_idx, _) in state.enumerate_bench_pokemon(action.actor) {
             choices.push(SimpleAction::Attach {
-                in_play_idx,
-                energy,
-                amount,
+                attachments: vec![(amount, energy, in_play_idx)],
+                is_turn_energy: false,
             });
         }
         if choices.is_empty() {
