@@ -1,4 +1,3 @@
-use colored::Colorize;
 use log::{debug, trace};
 use rand::{seq::SliceRandom, Rng};
 use std::collections::BTreeMap;

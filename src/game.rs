@@ -76,7 +76,7 @@ impl Game {
         } else {
             let player = self.players[actor].as_mut();
             trace!(
-                "Simple Actions: {:?}",
+                "Possible Actions: {:?}",
                 actions.iter().map(|x| x.action.clone()).collect::<Vec<_>>()
             );
             player.decision_fn(&mut self.rng, &self.state, actions)
