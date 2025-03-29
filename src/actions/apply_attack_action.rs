@@ -82,6 +82,7 @@ fn forecast_effect_attack(
         AttackId::A1052CentiskorchFireBlast => energy_discard_attack(0, vec![EnergyType::Fire]),
         AttackId::A1055BlastoiseHydroPump => hydro_pump_attack(acting_player, state, 80),
         AttackId::A1056BlastoiseExHydroBazooka => hydro_pump_attack(acting_player, state, 100),
+        AttackId::A1057PsyduckHeadache => damage_and_turn_effect_attack(0, 1),
         AttackId::A1063TentacruelPoisonTentacles => {
             damage_status_attack(50, StatusCondition::Poisoned)
         }

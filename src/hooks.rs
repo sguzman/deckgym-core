@@ -55,9 +55,14 @@ pub(crate) fn on_attach_tool(state: &mut State, actor: usize, in_play_idx: usize
     }
 }
 
-// TODO: Implement Psyduck's attack and Gengars ability that disallow playing support cards.
+// TODO: Implement Gengars ability that disallow playing support cards.
 pub(crate) fn can_play_support(state: &State) -> bool {
-    !state.has_played_support
+    let psyduck_id = CardId::A1057Psyduck;
+    let psyduck_headache = state
+        .get_current_turn_effects()
+        .iter()
+        .any(|x| CardId::from_card_id(&x.get_id()) == Some(psyduck_id));
+    !state.has_played_support && !psyduck_headache
 }
 
 pub(crate) fn can_retreat(state: &State) -> bool {
