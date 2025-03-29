@@ -164,73 +164,73 @@ fn pokeball_outcomes(acting_player: usize, state: &State) -> (Probabilities, Mut
 }
 
 // Remember to implement these in the main controller / hooks.
-fn turn_effect(_: &mut StdRng, mutable_state: &mut State, action: &Action) {
+fn turn_effect(_: &mut StdRng, state: &mut State, action: &Action) {
     if let SimpleAction::Play { trainer_card } = &action.action {
         let card = Card::Trainer(trainer_card.clone());
-        mutable_state.turn_effects.push(card);
+        state.add_turn_effect(card, 0);
     } else {
         panic!("Something went wrong. An action was played but couldnt get the card");
     }
 }
 
-fn sabrina_effect(_: &mut StdRng, mutable_state: &mut State, action: &Action) {
+fn sabrina_effect(_: &mut StdRng, state: &mut State, action: &Action) {
     // Switch out your opponent's Active Pokémon to the Bench. (Your opponent chooses the new Active Pokémon.)
     let opponent_player = (action.actor + 1) % 2;
-    let possible_moves = mutable_state
+    let possible_moves = state
         .enumerate_bench_pokemon(opponent_player)
         .map(|(i, _)| SimpleAction::Activate { in_play_idx: i })
         .collect::<Vec<_>>();
-    mutable_state
+    state
         .move_generation_stack
         .push((opponent_player, possible_moves));
 }
 
-fn cyrus_effect(_: &mut StdRng, mutable_state: &mut State, action: &Action) {
+fn cyrus_effect(_: &mut StdRng, state: &mut State, action: &Action) {
     // Switch 1 of your opponent's Pokemon that has damage on it to the Active Spot.
     let opponent_player = (action.actor + 1) % 2;
-    let possible_moves = mutable_state
+    let possible_moves = state
         .enumerate_bench_pokemon(opponent_player)
         .filter(|(_, x)| x.is_damaged())
         .map(|(in_play_idx, _)| SimpleAction::Activate { in_play_idx })
         .collect::<Vec<_>>();
-    mutable_state
+    state
         .move_generation_stack
         .push((opponent_player, possible_moves));
 }
 
-fn giovanni_effect(_: &mut StdRng, mutable_state: &mut State, action: &Action) {
+fn giovanni_effect(_: &mut StdRng, state: &mut State, action: &Action) {
     if let SimpleAction::Play { trainer_card } = &action.action {
         // During this turn, attacks used by your Pokémon do +10 damage to your opponent's Active Pokémon.
         let card = Card::Trainer(trainer_card.clone());
-        mutable_state.turn_effects.push(card.clone());
+        state.add_turn_effect(card, 0);
     } else {
         panic!("XSpeed should be played");
     }
 }
 
-fn koga_effect(_: &mut StdRng, mutable_state: &mut State, action: &Action) {
+fn koga_effect(_: &mut StdRng, state: &mut State, action: &Action) {
     // Put your Muk or Weezing in the Active Spot into your hand.
-    let active_pokemon = mutable_state.in_play_pokemon[action.actor][0]
+    let active_pokemon = state.in_play_pokemon[action.actor][0]
         .as_ref()
         .expect("Active Pokemon should be there if Koga is played");
     let mut cards_to_collect = active_pokemon.cards_behind.clone();
     cards_to_collect.push(active_pokemon.card.clone());
-    mutable_state.hands[action.actor].extend(cards_to_collect);
+    state.hands[action.actor].extend(cards_to_collect);
     // Energy dissapears
-    mutable_state.in_play_pokemon[action.actor][0] = None;
+    state.in_play_pokemon[action.actor][0] = None;
 
     // if no bench pokemon, finish game as a loss
-    let bench_pokemon = mutable_state.enumerate_bench_pokemon(action.actor).count();
+    let bench_pokemon = state.enumerate_bench_pokemon(action.actor).count();
     if bench_pokemon == 0 {
         debug!("Player lost due to no bench pokemon after Koga");
-        mutable_state.winner = Some((action.actor + 1) % 2);
+        state.winner = Some((action.actor + 1) % 2);
     } else {
         // else force current_player to promote one of their bench pokemon
-        let possible_moves = mutable_state
+        let possible_moves = state
             .enumerate_bench_pokemon(action.actor)
             .map(|(i, _)| SimpleAction::Activate { in_play_idx: i })
             .collect::<Vec<_>>();
-        mutable_state
+        state
             .move_generation_stack
             .push((action.actor, possible_moves));
     }
@@ -238,40 +238,40 @@ fn koga_effect(_: &mut StdRng, mutable_state: &mut State, action: &Action) {
 
 // TODO: Problem. With doing 1.0, we are basically giving bots the ability to see the cards in deck.
 // TODO: In theory this should give a probability distribution over cards in deck.
-fn professor_oak_effect(_: &mut StdRng, mutable_state: &mut State, action: &Action) {
+fn professor_oak_effect(_: &mut StdRng, state: &mut State, action: &Action) {
     // Draw 2 cards.
     for _ in 0..2 {
-        mutable_state.maybe_draw_card(action.actor);
+        state.maybe_draw_card(action.actor);
     }
 }
 
 // TODO: Actually use distribution of possibilities to capture probabilities
 // of pulling the different psychic left in deck vs pushing an item to the bottom.
-fn mythical_slab_effect(_: &mut StdRng, mutable_state: &mut State, action: &Action) {
+fn mythical_slab_effect(_: &mut StdRng, state: &mut State, action: &Action) {
     // Look at the top card of your deck. If that card is a Psychic Pokemon,\n        put it in your hand. If it is not a Psychic Pokemon, put it on the\n        bottom of your deck.
-    if let Some(card) = mutable_state.decks[action.actor].cards.first() {
+    if let Some(card) = state.decks[action.actor].cards.first() {
         if is_basic(card) {
-            mutable_state.hands[action.actor].push(card.clone());
-            mutable_state.decks[action.actor].cards.remove(0);
+            state.hands[action.actor].push(card.clone());
+            state.decks[action.actor].cards.remove(0);
         } else {
-            let card = mutable_state.decks[action.actor].cards.remove(0);
-            mutable_state.decks[action.actor].cards.push(card);
+            let card = state.decks[action.actor].cards.remove(0);
+            state.decks[action.actor].cards.push(card);
         }
     } // else do nothing
 }
 
 // Here we will simplify the output possibilities, counting with the fact that value functions
 // should not use the cards of the enemy as input.
-fn red_card_effect(rng: &mut StdRng, mutable_state: &mut State, action: &Action) {
+fn red_card_effect(rng: &mut StdRng, state: &mut State, action: &Action) {
     // Your opponent shuffles their hand into their deck and draws 3 cards.
     let acting_player = action.actor;
     let opponent = (acting_player + 1) % 2;
-    let opponent_hand = &mut mutable_state.hands[opponent];
-    let opponent_deck = &mut mutable_state.decks[opponent];
+    let opponent_hand = &mut state.hands[opponent];
+    let opponent_deck = &mut state.decks[opponent];
     opponent_deck.cards.append(opponent_hand);
     opponent_deck.shuffle(false, rng);
     for _ in 0..3 {
-        mutable_state.maybe_draw_card(opponent);
+        state.maybe_draw_card(opponent);
     }
 }
 

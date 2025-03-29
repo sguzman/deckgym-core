@@ -1,6 +1,7 @@
 use colored::Colorize;
-use log::debug;
+use log::{debug, trace};
 use rand::{seq::SliceRandom, Rng};
+use std::collections::BTreeMap;
 use std::hash::Hash;
 
 use crate::{
@@ -31,8 +32,8 @@ pub struct State {
     // Turn Flags (remember to reset these in reset_turn_states)
     pub(crate) has_played_support: bool,
     pub(crate) has_retreated: bool,
-    // TODO: Type these to an enum of Effects (since 1 card can have multiple)
-    pub(crate) turn_effects: Vec<Card>,
+    // Maps turn to a vector of effects (cards) for that turn. Using BTreeMap to keep State hashable.
+    turn_effects: BTreeMap<u8, Vec<Card>>,
 }
 
 impl State {
@@ -50,7 +51,7 @@ impl State {
             in_play_pokemon: [[None, None, None, None], [None, None, None, None]],
             has_played_support: false,
             has_retreated: false,
-            turn_effects: Vec::new(),
+            turn_effects: BTreeMap::new(),
         }
     }
 
@@ -151,7 +152,37 @@ impl State {
 
         self.has_played_support = false;
         self.has_retreated = false;
-        self.turn_effects.clear();
+    }
+
+    /// Adds an effect card that will remain active for a specified number of turns.
+    ///
+    /// # Arguments
+    ///
+    /// * `card` - The card representing the effect to be applied
+    /// * `duration` - The number of turns the effect should remain active. 0 means current turn only,
+    ///   1 means current turn and the next turn, etc.
+    pub(crate) fn add_turn_effect(&mut self, card: Card, duration: u8) {
+        for turn_offset in 0..(duration + 1) {
+            let target_turn = self.turn_count + turn_offset;
+            self.turn_effects
+                .entry(target_turn)
+                .or_insert_with(Vec::new)
+                .push(card.clone());
+        }
+        trace!(
+            "Added effect from turn {} to {}: {:?}",
+            self.turn_count,
+            self.turn_count + duration,
+            canonical_name(&card)
+        );
+    }
+
+    /// Retrieves all effects scheduled for the current turn
+    pub(crate) fn get_current_turn_effects(&self) -> Vec<Card> {
+        self.turn_effects
+            .get(&self.turn_count)
+            .cloned()
+            .unwrap_or_default()
     }
 
     pub fn enumerate_in_play_pokemon(

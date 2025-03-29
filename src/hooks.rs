@@ -62,7 +62,7 @@ pub(crate) fn can_play_support(state: &State) -> bool {
 
 pub(crate) fn can_retreat(state: &State) -> bool {
     let no_arbok_corner = !state
-        .turn_effects
+        .get_current_turn_effects()
         .iter()
         .any(|x| matches!(x, Card::Pokemon(pokemon_card) if pokemon_card.name == "Arbok"));
     !state.has_retreated && no_arbok_corner
@@ -73,12 +73,12 @@ pub(crate) fn get_retreat_cost(state: &State, card: &PlayedCard) -> Vec<EnergyTy
         let mut normal_cost = pokemon_card.retreat_cost.clone();
         // Implement Retreat Cost Modifiers here
         let x_speed = state
-            .turn_effects
+            .get_current_turn_effects()
             .iter()
             .filter(|x| **x == get_card_by_enum(CardId::PA002XSpeed))
             .count();
         let leafs = state
-            .turn_effects
+            .get_current_turn_effects()
             .iter()
             .filter(|x| {
                 **x == get_card_by_enum(CardId::A1a068Leaf)
@@ -116,7 +116,7 @@ pub(crate) fn get_damage_from_attack(
 
     // Giovanni's Modifier
     let mut giovanni_modifier = 0;
-    if state.turn_effects.iter().any(|x| {
+    if state.get_current_turn_effects().iter().any(|x| {
         matches!(x, Card::Trainer(trainer_card) if CardId::from_numeric_id(trainer_card.numeric_id) == Some(CardId::A1223Giovanni))
     }) {
         giovanni_modifier = 10;
@@ -212,9 +212,7 @@ mod tests {
     #[test]
     fn test_retreat_costs_with_xspeed() {
         let mut state = State::default();
-        state
-            .turn_effects
-            .push(get_card_by_enum(CardId::PA002XSpeed));
+        state.add_turn_effect(get_card_by_enum(CardId::PA002XSpeed), 0);
         let card = get_card_by_enum(CardId::A1055Blastoise);
         let playable_card = to_playable_card(&card, false);
         let retreat_cost = get_retreat_cost(&state, &playable_card);
@@ -227,15 +225,9 @@ mod tests {
     #[test]
     fn test_retreat_costs_with_two_xspeed_and_two_leafs() {
         let mut state = State::default();
-        state
-            .turn_effects
-            .push(get_card_by_enum(CardId::PA002XSpeed));
-        state
-            .turn_effects
-            .push(get_card_by_enum(CardId::PA002XSpeed));
-        state
-            .turn_effects
-            .push(get_card_by_enum(CardId::A1a068Leaf));
+        state.add_turn_effect(get_card_by_enum(CardId::PA002XSpeed), 0);
+        state.add_turn_effect(get_card_by_enum(CardId::PA002XSpeed), 0);
+        state.add_turn_effect(get_card_by_enum(CardId::A1a068Leaf), 0);
         let card = get_card_by_enum(CardId::A1211Snorlax);
         let playable_card = to_playable_card(&card, false);
         let retreat_cost = get_retreat_cost(&state, &playable_card);

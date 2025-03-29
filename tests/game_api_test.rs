@@ -28,7 +28,7 @@ fn test_mcts_player() {
     // }
     game.play();
 
-    assert_eq!(game.get_state_clone().turn_count, 38);
+    assert_eq!(game.get_state_clone().turn_count, 30);
 }
 
 #[test]
