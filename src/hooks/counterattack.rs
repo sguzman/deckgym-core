@@ -12,7 +12,7 @@ pub(crate) fn get_counterattack_damage(card: &PlayedCard) -> u32 {
     // Some cards have it as an ability
     let card_id = CardId::from_card_id(&card.card.get_id());
     match card_id {
-        Some(CardId::A1061Poliwrath) => {
+        Some(CardId::A1061Poliwrath) | Some(CardId::A1a056Druddigon) => {
             total_damage += 20;
         }
         _ => {}
