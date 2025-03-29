@@ -195,8 +195,8 @@ pub(crate) fn handle_attack_damage(
         let points_won = if ko_pokemon.card.is_ex() { 2 } else { 1 };
         state.points[ko_initiator] += points_won;
         debug!(
-            "Player {}'s Pokemon {} fainted. Player {} won {} points for a total of {}",
-            ko_receiver, ko_pokemon_idx, ko_initiator, points_won, state.points[ko_initiator]
+            "Pokemon {:?} fainted. Player {} won {} points for a total of {}",
+            ko_pokemon, ko_initiator, points_won, state.points[ko_initiator]
         );
 
         // Move card (and evolution chain) into discard pile
