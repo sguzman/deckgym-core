@@ -57,11 +57,10 @@ pub(crate) fn on_attach_tool(state: &mut State, actor: usize, in_play_idx: usize
 
 // TODO: Implement Gengars ability that disallow playing support cards.
 pub(crate) fn can_play_support(state: &State) -> bool {
-    let psyduck_id = CardId::A1057Psyduck;
     let psyduck_headache = state
         .get_current_turn_effects()
         .iter()
-        .any(|x| CardId::from_card_id(&x.get_id()) == Some(psyduck_id));
+        .any(|x| CardId::from_card_id(&x.get_id()) == Some(CardId::A1057Psyduck));
     !state.has_played_support && !psyduck_headache
 }
 
