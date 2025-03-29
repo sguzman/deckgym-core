@@ -169,13 +169,14 @@ impl State {
                 .entry(target_turn)
                 .or_default()
                 .push(card.clone());
+            trace!(
+                "Adding effect {:?} for {} turns, current turn: {}, target turn: {}",
+                canonical_name(&card),
+                duration,
+                self.turn_count,
+                target_turn
+            );
         }
-        trace!(
-            "Added effect from turn {} to {}: {:?}",
-            self.turn_count,
-            self.turn_count + duration,
-            canonical_name(&card)
-        );
     }
 
     /// Retrieves all effects scheduled for the current turn

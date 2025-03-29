@@ -85,9 +85,12 @@ pub(crate) fn get_damage_from_attack(
 
     // Giovanni's Modifier
     let mut giovanni_modifier = 0;
-    if state.get_current_turn_effects().iter().any(|x| {
-        matches!(x, Card::Trainer(trainer_card) if CardId::from_numeric_id(trainer_card.numeric_id) == Some(CardId::A1223Giovanni))
-    }) {
+    let giovanni_ids = vec![CardId::A1223Giovanni, CardId::A1270Giovanni];
+    if state
+        .get_current_turn_effects()
+        .iter()
+        .any(|x| giovanni_ids.contains(&CardId::from_card_id(&x.get_id()).unwrap()))
+    {
         giovanni_modifier = 10;
     }
 
@@ -185,5 +188,37 @@ mod tests {
         // With Psyduck headache effect, it should disallow
         state.add_turn_effect(get_card_by_enum(CardId::A1057Psyduck), 1);
         assert!(!can_play_support(&state));
+    }
+
+    #[test]
+    fn test_giovanni_modifier() {
+        // Create a basic state with attacking and defending Pokémon
+        let mut state = State::default();
+
+        // Set up attacker with a fixed damage attack
+        let attacker = get_card_by_enum(CardId::A1001Bulbasaur);
+        let played_attacker = to_playable_card(&attacker, false);
+        state.in_play_pokemon[0][0] = Some(played_attacker);
+
+        // Set up defender
+        let defender = get_card_by_enum(CardId::A1033Charmander);
+        let played_defender = to_playable_card(&defender, false);
+        state.in_play_pokemon[1][0] = Some(played_defender);
+
+        // Get base damage without Giovanni effect
+        let base_damage = get_damage_from_attack(&state, 0, 0, 0);
+
+        // Add Giovanni effect
+        state.add_turn_effect(get_card_by_enum(CardId::A1223Giovanni), 0);
+
+        // Get damage with Giovanni effect
+        let damage_with_giovanni = get_damage_from_attack(&state, 0, 0, 0);
+
+        // Verify Giovanni adds exactly 10 damage
+        assert_eq!(
+            damage_with_giovanni,
+            base_damage + 10,
+            "Giovanni should add exactly 10 damage to attacks"
+        );
     }
 }
