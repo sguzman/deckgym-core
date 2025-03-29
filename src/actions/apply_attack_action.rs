@@ -62,6 +62,7 @@ fn forecast_effect_attack(
             probabilistic_damage_attack(vec![0.25, 0.5, 0.25], vec![0, 50, 100])
         }
         AttackId::A1029PetililBlot => self_heal_attack(10, index),
+        AttackId::A1030LilligantLeafSupply => energy_bench_attack(0, 1, EnergyType::Grass),
         AttackId::A1031Skiddo => probabilistic_damage_attack(vec![0.5, 0.5], vec![0, 40]),
         AttackId::A1033CharmanderEmber => energy_discard_attack(0, vec![EnergyType::Fire]),
         AttackId::A1035CharizardFireSpin => {
