@@ -99,6 +99,9 @@ fn forecast_effect_attack(
         AttackId::A1129MewtwoExPsydrive => {
             energy_discard_attack(index, vec![EnergyType::Psychic, EnergyType::Psychic])
         }
+        AttackId::A1153MarowakExBonemerang => {
+            probabilistic_damage_attack(vec![0.25, 0.5, 0.25], vec![0, 80, 160])
+        }
         AttackId::A1154HitmonleeStretchKick => direct_damage(30, true),
         AttackId::A1165ArbokCorner => damage_and_turn_effect_attack(index, 1),
         AttackId::A1171NidokingPoisonHorn => damage_status_attack(90, StatusCondition::Poisoned),

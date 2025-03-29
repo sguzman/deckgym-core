@@ -34,6 +34,7 @@ pub enum AttackId {
     A1106ZebstrikaThunderSpear,
     A1128MewtwoPowerBlast,
     A1129MewtwoExPsydrive,
+    A1153MarowakExBonemerang,
     A1154HitmonleeStretchKick,
     A1165ArbokCorner,
     A1171NidokingPoisonHorn,
@@ -79,6 +80,7 @@ lazy_static::lazy_static! {
         m.insert(("A1 106", 0), AttackId::A1106ZebstrikaThunderSpear);
         m.insert(("A1 128", 0), AttackId::A1128MewtwoPowerBlast);
         m.insert(("A1 129", 1), AttackId::A1129MewtwoExPsydrive);
+        m.insert(("A1 153", 0), AttackId::A1153MarowakExBonemerang);
         m.insert(("A1 154", 0), AttackId::A1154HitmonleeStretchKick);
         m.insert(("A1 165", 0), AttackId::A1165ArbokCorner);
         m.insert(("A1 171", 0), AttackId::A1171NidokingPoisonHorn);
@@ -98,6 +100,7 @@ lazy_static::lazy_static! {
         m.insert(("A1 259", 0), AttackId::A1096PikachuExCircleCircuit);
         m.insert(("A1 260", 1), AttackId::A1104ZapdosExThunderingHurricane);
         m.insert(("A1 262", 1), AttackId::A1129MewtwoExPsydrive);
+        m.insert(("A1 264", 0), AttackId::A1153MarowakExBonemerang);
         m.insert(("A1 274", 0), AttackId::A1047MoltresExInfernoDance);
         m.insert(("A1 276", 1), AttackId::A1104ZapdosExThunderingHurricane);
         m.insert(("A1 280", 1), AttackId::A1036CharizardExCrimsonStorm);
