@@ -115,9 +115,7 @@ fn forecast_effect_attack(
             damage_chance_status_attack(10, 0.5, StatusCondition::Paralyzed)
         }
         AttackId::A2049PalkiaDimensionalStorm => palkia_dimensional_storm(state),
-        AttackId::A2119DialgaExMetallicTurbo => {
-            energy_bench_attack(acting_player, 2, EnergyType::Metal)
-        }
+        AttackId::A2119DialgaExMetallicTurbo => energy_bench_attack(index, 2, EnergyType::Metal),
         AttackId::A2a071ArceusExUltimateForce => {
             bench_count_attack(acting_player, state, 70, 20, None)
         }
