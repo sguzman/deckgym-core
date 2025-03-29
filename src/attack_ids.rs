@@ -36,6 +36,7 @@ pub enum AttackId {
     A1129MewtwoExPsydrive,
     A1154HitmonleeStretchKick,
     A1165ArbokCorner,
+    A1171NidokingPoisonHorn,
     A1196MeowthPayDay,
     A1203KangaskhanDizzyPunch,
     A1a030DedenneThunderShock,
@@ -80,11 +81,13 @@ lazy_static::lazy_static! {
         m.insert(("A1 129", 1), AttackId::A1129MewtwoExPsydrive);
         m.insert(("A1 154", 0), AttackId::A1154HitmonleeStretchKick);
         m.insert(("A1 165", 0), AttackId::A1165ArbokCorner);
+        m.insert(("A1 171", 0), AttackId::A1171NidokingPoisonHorn);
         m.insert(("A1 196", 0), AttackId::A1196MeowthPayDay);
         m.insert(("A1 203", 0), AttackId::A1203KangaskhanDizzyPunch);
         // Full Arts A1
         m.insert(("A1 229", 0), AttackId::A1026PinsirDoubleHorn);
         m.insert(("A1 230", 0), AttackId::A1033CharmanderEmber);
+        m.insert(("A1 241", 0), AttackId::A1171NidokingPoisonHorn);
         m.insert(("A1 246", 0), AttackId::A1196MeowthPayDay);
         m.insert(("A1 251", 1), AttackId::A1004VenusaurExGiantBloom);
         m.insert(("A1 252", 0), AttackId::A1023ExeggutorExTropicalSwing);
