@@ -43,6 +43,7 @@ pub enum AttackId {
     A1196MeowthPayDay,
     A1203KangaskhanDizzyPunch,
     A1a030DedenneThunderShock,
+    A2049PalkiaDimensionalStorm,
     A2119DialgaExMetallicTurbo,
     A2a071ArceusExUltimateForce,
 }
@@ -121,6 +122,10 @@ lazy_static::lazy_static! {
         m.insert(("A1a 073", 0), AttackId::A1a030DedenneThunderShock);
 
         // A2
+        m.insert(("A2 049", 1), AttackId::A2049PalkiaDimensionalStorm);
+        m.insert(("A2 182", 1), AttackId::A2049PalkiaDimensionalStorm);
+        m.insert(("A2 204", 1), AttackId::A2049PalkiaDimensionalStorm);
+        m.insert(("A2 206", 1), AttackId::A2049PalkiaDimensionalStorm);
         m.insert(("A2 119", 0), AttackId::A2119DialgaExMetallicTurbo);
         m.insert(("A2 188", 0), AttackId::A2119DialgaExMetallicTurbo);
         m.insert(("A2 205", 0), AttackId::A2119DialgaExMetallicTurbo);
