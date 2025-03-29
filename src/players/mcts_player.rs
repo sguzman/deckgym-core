@@ -5,7 +5,9 @@ use std::{collections::HashMap, fmt::Debug};
 use super::{Player, RandomPlayer};
 use crate::{
     actions::{apply_action, Action},
-    generate_possible_actions, Deck, Game, State,
+    generate_possible_actions,
+    state::GameOutcome,
+    Deck, Game, State,
 };
 
 pub struct MctsPlayer {
@@ -141,18 +143,18 @@ impl MctsNode {
 
         // Since we emplace the state, we can keep using our "seating position" as investigator
         let mut game_copy = Game::from_state(self.state.clone(), random_players, seed);
-        let winner = game_copy.play();
+        let outcome = game_copy.play();
 
         // If winner is my ID, return 1.0, if winner is opponent ID, return -1.0, else return 0.0
-        match winner {
-            Some(winner) => {
+        match outcome {
+            Some(GameOutcome::Win(winner)) => {
                 if winner == investigator {
                     1.0
                 } else {
                     -1.0
                 }
             }
-            None => 0.0,
+            Some(GameOutcome::Tie) | None => 0.0,
         }
     }
 

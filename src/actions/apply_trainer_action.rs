@@ -4,6 +4,7 @@ use rand::rngs::StdRng;
 use crate::{
     card_ids::CardId,
     deck::is_basic,
+    state::GameOutcome,
     tool_ids::ToolId,
     types::{Card, EnergyType, TrainerCard},
     State,
@@ -223,7 +224,7 @@ fn koga_effect(_: &mut StdRng, state: &mut State, action: &Action) {
     let bench_pokemon = state.enumerate_bench_pokemon(action.actor).count();
     if bench_pokemon == 0 {
         debug!("Player lost due to no bench pokemon after Koga");
-        state.winner = Some((action.actor + 1) % 2);
+        state.winner = Some(GameOutcome::Win((action.actor + 1) % 2))
     } else {
         // else force current_player to promote one of their bench pokemon
         let possible_moves = state

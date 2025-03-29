@@ -1,6 +1,3 @@
-/// These are the places/functions in the framework that custom logic is to be implemented per card.
-/// That is those special "if Psyduck, do this", "if Darkrai, do that" kind of logic.
-/// We call these "hooks" (like on_attach_tool, on_attach_energy, on_play, on_knockout, etc...).
 use core::panic;
 use std::vec;
 
@@ -8,7 +5,6 @@ use log::debug;
 
 use crate::{
     card_ids::CardId,
-    database::get_card_by_enum,
     tool_ids::ToolId,
     types::{Card, EnergyType, PlayedCard},
     State,
@@ -52,6 +48,8 @@ pub(crate) fn on_attach_tool(state: &mut State, actor: usize, in_play_idx: usize
             card.remaining_hp += 20;
             card.total_hp += 20;
         }
+        // Many tools do nothing on attach
+        ToolId::A2148RockyHelmet => {}
     }
 }
 
@@ -62,42 +60,6 @@ pub(crate) fn can_play_support(state: &State) -> bool {
         .iter()
         .any(|x| CardId::from_card_id(&x.get_id()) == Some(CardId::A1057Psyduck));
     !state.has_played_support && !psyduck_headache
-}
-
-pub(crate) fn can_retreat(state: &State) -> bool {
-    let no_arbok_corner = !state
-        .get_current_turn_effects()
-        .iter()
-        .any(|x| matches!(x, Card::Pokemon(pokemon_card) if pokemon_card.name == "Arbok"));
-    !state.has_retreated && no_arbok_corner
-}
-
-pub(crate) fn get_retreat_cost(state: &State, card: &PlayedCard) -> Vec<EnergyType> {
-    if let Card::Pokemon(pokemon_card) = &card.card {
-        let mut normal_cost = pokemon_card.retreat_cost.clone();
-        // Implement Retreat Cost Modifiers here
-        let x_speed = state
-            .get_current_turn_effects()
-            .iter()
-            .filter(|x| **x == get_card_by_enum(CardId::PA002XSpeed))
-            .count();
-        let leafs = state
-            .get_current_turn_effects()
-            .iter()
-            .filter(|x| {
-                **x == get_card_by_enum(CardId::A1a068Leaf)
-                    || **x == get_card_by_enum(CardId::A1a082Leaf)
-            })
-            .count();
-        // Retreat Effects accumulate so we add them.
-        let to_subtract = leafs * 2 + x_speed;
-        for _ in 0..to_subtract {
-            normal_cost.pop(); // Remove one colorless energy from retreat cost
-        }
-        normal_cost
-    } else {
-        vec![]
-    }
 }
 
 pub(crate) fn get_damage_from_attack(
@@ -113,6 +75,7 @@ pub(crate) fn get_damage_from_attack(
     if attack.fixed_damage == 0 {
         return attack.fixed_damage;
     }
+
     // If its bench attack, don't apply multipliers
     if receiving_index != 0 {
         return attack.fixed_damage;
@@ -167,6 +130,8 @@ pub(crate) fn contains_energy(attached: &[EnergyType], cost: &[EnergyType]) -> b
 // Test Colorless is wildcard when counting energy
 #[cfg(test)]
 mod tests {
+    use crate::database::get_card_by_enum;
+
     use super::*;
 
     #[test]
@@ -195,47 +160,6 @@ mod tests {
         let slice_a = vec![EnergyType::Water, EnergyType::Water, EnergyType::Fire];
         let slice_b = vec![EnergyType::Colorless, EnergyType::Colorless];
         assert!(contains_energy(&slice_a, &slice_b));
-    }
-
-    #[test]
-    fn test_retreat_costs() {
-        let state = State::default();
-        let card = get_card_by_enum(CardId::A1055Blastoise);
-        let playable_card = to_playable_card(&card, false);
-        let retreat_cost = get_retreat_cost(&state, &playable_card);
-        assert_eq!(
-            retreat_cost,
-            vec![
-                EnergyType::Colorless,
-                EnergyType::Colorless,
-                EnergyType::Colorless
-            ]
-        );
-    }
-
-    #[test]
-    fn test_retreat_costs_with_xspeed() {
-        let mut state = State::default();
-        state.add_turn_effect(get_card_by_enum(CardId::PA002XSpeed), 0);
-        let card = get_card_by_enum(CardId::A1055Blastoise);
-        let playable_card = to_playable_card(&card, false);
-        let retreat_cost = get_retreat_cost(&state, &playable_card);
-        assert_eq!(
-            retreat_cost,
-            vec![EnergyType::Colorless, EnergyType::Colorless]
-        );
-    }
-
-    #[test]
-    fn test_retreat_costs_with_two_xspeed_and_two_leafs() {
-        let mut state = State::default();
-        state.add_turn_effect(get_card_by_enum(CardId::PA002XSpeed), 0);
-        state.add_turn_effect(get_card_by_enum(CardId::PA002XSpeed), 0);
-        state.add_turn_effect(get_card_by_enum(CardId::A1a068Leaf), 0);
-        let card = get_card_by_enum(CardId::A1211Snorlax);
-        let playable_card = to_playable_card(&card, false);
-        let retreat_cost = get_retreat_cost(&state, &playable_card);
-        assert_eq!(retreat_cost, vec![]);
     }
 
     #[test]

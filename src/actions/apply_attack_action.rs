@@ -1,19 +1,18 @@
-use log::trace;
-use rand::rngs::StdRng;
-
 use crate::{
     attack_ids::AttackId,
-    card_ids::CardId,
     hooks::get_damage_from_attack,
     types::{EnergyType, StatusCondition},
     State,
 };
 
 use super::{
-    apply_action_helpers::{
-        apply_common_mutation, handle_attack_damage, FnMutation, Mutation, Mutations, Probabilities,
+    apply_action_helpers::{Mutations, Probabilities},
+    mutations::{
+        active_damage_doutcome, active_damage_effect_doutcome, active_damage_effect_mutation,
+        active_damage_mutation, build_status_effect, damage_effect_doutcome,
+        index_active_damage_doutcome,
     },
-    Action, SimpleAction,
+    SimpleAction,
 };
 
 // This is a reducer of all actions relating to attacks.
@@ -25,7 +24,8 @@ pub(crate) fn forecast_attack(
     let active = state.get_active(acting_player);
     let attack = active.card.get_attacks()[index].clone();
     if attack.effect.is_none() {
-        index_damage_doutcome(index, |_, _, _| {})
+        let damage = get_damage_from_attack(state, acting_player, index, 0);
+        active_damage_doutcome(damage)
     } else {
         forecast_effect_attack(acting_player, state, index)
     }
@@ -114,6 +114,7 @@ fn forecast_effect_attack(
         AttackId::A1a030DedenneThunderShock => {
             damage_chance_status_attack(10, 0.5, StatusCondition::Paralyzed)
         }
+        AttackId::A2049PalkiaDimensionalStorm => palkia_dimensional_storm(state),
         AttackId::A2119DialgaExMetallicTurbo => {
             energy_bench_attack(acting_player, 2, EnergyType::Metal)
         }
@@ -123,13 +124,29 @@ fn forecast_effect_attack(
     }
 }
 
+fn palkia_dimensional_storm(state: &State) -> (Probabilities, Mutations) {
+    // This attack does 150 damage to Active, and 20 to every bench pokemon
+    // it then also discards 3 energies. This is deterministic
+    let targets: Vec<(u32, usize)> = state
+        .enumerate_in_play_pokemon((state.current_player + 1) % 2)
+        .map(|(idx, _)| (20, idx))
+        .chain(std::iter::once((150, 0))) // Add active Pokémon directly
+        .collect();
+    damage_effect_doutcome(targets, |_, state, action| {
+        let active = state.get_active_mut(action.actor);
+        active.discard_energy(&EnergyType::Water);
+        active.discard_energy(&EnergyType::Water);
+        active.discard_energy(&EnergyType::Water);
+    })
+}
+
 fn moltres_inferno_dance() -> (Probabilities, Mutations) {
     let probabilities = vec![0.125, 0.375, 0.375, 0.125]; // 0,1,2,3 heads
     let mutations = probabilities
         .iter()
         .enumerate()
         .map(|(heads, _)| {
-            damage_effect_mutation(0, move |_, state, action| {
+            active_damage_effect_mutation(0, move |_, state, action| {
                 if heads == 0 {
                     return;
                 }
@@ -226,7 +243,7 @@ fn energy_bench_attack(
     amount: u32,
     energy: EnergyType,
 ) -> (Probabilities, Mutations) {
-    index_damage_doutcome(attack_index, move |_, state, action| {
+    index_active_damage_doutcome(attack_index, move |_, state, action| {
         let mut choices = Vec::new();
         for (in_play_idx, _) in state.enumerate_bench_pokemon(action.actor) {
             choices.push(SimpleAction::Attach {
@@ -249,8 +266,8 @@ fn extra_or_self_damage_attack(
 ) -> (Probabilities, Mutations) {
     let probabilities = vec![0.5, 0.5];
     let mutations: Mutations = vec![
-        damage_mutation(base_damage + extra_damage),
-        damage_effect_mutation(base_damage, move |_, state, action| {
+        active_damage_mutation(base_damage + extra_damage),
+        active_damage_effect_mutation(base_damage, move |_, state, action| {
             let active = state.get_active_mut(action.actor);
             active.apply_damage(self_damage);
         }),
@@ -265,8 +282,8 @@ fn damage_chance_status_attack(
 ) -> (Probabilities, Mutations) {
     let probabilities = vec![probability_of_status, 1.0 - probability_of_status];
     let mutations: Mutations = vec![
-        damage_effect_mutation(damage, build_status_effect(status)),
-        damage_mutation(damage),
+        active_damage_effect_mutation(damage, build_status_effect(status)),
+        active_damage_mutation(damage),
     ];
     (probabilities, mutations)
 }
@@ -290,27 +307,25 @@ fn bench_count_attack(
             bench_count += 1;
         }
     }
-    damage_doutcome(base_damage + damage_per * bench_count)
+    active_damage_doutcome(base_damage + damage_per * bench_count)
 }
 
 /// Used for attacks that can go directly to bench.
 /// It will queue (via move_generation_stack) for the user to choose a pokemon to damage.
 fn direct_damage(damage: u32, bench_only: bool) -> (Probabilities, Mutations) {
-    damage_effect_doutcome(0, move |_, state, action| {
+    active_damage_effect_doutcome(0, move |_, state, action| {
         let opponent = (action.actor + 1) % 2;
         let mut choices = Vec::new();
         if bench_only {
             for (in_play_idx, _) in state.enumerate_bench_pokemon(opponent) {
                 choices.push(SimpleAction::ApplyDamage {
-                    in_play_idx,
-                    damage,
+                    targets: vec![(damage, in_play_idx)],
                 });
             }
         } else {
             for (in_play_idx, _) in state.enumerate_in_play_pokemon(opponent) {
                 choices.push(SimpleAction::ApplyDamage {
-                    in_play_idx,
-                    damage,
+                    targets: vec![(damage, in_play_idx)],
                 });
             }
         }
@@ -325,7 +340,7 @@ fn energy_discard_attack(
     attack_index: usize,
     to_discard: Vec<EnergyType>,
 ) -> (Probabilities, Mutations) {
-    index_damage_doutcome(attack_index, move |_, state, action| {
+    index_active_damage_doutcome(attack_index, move |_, state, action| {
         let active = state.get_active_mut(action.actor);
         for energy in to_discard.iter() {
             active.discard_energy(energy);
@@ -335,7 +350,7 @@ fn energy_discard_attack(
 
 /// For attacks that deal damage to opponent and also damage themselves
 fn self_damage_attack(damage: u32, self_damage: u32) -> (Probabilities, Mutations) {
-    damage_effect_doutcome(damage, move |_, state, action| {
+    active_damage_effect_doutcome(damage, move |_, state, action| {
         let active = state.get_active_mut(action.actor);
         active.apply_damage(self_damage);
     })
@@ -343,12 +358,12 @@ fn self_damage_attack(damage: u32, self_damage: u32) -> (Probabilities, Mutation
 
 /// For attacks that deal damage and apply a status effect (e.g. Wigglituff Ex)
 fn damage_status_attack(damage: u32, status: StatusCondition) -> (Probabilities, Mutations) {
-    damage_effect_doutcome(damage, build_status_effect(status))
+    active_damage_effect_doutcome(damage, build_status_effect(status))
 }
 
 /// For cards like "Meowth Pay Day" that draw a card and deal damage.
 fn draw_and_damage_outcome(damage: u32) -> (Probabilities, Mutations) {
-    damage_effect_doutcome(damage, move |_, state, action| {
+    active_damage_effect_doutcome(damage, move |_, state, action| {
         state
             .move_generation_stack
             .push((action.actor, vec![SimpleAction::DrawCard]));
@@ -373,9 +388,9 @@ fn hydro_pump_attack(
             .count()
             >= 4;
     if has_2_extra {
-        damage_doutcome(base_damage + 60)
+        active_damage_doutcome(base_damage + 60)
     } else {
-        damage_doutcome(base_damage)
+        active_damage_doutcome(base_damage)
     }
 }
 
@@ -386,155 +401,35 @@ fn probabilistic_damage_attack(
 ) -> (Probabilities, Mutations) {
     let mutations = damages
         .into_iter()
-        .map(|damage| damage_mutation(damage))
+        .map(|damage| active_damage_mutation(damage))
         .collect();
     (probabilities, mutations)
 }
 
 fn self_heal_attack(heal: u32, index: usize) -> (Probabilities, Mutations) {
-    index_damage_doutcome(index, move |_, state, action| {
+    index_active_damage_doutcome(index, move |_, state, action| {
         let active = state.get_active_mut(action.actor);
         active.heal(heal);
     })
 }
 
 fn damage_and_turn_effect_attack(index: usize, effect_duration: u8) -> (Probabilities, Mutations) {
-    index_damage_doutcome(index, move |_, state, action| {
+    index_active_damage_doutcome(index, move |_, state, action| {
         let active = state.get_active(action.actor);
         // TODO: Maybe create an EffectId enum and have a mapping between card,attack_idx to effect?
         state.add_turn_effect(active.card.clone(), effect_duration);
     })
 }
 
-// ===== These functions should share the common code of
-// forcing the end of the turn, applying damage with calculations, forcing enemy
-// to promote pokemon after knockout, etc... apply to all attacks.
-// Doutcome means deterministic outcome.
-fn damage_doutcome(damage: u32) -> (Probabilities, Mutations) {
-    damage_effect_doutcome(damage, |_, _, _| {})
-}
-
-// TODO: Ask for state so that we can get damage via index, before the mutation,
-//  and reuse the common mutation code.
-fn index_damage_doutcome<F>(attack_index: usize, additional_effect: F) -> (Probabilities, Mutations)
-where
-    F: Fn(&mut StdRng, &mut State, &Action) + 'static,
-{
-    (
-        vec![1.0],
-        vec![Box::new(move |rng, state, action| {
-            apply_common_mutation(state, action);
-            state
-                .move_generation_stack
-                .push((action.actor, vec![SimpleAction::EndTurn]));
-            additional_effect(rng, state, action);
-
-            let damage = get_damage_from_attack(state, action.actor, attack_index, 0);
-            handle_attack_damage(state, action.actor, damage, 0);
-        })],
-    )
-}
-
-fn damage_effect_doutcome<F>(damage: u32, additional_effect: F) -> (Probabilities, Mutations)
-where
-    F: Fn(&mut StdRng, &mut State, &Action) + 'static,
-{
-    (
-        vec![1.0],
-        vec![damage_effect_mutation(damage, additional_effect)],
-    )
-}
-
-// ===== Helper functions for building outcomes
-fn damage_mutation(damage: u32) -> Mutation {
-    damage_effect_mutation(damage, |_, _, _| {})
-}
-
-// TODO: Verify all use active
-fn damage_effect_mutation<F>(damage: u32, additional_effect: F) -> Mutation
-where
-    F: Fn(&mut StdRng, &mut State, &Action) + 'static,
-{
-    Box::new({
-        move |rng, state, action| {
-            apply_common_mutation(state, action);
-            state
-                .move_generation_stack
-                .push((action.actor, vec![SimpleAction::EndTurn]));
-            additional_effect(rng, state, action);
-            handle_attack_damage(state, action.actor, damage, 0);
-        }
-    })
-}
-
-fn build_status_effect(status: StatusCondition) -> FnMutation {
-    Box::new({
-        move |_, state: &mut State, action: &Action| {
-            let opponent = (action.actor + 1) % 2;
-            let opponent_active = state.get_active_mut(opponent);
-
-            // Arceus Ex avoids status effects
-            let string_id = opponent_active.get_id();
-            let arceus_ids = [
-                CardId::A2a071ArceusEx,
-                CardId::A2a086ArceusEx,
-                CardId::A2a095ArceusEx,
-                CardId::A2a096ArceusEx,
-            ];
-            let card_id = CardId::from_card_id(&string_id).unwrap();
-            if arceus_ids.contains(&card_id) {
-                trace!("Arceus Ex avoids status effect");
-                return;
-            }
-
-            match status {
-                StatusCondition::Asleep => opponent_active.asleep = true,
-                StatusCondition::Paralyzed => opponent_active.paralyzed = true,
-                StatusCondition::Poisoned => opponent_active.poisoned = true,
-            }
-        }
-    })
-}
-
 #[cfg(test)]
 mod test {
-    use rand::SeedableRng;
+    use rand::{rngs::StdRng, SeedableRng};
 
-    use crate::{card_ids::CardId, database::get_card_by_enum, hooks::to_playable_card};
+    use crate::{
+        actions::Action, card_ids::CardId, database::get_card_by_enum, hooks::to_playable_card,
+    };
 
     use super::*;
-
-    #[test]
-    fn test_build_status_effect() {
-        let mut rng = StdRng::seed_from_u64(0);
-        let mut state = State::default();
-        let action = Action {
-            actor: 0,
-            action: SimpleAction::EndTurn,
-            is_stack: false,
-        };
-        let bulbasuar = get_card_by_enum(CardId::A1001Bulbasaur);
-        state.in_play_pokemon[1][0] = Some(to_playable_card(&bulbasuar, false));
-        let effect = build_status_effect(StatusCondition::Asleep);
-        effect(&mut rng, &mut state, &action);
-        assert!(state.get_active(1).asleep);
-    }
-
-    #[test]
-    fn test_arceus_avoids_status() {
-        let mut rng = StdRng::seed_from_u64(0);
-        let mut state = State::default();
-        let action = Action {
-            actor: 0,
-            action: SimpleAction::EndTurn,
-            is_stack: false,
-        };
-        let arceus = get_card_by_enum(CardId::A2a071ArceusEx);
-        state.in_play_pokemon[1][0] = Some(to_playable_card(&arceus, false));
-        let effect = build_status_effect(StatusCondition::Asleep);
-        effect(&mut rng, &mut state, &action);
-        assert!(!state.get_active(1).asleep);
-    }
 
     #[test]
     fn test_arceus_does_90_damage() {
