@@ -238,4 +238,23 @@ mod tests {
         let retreat_cost = get_retreat_cost(&state, &playable_card);
         assert_eq!(retreat_cost, vec![]);
     }
+
+    #[test]
+    fn test_can_play_support() {
+        // Normal state should allow support cards
+        let mut state = State::default();
+        assert!(can_play_support(&state));
+
+        // After playing a support, it should disallow
+        state.has_played_support = true;
+        assert!(!can_play_support(&state));
+
+        // Reset state
+        state.has_played_support = false;
+        assert!(can_play_support(&state));
+
+        // With Psyduck headache effect, it should disallow
+        state.add_turn_effect(get_card_by_enum(CardId::A1057Psyduck), 1);
+        assert!(!can_play_support(&state));
+    }
 }
