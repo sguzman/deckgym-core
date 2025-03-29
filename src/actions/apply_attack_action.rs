@@ -555,24 +555,74 @@ mod test {
         // 1 pokemon, 1 head
         let fire_pokemon = vec![1];
         let choices = generate_energy_distributions(&fire_pokemon, 1);
-        assert_eq!(choices.len(), 1); // Only [1]
+        assert_eq!(choices.len(), 1);
+        if let SimpleAction::Attach { attachments, .. } = &choices[0] {
+            assert_eq!(attachments, &[(1, EnergyType::Fire, 1)]);
+        } else {
+            panic!("Expected SimpleAction::Attach");
+        }
 
         // 1 pokemon, 2 heads
         let choices = generate_energy_distributions(&fire_pokemon, 2);
-        assert_eq!(choices.len(), 1); // Only [2]
+        assert_eq!(choices.len(), 1);
+        if let SimpleAction::Attach { attachments, .. } = &choices[0] {
+            assert_eq!(attachments, &[(2, EnergyType::Fire, 1)]);
+        } else {
+            panic!("Expected SimpleAction::Attach");
+        }
 
         // 2 pokemon, 2 heads
         let fire_pokemon = vec![1, 2];
         let choices = generate_energy_distributions(&fire_pokemon, 2);
-        assert_eq!(choices.len(), 3); // [2,0], [1,1], [0,2]
+        assert_eq!(choices.len(), 3);
+        let expected_distributions = [
+            vec![(2, EnergyType::Fire, 2)],
+            vec![(1, EnergyType::Fire, 1), (1, EnergyType::Fire, 2)],
+            vec![(2, EnergyType::Fire, 1)],
+        ];
+        for (i, choice) in choices.iter().enumerate() {
+            if let SimpleAction::Attach { attachments, .. } = choice {
+                assert_eq!(attachments, &expected_distributions[i]);
+            } else {
+                panic!("Expected SimpleAction::Attach");
+            }
+        }
 
         // 2 pokemon, 3 heads
         let choices = generate_energy_distributions(&fire_pokemon, 3);
-        assert_eq!(choices.len(), 4); // [3,0], [2,1], [1,2], [0,3]
+        assert_eq!(choices.len(), 4);
+        let expected_distributions = [
+            vec![(3, EnergyType::Fire, 2)],
+            vec![(1, EnergyType::Fire, 1), (2, EnergyType::Fire, 2)],
+            vec![(2, EnergyType::Fire, 1), (1, EnergyType::Fire, 2)],
+            vec![(3, EnergyType::Fire, 1)],
+        ];
+        for (i, choice) in choices.iter().enumerate() {
+            if let SimpleAction::Attach { attachments, .. } = choice {
+                assert_eq!(attachments, &expected_distributions[i]);
+            } else {
+                panic!("Expected SimpleAction::Attach");
+            }
+        }
 
         // 3 pokemon, 2 heads
         let fire_pokemon = vec![1, 2, 3];
         let choices = generate_energy_distributions(&fire_pokemon, 2);
-        assert_eq!(choices.len(), 6); // [2,0,0], [1,1,0], [1,0,1], [0,2,0], [0,1,1], [0,0,2]
+        assert_eq!(choices.len(), 6);
+        let expected_distributions = [
+            vec![(2, EnergyType::Fire, 3)],
+            vec![(1, EnergyType::Fire, 2), (1, EnergyType::Fire, 3)],
+            vec![(2, EnergyType::Fire, 2)],
+            vec![(1, EnergyType::Fire, 1), (1, EnergyType::Fire, 3)],
+            vec![(1, EnergyType::Fire, 1), (1, EnergyType::Fire, 2)],
+            vec![(2, EnergyType::Fire, 1)],
+        ];
+        for (i, choice) in choices.iter().enumerate() {
+            if let SimpleAction::Attach { attachments, .. } = choice {
+                assert_eq!(attachments, &expected_distributions[i]);
+            } else {
+                panic!("Expected SimpleAction::Attach");
+            }
+        }
     }
 }
