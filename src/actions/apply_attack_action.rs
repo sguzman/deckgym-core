@@ -127,18 +127,18 @@ fn moltres_inferno_dance() -> (Probabilities, Mutations) {
                 }
 
                 // First collect all eligible fire pokemon in bench
-                let mut fire_pokemon = Vec::new();
+                let mut fire_bench_idx = Vec::new();
                 for (in_play_idx, pokemon) in state.enumerate_bench_pokemon(action.actor) {
                     if pokemon.get_energy_type() == Some(EnergyType::Fire) {
-                        fire_pokemon.push(in_play_idx);
+                        fire_bench_idx.push(in_play_idx);
                     }
                 }
 
-                if fire_pokemon.is_empty() {
+                if fire_bench_idx.is_empty() {
                     return;
                 }
 
-                let all_choices = generate_energy_distributions(&fire_pokemon, heads);
+                let all_choices = generate_energy_distributions(&fire_bench_idx, heads);
                 if !all_choices.is_empty() {
                     state
                         .move_generation_stack
@@ -150,23 +150,23 @@ fn moltres_inferno_dance() -> (Probabilities, Mutations) {
     (probabilities, mutations)
 }
 
-fn generate_energy_distributions(fire_pokemon: &[usize], heads: usize) -> Vec<SimpleAction> {
+fn generate_energy_distributions(fire_bench_idx: &[usize], heads: usize) -> Vec<SimpleAction> {
     let mut all_choices = Vec::new();
 
     // Generate all possible ways to distribute the energy
     let mut distributions = Vec::new();
     generate_distributions(
-        fire_pokemon,
+        fire_bench_idx,
         heads,
         0,
-        &mut vec![0; fire_pokemon.len()],
+        &mut vec![0; fire_bench_idx.len()],
         &mut distributions,
     );
 
     // Convert each distribution into an Attach action
     for dist in distributions {
         let mut attachments = Vec::new();
-        for (i, &pokemon_idx) in fire_pokemon.iter().enumerate() {
+        for (i, &pokemon_idx) in fire_bench_idx.iter().enumerate() {
             if dist[i] > 0 {
                 attachments.push((dist[i] as u32, EnergyType::Fire, pokemon_idx));
             }
@@ -183,7 +183,7 @@ fn generate_energy_distributions(fire_pokemon: &[usize], heads: usize) -> Vec<Si
 // Helper function to generate all possible distributions of 'heads' energy
 // across the available Pokémon
 fn generate_distributions(
-    fire_pokemon: &[usize],
+    fire_bench_idx: &[usize],
     remaining: usize,
     start_idx: usize,
     current: &mut Vec<usize>,
@@ -194,7 +194,7 @@ fn generate_distributions(
         return;
     }
 
-    if start_idx >= fire_pokemon.len() {
+    if start_idx >= fire_bench_idx.len() {
         return;
     }
 
@@ -202,7 +202,7 @@ fn generate_distributions(
     for amount in 0..=remaining {
         current[start_idx] = amount;
         generate_distributions(
-            fire_pokemon,
+            fire_bench_idx,
             remaining - amount,
             start_idx + 1,
             current,
