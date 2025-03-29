@@ -166,7 +166,7 @@ impl State {
             let target_turn = self.turn_count + turn_offset;
             self.turn_effects
                 .entry(target_turn)
-                .or_insert_with(Vec::new)
+                .or_default()
                 .push(card.clone());
         }
         trace!(
