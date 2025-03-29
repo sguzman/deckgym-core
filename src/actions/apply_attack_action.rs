@@ -99,6 +99,7 @@ fn forecast_effect_attack(
         AttackId::A1129MewtwoExPsydrive => {
             energy_discard_attack(index, vec![EnergyType::Psychic, EnergyType::Psychic])
         }
+        AttackId::A1149GolemDoubleEdge => self_damage_attack(150, 50),
         AttackId::A1153MarowakExBonemerang => {
             probabilistic_damage_attack(vec![0.25, 0.5, 0.25], vec![0, 80, 160])
         }
