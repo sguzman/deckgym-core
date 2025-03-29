@@ -1,6 +1,7 @@
 use common::init_random_players;
 use deckgym::{
     players::{AttachAttackPlayer, EndTurnPlayer, MctsPlayer, Player, RandomPlayer},
+    state::GameOutcome,
     test_helpers::load_test_decks,
 };
 
@@ -54,5 +55,5 @@ fn test_first_ko() {
     // Now play the rest. AA should win b.c. ET has no bench pokemon
     let winner = game.play();
     assert_eq!(game.get_state_clone().turn_count, 7);
-    assert_eq!(winner, Some(0));
+    assert_eq!(winner, Some(GameOutcome::Win(0)));
 }

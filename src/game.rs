@@ -6,6 +6,7 @@ use crate::{
     actions::{apply_action, Action},
     generate_possible_actions,
     players::Player,
+    state::GameOutcome,
     types::EnergyType,
     State,
 };
@@ -51,7 +52,8 @@ impl Game {
         }
     }
 
-    pub fn play(&mut self) -> Option<usize> {
+    // Returns None if the game times out
+    pub fn play(&mut self) -> Option<GameOutcome> {
         if self.debug {
             info!("Playing game with seed: {}", self.seed);
         }
@@ -151,6 +153,7 @@ impl Game {
 mod tests {
     use crate::{
         players::{AttachAttackPlayer, EndTurnPlayer, Player},
+        state::GameOutcome,
         test_helpers::load_test_decks,
         Game,
     };
@@ -192,7 +195,7 @@ mod tests {
         // Now play the rest. AA should win b.c. ET has no bench pokemon
         let winner = game.play();
         assert_eq!(game.get_state_clone().turn_count, 5);
-        assert_eq!(winner, Some(0));
+        assert_eq!(winner, Some(GameOutcome::Win(0)));
     }
 
     #[test]

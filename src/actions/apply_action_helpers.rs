@@ -1,7 +1,9 @@
 use log::debug;
 use rand::rngs::StdRng;
 
-use crate::{actions::SimpleAction, types::Card, State};
+use crate::{
+    actions::SimpleAction, hooks::get_counterattack_damage, state::GameOutcome, types::Card, State,
+};
 
 use super::Action;
 
@@ -138,87 +140,114 @@ pub(crate) fn handle_attack_damage(
     attacking_player: usize,
     targets: &Vec<(u32, usize)>, // damage, in_play_idx
 ) {
-    let opponent = (attacking_player + 1) % 2;
-    let mut knockouts: Vec<usize> = vec![];
-    for (damage, receiving_pokemon_idx) in targets {
+    let defending_player = (attacking_player + 1) % 2;
+    let mut knockouts: Vec<(usize, usize)> = vec![];
+    for (damage, target_pokemon_idx) in targets {
         if *damage == 0 {
             continue;
         }
 
-        // Apply damage to opponent's pokemon (without surpassing 0 HP)
-        let receiving_pokemon = state.in_play_pokemon[opponent][*receiving_pokemon_idx]
-            .as_mut()
-            .expect("Pokemon should be there if receiving damage");
-        receiving_pokemon.apply_damage(*damage);
-        debug!(
-            "Dealt {} damage to opponent's {} Pokemon. Remaining HP: {}",
-            damage, receiving_pokemon_idx, receiving_pokemon.remaining_hp
-        );
+        // Create a closure for target_pokemon's mutations
+        let counter_damage = {
+            let target_pokemon = state.in_play_pokemon[defending_player][*target_pokemon_idx]
+                .as_mut()
+                .expect("Pokemon should be there if taking damage");
+            target_pokemon.apply_damage(*damage); // Applies without surpassing 0 HP
+            debug!(
+                "Dealt {} damage to opponent's {} Pokemon. Remaining HP: {}",
+                damage, target_pokemon_idx, target_pokemon.remaining_hp
+            );
+            if target_pokemon.remaining_hp <= 0 {
+                knockouts.push((defending_player, *target_pokemon_idx));
+            }
 
-        // TODO: If pokemon is active and has counterattack mechanisms, apply.
-        if receiving_pokemon.remaining_hp > 0 {
-            continue; // nothing to do
+            let counter_damage = if *target_pokemon_idx == 0 {
+                get_counterattack_damage(&target_pokemon)
+            } else {
+                0
+            };
+            counter_damage
+        };
+
+        // If pokemon not active, don't even look at counter-attack logic.
+        if *target_pokemon_idx == 0 && counter_damage > 0 {
+            let attacking_pokemon = state.in_play_pokemon[attacking_player][0]
+                .as_mut()
+                .expect("Active Pokemon should be there");
+            attacking_pokemon.apply_damage(counter_damage);
+            debug!(
+                "Dealt {} counterattack damage to active Pokemon. Remaining HP: {}",
+                counter_damage, attacking_pokemon.remaining_hp
+            );
+            if attacking_pokemon.remaining_hp <= 0 {
+                knockouts.push((attacking_player, 0));
+            }
         }
-        knockouts.push(*receiving_pokemon_idx);
     }
 
     // Handle knockouts: Discard cards and award points (to potentially short-circuit promotions)
-    // TODO: Could be a counter-attack knockout too.
-    for receiving_pokemon_idx in knockouts.clone() {
-        let receiving_pokemon = state.in_play_pokemon[opponent][receiving_pokemon_idx]
+    for (ko_receiver, ko_pokemon_idx) in knockouts.clone() {
+        let ko_pokemon = state.in_play_pokemon[ko_receiver][ko_pokemon_idx]
             .as_mut()
             .expect("Pokemon should be there if knocked out");
 
-        // Sum points
-        let points_won = if receiving_pokemon.card.is_ex() { 2 } else { 1 };
-        state.points[attacking_player] += points_won;
+        // Award points
+        let ko_initiator = (ko_receiver + 1) % 2;
+        let points_won = if ko_pokemon.card.is_ex() { 2 } else { 1 };
+        state.points[ko_initiator] += points_won;
         debug!(
-            "Opponent's Pokemon {} fainted. Won {} points for a total of {}",
-            receiving_pokemon_idx, points_won, state.points[attacking_player]
+            "Player {}'s Pokemon {} fainted. Player {} won {} points for a total of {}",
+            ko_receiver, ko_pokemon_idx, ko_initiator, points_won, state.points[ko_initiator]
         );
 
         // Move card (and evolution chain) into discard pile
-        let mut cards_to_discard = receiving_pokemon.cards_behind.clone();
-        cards_to_discard.push(receiving_pokemon.card.clone());
+        let mut cards_to_discard = ko_pokemon.cards_behind.clone();
+        cards_to_discard.push(ko_pokemon.card.clone());
         debug!("Discarding: {:?}", cards_to_discard);
-        state.discard_piles[opponent].extend(cards_to_discard);
-        state.in_play_pokemon[opponent][receiving_pokemon_idx] = None;
+        state.discard_piles[ko_receiver].extend(cards_to_discard);
+        state.in_play_pokemon[ko_receiver][ko_pokemon_idx] = None;
     }
 
-    // TODO: Could be tie because of counterattack knockouts
-    if state.points[attacking_player] >= 3 {
-        state.winner = Some(attacking_player); // the next ticker should end the game
+    // If game ends because of knockouts, set winner and return so as to short-circuit promotion logic
+    if state.points[attacking_player] >= 3 && state.points[defending_player] >= 3 {
+        debug!("Both players have 3 points, it's a tie");
+        state.winner = Some(GameOutcome::Tie);
+        return;
+    } else if state.points[attacking_player] >= 3 {
+        state.winner = Some(GameOutcome::Win(attacking_player));
+        return; // attacking player could lose by attacking into a RockyHelmet e.g.
+    } else if state.points[defending_player] >= 3 {
+        state.winner = Some(GameOutcome::Win(defending_player));
         return;
     }
 
     // Queue up promotion actions if the game is still on after a knockout
-    // TODO: Attacker might also need to promote.
-    if knockouts.contains(&0) {
-        // If K.O. was Active and opponent hasn't win, check if can select from Bench
-        let enumerated_bench_pokemon = state.enumerate_bench_pokemon(opponent).collect::<Vec<_>>();
+    for (ko_receiver, ko_pokemon_idx) in knockouts {
+        if ko_pokemon_idx != 0 {
+            continue; // Only promote if K.O. was on Active
+        }
+
+        // If K.O. was Active and ko_receiver hasn't win, check if can select from Bench
+        let enumerated_bench_pokemon = state
+            .enumerate_bench_pokemon(ko_receiver)
+            .collect::<Vec<_>>();
         if enumerated_bench_pokemon.is_empty() {
             // If no bench pokemon, opponent loses
-            state.winner = Some(attacking_player);
-            debug!("Opponent lost due to no bench pokemon");
-        } else if enumerated_bench_pokemon.len() == 1 {
-            // If only one bench pokemon, automatically switch to it
-            let bench_idx = enumerated_bench_pokemon[0].0;
-            let bench_card = enumerated_bench_pokemon[0].1.clone();
-            debug!("Automatically switching to Active: {:?}", bench_card);
-            state.in_play_pokemon[opponent][0] = Some(bench_card);
-            state.in_play_pokemon[opponent][bench_idx] = None;
+            let ko_initiator = (ko_receiver + 1) % 2;
+            state.winner = Some(GameOutcome::Win(ko_initiator));
+            debug!("Player {} lost due to no bench pokemon", ko_receiver);
         } else {
-            // If multiple bench pokemon, let opponent choose
             let possible_moves = state
-                .enumerate_bench_pokemon(opponent)
+                .enumerate_bench_pokemon(ko_receiver)
                 .map(|(i, _)| SimpleAction::Activate { in_play_idx: i })
                 .collect::<Vec<_>>();
-            // Activate will keep control, end turn should happen after since stack
             debug!(
                 "Triggering Activate moves: {:?} to player {}",
-                possible_moves, opponent
+                possible_moves, ko_receiver
             );
-            state.move_generation_stack.push((opponent, possible_moves));
+            state
+                .move_generation_stack
+                .push((ko_receiver, possible_moves));
         }
     }
 }

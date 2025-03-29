@@ -1,6 +1,7 @@
 use clap::Parser;
 use colored::Colorize;
 use deckgym::players::{create_players, fill_code_array, parse_player_code, PlayerCode};
+use deckgym::state::GameOutcome;
 use deckgym::Game;
 use env_logger::{Builder, Env};
 use log::{info, warn};
@@ -62,16 +63,16 @@ fn main() {
     for i in 1..=num_simulations {
         let players = create_players(deck_a.clone(), deck_b.clone(), cli_players.clone());
         let mut game = Game::new(players, rand::random::<u64>());
-        let winner = game.play();
+        let outcome = game.play();
         turns_per_game.push(game.get_state_clone().turn_count);
         plys_per_game.push(game.get_num_plys());
         total_degrees.extend(game.get_degrees_per_ply().iter());
-        info!("Simulation {}: Winner is {:?}", i, winner);
-        match winner {
-            Some(winner_name) => {
+        info!("Simulation {}: Winner is {:?}", i, outcome);
+        match outcome {
+            Some(GameOutcome::Win(winner_name)) => {
                 wins_per_deck[winner_name] += 1;
             }
-            None => {
+            Some(GameOutcome::Tie) | None => {
                 wins_per_deck[2] += 1;
             }
         }

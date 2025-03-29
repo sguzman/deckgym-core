@@ -10,10 +10,16 @@ use crate::{
     types::{Card, EnergyType, PlayedCard},
 };
 
+#[derive(Debug, Clone, Copy, Hash, PartialEq, Eq)]
+pub enum GameOutcome {
+    Win(usize),
+    Tie,
+}
+
 #[derive(Debug, Clone, Hash, PartialEq, Eq, Default)]
 pub struct State {
     // Turn State
-    pub winner: Option<usize>,
+    pub winner: Option<GameOutcome>,
     pub points: [u8; 2],
     pub turn_count: u8, // Global turn count. Matches TCGPocket app.
     // Player that needs to select from playable actions. Might not be aligned

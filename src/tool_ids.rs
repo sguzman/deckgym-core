@@ -6,12 +6,14 @@ use crate::types::TrainerCard;
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum ToolId {
     A2147GiantCape,
+    A2148RockyHelmet,
 }
 
 lazy_static::lazy_static! {
     static ref TOOL_ID_MAP: HashMap<&'static str, ToolId> = {
         let mut m = HashMap::new();
         m.insert("A2 147", ToolId::A2147GiantCape);
+        m.insert("A2 148", ToolId::A2148RockyHelmet);
         m
     };
 }

@@ -48,6 +48,8 @@ pub(crate) fn on_attach_tool(state: &mut State, actor: usize, in_play_idx: usize
             card.remaining_hp += 20;
             card.total_hp += 20;
         }
+        // Many tools do nothing on attach
+        ToolId::A2148RockyHelmet => {}
     }
 }
 
