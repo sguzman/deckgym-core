@@ -19,15 +19,18 @@ impl Player for ExpectiMiniMaxPlayer {
         state: &State,
         possible_actions: Vec<Action>,
     ) -> Action {
+        let myself = possible_actions[0].actor;
+
+        // Get value for each possible action
         let original_level = log::max_level();
         log::set_max_level(LevelFilter::Error); // Temporarily silence debug and trace logs
-        let myself = possible_actions[0].actor;
-        // Get value for each possible action
         let scores: Vec<f64> = possible_actions
             .iter()
             .map(|action| expected_value_function(rng, state, action, self.max_depth - 1, myself))
             .collect();
+        log::set_max_level(original_level); // Restore the original logging level
 
+        trace!("Scores: {:?}", scores);
         // Select the one with best score
         let best_idx = scores
             .iter()
@@ -35,7 +38,6 @@ impl Player for ExpectiMiniMaxPlayer {
             .max_by(|(_, a), (_, b)| a.partial_cmp(b).unwrap())
             .unwrap()
             .0;
-        log::set_max_level(original_level); // Restore the original logging level
         possible_actions[best_idx].clone()
     }
 
@@ -80,7 +82,7 @@ fn expectiminimax(rng: &mut StdRng, state: &State, depth: usize, myself: usize) 
             .iter()
             .map(|action| expected_value_function(rng, state, action, depth - 1, myself))
             .collect();
-        scores.iter().cloned().fold(0.0, f64::max)
+        scores.iter().cloned().fold(f64::NEG_INFINITY, f64::max)
     } else {
         // TODO: If minimizing, we can't just generate_possible_actions since
         //  not everything is public information. So we would have to have
@@ -89,7 +91,7 @@ fn expectiminimax(rng: &mut StdRng, state: &State, depth: usize, myself: usize) 
             .iter()
             .map(|action| expected_value_function(rng, state, action, depth - 1, myself))
             .collect();
-        scores.iter().cloned().fold(0.0, f64::min)
+        scores.iter().cloned().fold(f64::INFINITY, f64::min)
     }
 }
 
