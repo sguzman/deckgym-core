@@ -1,3 +1,5 @@
+use log::trace;
+
 use crate::{
     attack_ids::AttackId,
     hooks::get_damage_from_attack,
@@ -23,6 +25,7 @@ pub(crate) fn forecast_attack(
 ) -> (Probabilities, Mutations) {
     let active = state.get_active(acting_player);
     let attack = active.card.get_attacks()[index].clone();
+    trace!("Forecasting attack: {:?} {:?}", active, attack);
     if attack.effect.is_none() {
         let damage = get_damage_from_attack(state, acting_player, index, 0);
         active_damage_doutcome(damage)
@@ -115,9 +118,7 @@ fn forecast_effect_attack(
             damage_chance_status_attack(10, 0.5, StatusCondition::Paralyzed)
         }
         AttackId::A2049PalkiaDimensionalStorm => palkia_dimensional_storm(state),
-        AttackId::A2119DialgaExMetallicTurbo => {
-            energy_bench_attack(acting_player, 2, EnergyType::Metal)
-        }
+        AttackId::A2119DialgaExMetallicTurbo => energy_bench_attack(index, 2, EnergyType::Metal),
         AttackId::A2a071ArceusExUltimateForce => {
             bench_count_attack(acting_player, state, 70, 20, None)
         }

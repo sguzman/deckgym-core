@@ -1,4 +1,4 @@
-use log::debug;
+use log::{trace, LevelFilter};
 use rand::rngs::StdRng;
 use std::fmt::Debug;
 
@@ -19,6 +19,8 @@ impl Player for ExpectiMiniMaxPlayer {
         state: &State,
         possible_actions: Vec<Action>,
     ) -> Action {
+        let original_level = log::max_level();
+        log::set_max_level(LevelFilter::Error); // Temporarily silence debug and trace logs
         let myself = possible_actions[0].actor;
         // Get value for each possible action
         let scores: Vec<f64> = possible_actions
@@ -33,6 +35,7 @@ impl Player for ExpectiMiniMaxPlayer {
             .max_by(|(_, a), (_, b)| a.partial_cmp(b).unwrap())
             .unwrap()
             .0;
+        log::set_max_level(original_level); // Restore the original logging level
         possible_actions[best_idx].clone()
     }
 
@@ -48,7 +51,7 @@ fn expected_value_function(
     depth: usize,
     myself: usize,
 ) -> f64 {
-    debug!("E({}) depth left: {} action: {:?}", myself, depth, action);
+    trace!("E({}) depth left: {} action: {:?}", myself, depth, action);
     let (probabilities, mutations) = forecast_action(state, action);
     let mut outcomes: Vec<State> = vec![];
     for mutation in mutations {
@@ -56,11 +59,13 @@ fn expected_value_function(
         mutation(rng, &mut state, action);
         outcomes.push(state);
     }
-    outcomes
+    let score = outcomes
         .iter()
         .zip(probabilities.iter())
         .map(|(outcome, prob)| expectiminimax(rng, outcome, depth, myself) * prob)
-        .sum()
+        .sum();
+    trace!("E({}) action: {:?} score: {}", myself, action, score);
+    score
 }
 
 fn expectiminimax(rng: &mut StdRng, state: &State, depth: usize, myself: usize) -> f64 {
@@ -89,12 +94,15 @@ fn expectiminimax(rng: &mut StdRng, state: &State, depth: usize, myself: usize) 
 }
 
 fn value_function(state: &State, myself: usize) -> f64 {
-    // TODO: Add more features. Other ideas:
-    // Attached energy on enemies in play?
-    // Can we give priorities to attached energies?
-    // Health on the Active spot?
-    // Closeness to getting a point(?) Num Knockouts?
+    // TODO: Add more features
+    // Give priorities to attached energies?
     let opponent = (myself + 1) % 2;
+
+    // Points
+    let points = state.points[myself] as f64;
+    let opponent_points = state.points[opponent] as f64;
+
+    // Attached energy
     let attached_energy_in_play = state
         .enumerate_in_play_pokemon(myself)
         .map(|(_, card)| card.attached_energy.len() as f64)
@@ -104,10 +112,44 @@ fn value_function(state: &State, myself: usize) -> f64 {
         .map(|(_, card)| card.attached_energy.len() as f64)
         .sum::<f64>();
 
-    let points = state.points[myself] as f64;
-    let opponent_points = state.points[opponent] as f64;
+    // Total health of Pokémon on the board
+    let total_health_in_play = state
+        .enumerate_in_play_pokemon(myself)
+        .map(|(_, card)| card.total_hp as f64)
+        .sum::<f64>();
+    let enemy_total_health_in_play = state
+        .enumerate_in_play_pokemon(opponent)
+        .map(|(_, card)| card.total_hp as f64)
+        .sum::<f64>();
 
-    (points - opponent_points) * 100.0 + attached_energy_in_play - enemy_attached_energy_in_play
+    // Remaining health of Pokémon on the board
+    let remaining_health_in_play = state
+        .enumerate_in_play_pokemon(myself)
+        .map(|(_, card)| card.remaining_hp as f64)
+        .sum::<f64>();
+    let enemy_remaining_total_health_in_play = state
+        .enumerate_in_play_pokemon(opponent)
+        .map(|(_, card)| card.remaining_hp as f64)
+        .sum::<f64>();
+
+    // Weighted value function
+    trace!(
+        "Value function: points: {}, opponent_points: {}, total_health_in_play: {}, enemy_total_health_in_play: {}, remaining_health_in_play: {}, enemy_remaining_total_health_in_play: {}, attached_energy_in_play: {}, enemy_attached_energy_in_play: {}",
+        points,
+        opponent_points,
+        total_health_in_play,
+        enemy_total_health_in_play,
+        remaining_health_in_play,
+        enemy_remaining_total_health_in_play,
+        attached_energy_in_play,
+        enemy_attached_energy_in_play
+    );
+    let score = (points - opponent_points) * 1000.0
+        + (total_health_in_play - enemy_total_health_in_play)
+        + (remaining_health_in_play - enemy_remaining_total_health_in_play)
+        + (attached_energy_in_play - enemy_attached_energy_in_play) * 50.0;
+    trace!("Value function: {}", score);
+    score
 }
 
 impl Debug for ExpectiMiniMaxPlayer {

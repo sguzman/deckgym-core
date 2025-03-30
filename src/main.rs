@@ -25,6 +25,10 @@ struct Args {
     /// Number of simulations to run
     #[arg(short, long)]
     num: u32,
+
+    /// Seed for random number generation
+    #[arg(short, long)]
+    seed: Option<u64>,
 }
 
 /// The CLI tool to simulate games between two decks.
@@ -62,7 +66,8 @@ fn main() {
     let mut total_degrees = Vec::new();
     for i in 1..=num_simulations {
         let players = create_players(deck_a.clone(), deck_b.clone(), cli_players.clone());
-        let mut game = Game::new(players, rand::random::<u64>());
+        let seed = args.seed.unwrap_or(rand::random::<u64>());
+        let mut game = Game::new(players, seed);
         let outcome = game.play();
         turns_per_game.push(game.get_state_clone().turn_count);
         plys_per_game.push(game.get_num_plys());

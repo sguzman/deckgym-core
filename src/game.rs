@@ -1,5 +1,5 @@
 use colored::Colorize;
-use log::{debug, info};
+use log::{debug, info, trace};
 use rand::{rngs::StdRng, SeedableRng};
 
 use crate::{
@@ -75,6 +75,10 @@ impl Game {
             actions[0].clone()
         } else {
             let player = self.players[actor].as_mut();
+            trace!(
+                "Possible Actions: {:?}",
+                actions.iter().map(|x| x.action.clone()).collect::<Vec<_>>()
+            );
             player.decision_fn(&mut self.rng, &self.state, actions)
         };
         let player = &self.players[actor];
@@ -119,7 +123,7 @@ impl Game {
 
     fn print_state(&self) {
         if self.debug {
-            debug!("{}", self.state.debug_string());
+            trace!("{}", self.state.debug_string());
         }
     }
 
