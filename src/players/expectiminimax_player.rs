@@ -82,7 +82,7 @@ fn expectiminimax(rng: &mut StdRng, state: &State, depth: usize, myself: usize) 
             .iter()
             .map(|action| expected_value_function(rng, state, action, depth - 1, myself))
             .collect();
-        scores.iter().cloned().fold(0.0, f64::max)
+        scores.iter().cloned().fold(f64::NEG_INFINITY, f64::max)
     } else {
         // TODO: If minimizing, we can't just generate_possible_actions since
         //  not everything is public information. So we would have to have
@@ -91,7 +91,7 @@ fn expectiminimax(rng: &mut StdRng, state: &State, depth: usize, myself: usize) 
             .iter()
             .map(|action| expected_value_function(rng, state, action, depth - 1, myself))
             .collect();
-        scores.iter().cloned().fold(0.0, f64::min)
+        scores.iter().cloned().fold(f64::INFINITY, f64::min)
     }
 }
 
