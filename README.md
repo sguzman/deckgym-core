@@ -88,5 +88,6 @@ cargo run --bin card_enum_generator -- --database > tmp.rs && mv tmp.rs src/data
 **Profiling Main Script**
 
 ```
+cargo install flamegraph
 sudo RUST_LOG=warn cargo flamegraph --dev --bin deckgym -- example_decks/venusaur-exeggutor.txt example_decks/weezing-arbok.txt --num 100 && open flamegraph.svg
 ```
