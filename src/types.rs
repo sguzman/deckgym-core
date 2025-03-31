@@ -182,6 +182,13 @@ impl Card {
     pub fn get_card_id(&self) -> CardId {
         CardId::from_card_id(self.get_id().as_str()).expect("Card ID should be valid")
     }
+
+    pub fn is_basic(&self) -> bool {
+        match self {
+            Card::Pokemon(pokemon_card) => pokemon_card.stage == BASIC_STAGE,
+            _ => false,
+        }
+    }
 }
 
 /// This represents a card in the mat. Has a pointer to the card
