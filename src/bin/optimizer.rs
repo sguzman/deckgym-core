@@ -132,6 +132,25 @@ fn main() {
     );
     warn!("Combinations: {:?}", combinations);
 
+    // Estimate the time it will take to run all simulations
+    let player_codes = fill_code_array(args.players.clone());
+    let total_games = combinations.len() as u64 * args.num as u64 * enemy_valid_decks.len() as u64;
+    let time_per_game = estimate_time_per_game(&player_codes);
+    let total_time = time_per_game * total_games as f64;
+    warn!(
+        "Estimated time: {} ({} combinations × {} enemy decks × {} games per deck)",
+        format_time(total_time),
+        combinations.len(),
+        enemy_valid_decks.len(),
+        args.num
+    );
+    warn!(
+        "Time estimation: {} per game ({} non-R players, {} R players)",
+        format_time(time_per_game),
+        count_player_types(&player_codes, false),
+        count_player_types(&player_codes, true)
+    );
+
     // For every valid combination, complete the deck and simulate games.
     let mut best_win_percent = 0.0;
     let mut best_combination = None;
@@ -196,6 +215,44 @@ fn main() {
         None => {
             warn!("No valid combination found.");
         }
+    }
+}
+
+/// Estimates time per game based on player types
+fn estimate_time_per_game(player_codes: &[PlayerCode]) -> f64 {
+    let non_r_count = count_player_types(player_codes, false) as f64;
+    let r_count = count_player_types(player_codes, true) as f64;
+
+    // 15ms per non-R player, 150µs per R player
+    (non_r_count * 15.0 / 1000.0) + (r_count * 150.0 / 1_000_000.0) // Convert to seconds
+}
+
+/// Counts the number of players of a specific type (R or non-R)
+fn count_player_types(player_codes: &[PlayerCode], is_r: bool) -> usize {
+    player_codes
+        .iter()
+        .filter(|&code| {
+            if is_r {
+                matches!(code, PlayerCode::R)
+            } else {
+                !matches!(code, PlayerCode::R)
+            }
+        })
+        .count()
+}
+
+/// Formats time in seconds to a human-readable string
+fn format_time(seconds: f64) -> String {
+    let hours = (seconds / 3600.0).floor();
+    let minutes = ((seconds % 3600.0) / 60.0).floor();
+    let secs = seconds % 60.0;
+
+    if hours > 0.0 {
+        format!("{:.0}h {:.0}m {:.1}s", hours, minutes, secs)
+    } else if minutes > 0.0 {
+        format!("{:.0}m {:.1}s", minutes, secs)
+    } else {
+        format!("{:.1}s", secs)
     }
 }
 
