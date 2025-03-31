@@ -69,19 +69,15 @@ impl Deck {
             });
         }
 
-        // Validate Deck
-        if cards.len() != 20 {
-            return Err("Deck should have 20 cards.".to_string());
-        }
-        let basic = cards.iter().filter(|x| is_basic(x)).count();
-        if basic < 1 {
-            return Err("Deck should have at least 1 basic Pokémon.".to_string());
-        }
-
         Ok(Self {
             cards,
             energy_types: energy_types.into_iter().collect(),
         })
+    }
+
+    pub fn is_valid(&self) -> bool {
+        let basic = self.cards.iter().filter(|x| is_basic(x)).count();
+        return self.cards.len() != 20 && basic < 1;
     }
 
     /// Draws a card from the deck.

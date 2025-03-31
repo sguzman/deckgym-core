@@ -3,7 +3,7 @@ use std::hash::{Hash, Hasher};
 
 use serde::{Deserialize, Serialize};
 
-use crate::tool_ids::ToolId;
+use crate::{card_ids::CardId, tool_ids::ToolId};
 
 /// Represents the type of energy.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize, PartialOrd, Ord)]
@@ -177,6 +177,10 @@ impl Card {
             Card::Pokemon(pokemon_card) => Some(pokemon_card.energy_type),
             _ => None,
         }
+    }
+
+    pub fn get_card_id(&self) -> CardId {
+        CardId::from_card_id(self.get_id().as_str()).expect("Card ID should be valid")
     }
 }
 
