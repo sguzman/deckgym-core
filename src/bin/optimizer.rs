@@ -1,6 +1,7 @@
 use clap::Parser;
 use colored::Colorize;
 use deckgym::card_ids::CardId;
+use deckgym::database::get_card_by_enum;
 use deckgym::players::{create_players, fill_code_array, parse_player_code, PlayerCode};
 use deckgym::state::GameOutcome;
 use deckgym::{Deck, Game};
@@ -125,95 +126,87 @@ fn main() {
     );
 
     // Generate all valid combinations (multiset selections) of candidate cards that sum to missing_count.
-    // let combinations = generate_combinations(&candidate_cards, &allowed_map, missing_count as u32);
-    // warn!(
-    //     "Generated {} possible combinations to complete the deck.",
-    //     combinations.len()
-    // );
-
-    // let mut best_win_percent = 0.0;
-    // let mut best_combination = None;
-    // let mut results = Vec::new();
+    let combinations = generate_combinations(&candidate_cards, &allowed_map, missing_count as u32);
+    warn!(
+        "Generated {} possible combinations to complete the deck.",
+        combinations.len()
+    );
+    warn!("Combinations: {:?}", combinations);
 
     // For every valid combination, complete the deck and simulate games.
-    // for comb in combinations {
-    //     // Create a completed deck by cloning the incomplete one and adding the candidate cards.
-    //     let mut completed_deck = incomplete_deck.clone();
-    //     for card in &comb {
-    //         completed_deck
-    //             .add_card(card)
-    //             .expect("Failed to add card to deck");
-    //     }
+    let mut best_win_percent = 0.0;
+    let mut best_combination = None;
+    let mut results = Vec::new();
+    for comb in combinations {
+        // Create a completed deck by cloning the incomplete one and adding the candidate cards.
+        let mut completed_deck = incomplete_deck.clone();
+        for card_id in &comb {
+            let card = get_card_by_enum(*card_id);
+            completed_deck.cards.push(card);
+        }
+        if !completed_deck.is_valid() {
+            warn!(
+                "Completed deck is invalid. Num cards: {}, num basics: {}",
+                completed_deck.cards.len(),
+                completed_deck.cards.iter().filter(|x| x.is_basic()).count()
+            );
+            continue;
+        }
 
-    //     // Check that the deck is complete (20 cards).
-    //     if completed_deck.cards().len() != 20 {
-    //         warn!(
-    //             "Completed deck is not 20 cards (has {}), skipping combination {:?}",
-    //             completed_deck.cards().len(),
-    //             comb
-    //         );
-    //         continue;
-    //     }
+        // Simulate games for each enemy deck.
+        let mut total_wins = 0;
+        let mut total_games = 0;
+        for enemy_deck in &enemy_valid_decks {
+            for _ in 0..args.num {
+                let players = create_players(
+                    completed_deck.clone(),
+                    enemy_deck.clone(),
+                    fill_code_array(args.players.clone()),
+                );
+                let seed = args.seed.unwrap_or(rand::random::<u64>());
+                let mut game = Game::new(players, seed);
+                let outcome = game.play();
 
-    //     let mut total_wins = 0;
-    //     let mut total_games = 0;
+                // Assume that if outcome is a win and the first player (our deck) wins, it counts as a win.
+                if let Some(GameOutcome::Win(winner)) = outcome {
+                    if winner == 0 {
+                        total_wins += 1;
+                    }
+                }
+                total_games += 1;
+            }
+        }
 
-    //     // Simulate games for each enemy deck.
-    //     for enemy_path in &enemy_deck_paths {
-    //         let enemy_deck =
-    //             deckgym::Deck::from_file(enemy_path.to_str().expect("Invalid enemy deck path"))
-    //                 .expect("Failed to parse enemy deck file");
+        let win_percent = (total_wins as f32 / total_games as f32) * 100.0;
+        results.push((comb.clone(), win_percent));
+        warn!("Combination {:?} win percentage: {:.2}%", comb, win_percent);
+        if win_percent > best_win_percent {
+            best_win_percent = win_percent;
+            best_combination = Some(comb.clone());
+        }
+    }
 
-    //         for _ in 0..args.num {
-    //             let players = create_players(
-    //                 completed_deck.clone(),
-    //                 enemy_deck.clone(),
-    //                 fill_code_array(args.players.clone()),
-    //             );
-    //             let seed = args.seed.unwrap_or(rand::random::<u64>());
-    //             let mut game = Game::new(players, seed);
-    //             let outcome = game.play();
-
-    //             // Assume that if outcome is a win and the first player (our deck) wins, it counts as a win.
-    //             if let Some(GameOutcome::Win(winner)) = outcome {
-    //                 if winner == 0 {
-    //                     total_wins += 1;
-    //                 }
-    //             }
-    //             total_games += 1;
-    //         }
-    //     }
-
-    //     let win_percent = (total_wins as f32 / total_games as f32) * 100.0;
-    //     results.push((comb.clone(), win_percent));
-    //     warn!("Combination {:?} win percentage: {:.2}%", comb, win_percent);
-    //     if win_percent > best_win_percent {
-    //         best_win_percent = win_percent;
-    //         best_combination = Some(comb.clone());
-    //     }
-    // }
-
-    // // Report the best combination found.
-    // match best_combination {
-    //     Some(comb) => {
-    //         warn!(
-    //             "Best combination: {:?} with win percentage: {:.2}%",
-    //             comb, best_win_percent
-    //         );
-    //     }
-    //     None => {
-    //         warn!("No valid combination found.");
-    //     }
-    // }
+    // Report the best combination found.
+    match best_combination {
+        Some(comb) => {
+            warn!(
+                "Best combination: {:?} with win percentage: {:.2}%",
+                comb, best_win_percent
+            );
+        }
+        None => {
+            warn!("No valid combination found.");
+        }
+    }
 }
 
 /// Generates all valid multisets of candidate cards (as vectors of strings) whose total count is `remaining`.
 /// Each candidate card cannot be used more than allowed_map[card] times.
 fn generate_combinations(
-    candidates: &Vec<String>,
-    allowed_map: &HashMap<String, u32>,
+    candidates: &Vec<CardId>,
+    allowed_map: &HashMap<CardId, u32>,
     remaining: u32,
-) -> Vec<Vec<String>> {
+) -> Vec<Vec<CardId>> {
     let mut result = Vec::new();
     let mut current = Vec::new();
     generate_combinations_recursive(
@@ -229,12 +222,12 @@ fn generate_combinations(
 
 /// Helper recursive function to generate combinations.
 fn generate_combinations_recursive(
-    candidates: &Vec<String>,
-    allowed_map: &HashMap<String, u32>,
+    candidates: &Vec<CardId>,
+    allowed_map: &HashMap<CardId, u32>,
     remaining: u32,
     index: usize,
-    current: &mut Vec<String>,
-    result: &mut Vec<Vec<String>>,
+    current: &mut Vec<CardId>,
+    result: &mut Vec<Vec<CardId>>,
 ) {
     if remaining == 0 {
         result.push(current.clone());
