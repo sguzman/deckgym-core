@@ -77,7 +77,7 @@ impl Deck {
 
     pub fn is_valid(&self) -> bool {
         let basic = self.cards.iter().filter(|x| x.is_basic()).count();
-        return self.cards.len() == 20 && basic >= 1;
+        self.cards.len() == 20 && basic >= 1
     }
 
     /// Draws a card from the deck.

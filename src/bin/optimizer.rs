@@ -8,7 +8,6 @@ use deckgym::{Deck, Game};
 use env_logger::{Builder, Env};
 use log::warn;
 use num_format::{Locale, ToFormattedString};
-use rand;
 use std::collections::HashMap;
 use std::fs;
 use std::io::Write;
@@ -88,7 +87,7 @@ fn main() {
             .filter(|c| c.get_card_id() == *card)
             .count();
         let allowed = if count >= 2 { 0 } else { 2 - count };
-        allowed_map.insert(card.clone(), allowed as u32);
+        allowed_map.insert(*card, allowed as u32);
     }
 
     // Read enemy decks from the specified folder.
@@ -241,7 +240,7 @@ fn generate_combinations_recursive(
     // Try using this candidate 0 up to min(max_allowed, remaining) times.
     for count in 0..=std::cmp::min(max_allowed, remaining) {
         for _ in 0..count {
-            current.push(candidate.clone());
+            current.push(*candidate);
         }
         generate_combinations_recursive(
             candidates,
