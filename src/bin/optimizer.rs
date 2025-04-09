@@ -6,7 +6,6 @@ use deckgym::players::{create_players, fill_code_array, parse_player_code, Playe
 use deckgym::state::GameOutcome;
 use deckgym::{Deck, Game};
 use env_logger::{Builder, Env};
-use humantime;
 use log::warn;
 use num_format::{Locale, ToFormattedString};
 use std::collections::HashMap;
