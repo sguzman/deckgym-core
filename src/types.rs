@@ -152,7 +152,7 @@ impl Card {
         // A pokemon is EX if after splitting by spaces in the name, the last word is "EX"
         match self {
             Card::Pokemon(pokemon_card) => {
-                pokemon_card.name.to_lowercase().split(' ').last() == Some("ex")
+                pokemon_card.name.to_lowercase().split(' ').next_back() == Some("ex")
             }
             _ => false,
         }
@@ -235,7 +235,7 @@ impl PlayedCard {
 
     pub(crate) fn attach_energy(&mut self, energy: &EnergyType, amount: u8) {
         self.attached_energy
-            .extend(std::iter::repeat(*energy).take(amount as usize));
+            .extend(std::iter::repeat_n(*energy, amount as usize));
     }
 
     // Discard 1 of energy type

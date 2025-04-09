@@ -139,7 +139,7 @@ fn optimize(
         enemy_valid_decks.len(),
         enemy_deck_paths
             .iter()
-            .map(|s| s.split('/').last().unwrap())
+            .map(|s| s.split('/').next_back().unwrap())
             .collect::<Vec<_>>()
     );
 
