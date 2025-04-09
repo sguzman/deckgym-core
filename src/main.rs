@@ -1,4 +1,4 @@
-use clap::Parser;
+use clap::{ArgAction, Parser};
 use colored::Colorize;
 use deckgym::players::{create_players, fill_code_array, parse_player_code, PlayerCode};
 use deckgym::state::GameOutcome;
@@ -29,44 +29,65 @@ struct Args {
     /// Seed for random number generation
     #[arg(short, long)]
     seed: Option<u64>,
+
+    /// Increase verbosity (-v, -vv, -vvv, etc.)
+    #[arg(short, long, action = ArgAction::Count, default_value_t = 2)]
+    verbose: u8,
 }
 
 /// The CLI tool to simulate games between two decks.
 fn main() {
-    // Initialize env_logger with a custom format
-    Builder::from_env(Env::default().default_filter_or("info"))
-        .format(|buf, record| {
-            writeln!(
-                buf,
-                "{}",
-                record.args() // Log message
-            )
-        })
-        .init();
     let args = Args::parse();
+
+    // Initialize the logger with the chosen log level.
+    let level = match args.verbose {
+        1 => "warn",
+        2 => "info",
+        3 => "debug",
+        _ => "trace",
+    };
+    Builder::from_env(Env::default().default_filter_or(level))
+        .format(|buf, record| writeln!(buf, "{}", record.args()))
+        .init();
 
     warn!("Welcome to {}!", "deckgym".blue().bold());
 
+    simulate(
+        &args.deck_a,
+        &args.deck_b,
+        args.players,
+        args.num,
+        args.seed,
+    );
+}
+
+fn simulate(
+    deck_a_path: &str,
+    deck_b_path: &str,
+    players: Option<Vec<PlayerCode>>,
+    num_simulations: u32,
+    seed: Option<u64>,
+) {
     // Read the decks files and initialize Players
-    let deck_a = deckgym::Deck::from_file(&args.deck_a).expect("Failed to parse deck from file");
-    let deck_b = deckgym::Deck::from_file(&args.deck_b).expect("Failed to parse deck from file");
-    let cli_players = fill_code_array(args.players);
+    let deck_a = deckgym::Deck::from_file(deck_a_path).expect("Failed to parse deck from file");
+    let deck_b = deckgym::Deck::from_file(deck_b_path).expect("Failed to parse deck from file");
+    let cli_players = fill_code_array(players);
 
     // Simulate Games and accumulate statistics
     warn!(
         "Running {} games with players {:?}",
-        args.num.to_formatted_string(&Locale::en),
+        num_simulations.to_formatted_string(&Locale::en),
         cli_players
     );
     let start = Instant::now(); // Start the timer
-    let num_simulations = args.num;
+    let num_simulations = num_simulations;
     let mut wins_per_deck = [0, 0, 0];
     let mut turns_per_game = Vec::new();
     let mut plys_per_game = Vec::new();
     let mut total_degrees = Vec::new();
     for i in 1..=num_simulations {
         let players = create_players(deck_a.clone(), deck_b.clone(), cli_players.clone());
-        let seed = args.seed.unwrap_or(rand::random::<u64>());
+        let seed = seed.unwrap_or(rand::random::<u64>());
         let mut game = Game::new(players, seed);
         let outcome = game.play();
         turns_per_game.push(game.get_state_clone().turn_count);
@@ -112,14 +133,14 @@ fn main() {
     warn!(
         "Player {:?} with Deck {} wins: {} ({:.2}%)",
         cli_players[0],
-        args.deck_a,
+        deck_a_path,
         wins_per_deck[0].to_formatted_string(&Locale::en),
         wins_per_deck[0] as f32 / num_simulations as f32 * 100.0
     );
     warn!(
         "Player {:?} with Deck {} wins: {} ({:.2}%)",
         cli_players[1],
-        args.deck_b,
+        deck_b_path,
         wins_per_deck[1].to_formatted_string(&Locale::en),
         wins_per_deck[1] as f32 / num_simulations as f32 * 100.0
     );
