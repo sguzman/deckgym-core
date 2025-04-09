@@ -36,7 +36,7 @@ enum Commands {
         seed: Option<u64>,
 
         /// Increase verbosity (-v, -vv, -vvv, etc.)
-        #[arg(short, long, action = ArgAction::Count, default_value_t = 2)]
+        #[arg(short, long, action = ArgAction::Count, default_value_t = 1)]
         verbose: u8,
     },
     /// Optimize an incomplete deck against enemy decks
