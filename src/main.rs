@@ -80,7 +80,6 @@ fn simulate(
         cli_players
     );
     let start = Instant::now(); // Start the timer
-    let num_simulations = num_simulations;
     let mut wins_per_deck = [0, 0, 0];
     let mut turns_per_game = Vec::new();
     let mut plys_per_game = Vec::new();
