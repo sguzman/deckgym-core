@@ -1,4 +1,4 @@
-use clap::Parser;
+use clap::{ArgAction, Parser};
 use colored::Colorize;
 use deckgym::optimize;
 use deckgym::players::{parse_player_code, PlayerCode};
@@ -29,16 +29,27 @@ struct Args {
     /// Seed for random number generation (optional)
     #[arg(short, long)]
     seed: Option<u64>,
+
+    /// Increase verbosity (-v, -vv, -vvv, etc.)
+    #[arg(short, long, action = ArgAction::Count, default_value_t = 2)]
+    verbose: u8,
 }
 
 fn main() {
-    // Initialize the logger with a minimal format.
-    Builder::from_env(Env::default().default_filter_or("info"))
+    let args = Args::parse();
+
+    // Initialize the logger with the chosen log level.
+    let level = match args.verbose {
+        1 => "warn",
+        2 => "info",
+        3 => "debug",
+        _ => "trace",
+    };
+    Builder::from_env(Env::default().default_filter_or(level))
         .format(|buf, record| writeln!(buf, "{}", record.args()))
         .init();
 
     warn!("Welcome to {} optimizer!", "deckgym".blue().bold());
-    let args = Args::parse();
 
     optimize(
         &args.incomplete_deck,
