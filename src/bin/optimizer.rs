@@ -47,9 +47,27 @@ fn main() {
     warn!("Welcome to {} optimizer!", "deckgym".blue().bold());
     let args = Args::parse();
 
+    optimize(
+        &args.incomplete_deck,
+        &args.candidate_cards,
+        &args.enemy_decks_folder,
+        args.num,
+        args.players,
+        args.seed,
+    );
+}
+
+/// Optimizes a deck by simulating games with different combinations of candidate cards.
+fn optimize(
+    incomplete_deck_path: &str,
+    candidate_cards_str: &str,
+    enemy_decks_folder: &str,
+    num: u32,
+    players: Option<Vec<PlayerCode>>,
+    seed: Option<u64>,
+) {
     // Parse the candidate cards list.
-    let candidate_cards: Vec<CardId> = args
-        .candidate_cards
+    let candidate_cards: Vec<CardId> = candidate_cards_str
         .split(',')
         .map(|s| {
             // take last 3 to be id, then the rest of prefix will be set
@@ -65,7 +83,7 @@ fn main() {
         .collect();
 
     // Read and validate the incomplete deck.
-    let incomplete_deck = deckgym::Deck::from_file(&args.incomplete_deck)
+    let incomplete_deck = deckgym::Deck::from_file(incomplete_deck_path)
         .expect("Failed to parse incomplete deck file");
     let current_count = incomplete_deck.cards.len();
     let missing_count = 20 - current_count;
@@ -92,7 +110,7 @@ fn main() {
     }
 
     // Read enemy decks from the specified folder.
-    let enemy_deck_paths: Vec<String> = fs::read_dir(&args.enemy_decks_folder)
+    let enemy_deck_paths: Vec<String> = fs::read_dir(enemy_decks_folder)
         .expect("Failed to read enemy decks folder")
         .filter_map(|entry| {
             let entry = entry.ok()?;
@@ -134,8 +152,8 @@ fn main() {
     warn!("Combinations: {:?}", combinations);
 
     // Estimate the time it will take to run all simulations
-    let player_codes = fill_code_array(args.players.clone());
-    let total_games = combinations.len() as u64 * args.num as u64 * enemy_valid_decks.len() as u64;
+    let player_codes = fill_code_array(players.clone());
+    let total_games = combinations.len() as u64 * num as u64 * enemy_valid_decks.len() as u64;
     let time_per_game = estimate_time_per_game(&player_codes);
     let total_time = time_per_game.mul_f64(total_games as f64);
 
@@ -144,7 +162,7 @@ fn main() {
         humantime::format_duration(total_time).to_string(),
         combinations.len(),
         enemy_valid_decks.len(),
-        args.num
+        num
     );
     warn!(
         "Time estimation: {} per game ({} non-R players, {} R players)",
@@ -177,13 +195,13 @@ fn main() {
         let mut total_wins = 0;
         let mut total_games = 0;
         for enemy_deck in &enemy_valid_decks {
-            for _ in 0..args.num {
+            for _ in 0..num {
                 let players = create_players(
                     completed_deck.clone(),
                     enemy_deck.clone(),
-                    fill_code_array(args.players.clone()),
+                    fill_code_array(players.clone()),
                 );
-                let seed = args.seed.unwrap_or(rand::random::<u64>());
+                let seed = seed.unwrap_or(rand::random::<u64>());
                 let mut game = Game::new(players, seed);
                 let outcome = game.play();
 
