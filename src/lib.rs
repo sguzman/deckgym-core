@@ -8,6 +8,7 @@ pub mod game;
 mod hooks;
 pub mod move_generation;
 pub mod players;
+pub mod simulate;
 pub mod state;
 pub mod test_helpers; // TODO: Compile/Expose only in test mode?
 pub mod tool_ids;
@@ -19,4 +20,5 @@ pub use deck::Deck;
 pub use game::Game;
 pub use move_generation::generate_possible_actions;
 pub use move_generation::generate_possible_trainer_actions;
+pub use simulate::simulate;
 pub use state::State;
