@@ -90,6 +90,8 @@ fn forecast_effect_attack(
             damage_status_attack(50, StatusCondition::Poisoned)
         }
         AttackId::A1069KinglerKOCrab => probabilistic_damage_attack(vec![0.25, 0.75], vec![160, 80]),
+        AttackId::A1071SeadraWaterArrow => direct_damage(50, false),
+        AttackId::A1073SeakingHornHazard => probabilistic_damage_attack(vec![0.5, 0.5], vec![80, 0]),
         AttackId::A1096PikachuExCircleCircuit => {
             bench_count_attack(acting_player, state, 0, 30, Some(EnergyType::Lightning))
         }
