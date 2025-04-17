@@ -103,6 +103,9 @@ fn forecast_effect_attack(
         }
         AttackId::A1078GyaradosHyperBeam => damage_and_discard_energy(100, 1),
         AttackId::A1079LaprasHydroPump => hydro_pump_attack(acting_player, state, 20, 4, 70),
+        AttackId::A1080VaporeonBubbleDrain => self_heal_attack(30, 0),
+        AttackId::A1083ArticunoIceBeam => damage_chance_status_attack(60, 0.5, StatusCondition::Paralyzed),
+        AttackId::A1093FrosmothPowderSnow => damage_status_attack(40, StatusCondition::Asleep),
         AttackId::A1096PikachuExCircleCircuit => {
             bench_count_attack(acting_player, state, 0, 30, Some(EnergyType::Lightning))
         }
