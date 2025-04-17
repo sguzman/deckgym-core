@@ -28,6 +28,7 @@ pub enum AttackId {
     A1056BlastoiseExHydroBazooka,
     A1057PsyduckHeadache,
     A1063TentacruelPoisonTentacles,
+    A1069KinglerKOCrab,
     A1096PikachuExCircleCircuit,
     A1101ElectabuzzThunderPunch,
     A1104ZapdosExThunderingHurricane,
@@ -77,6 +78,7 @@ lazy_static::lazy_static! {
         m.insert(("A1 056", 1), AttackId::A1056BlastoiseExHydroBazooka);
         m.insert(("A1 057", 0), AttackId::A1057PsyduckHeadache);
         m.insert(("A1 063", 0), AttackId::A1063TentacruelPoisonTentacles);
+        m.insert(("A1 069", 0), AttackId::A1069KinglerKOCrab);
         m.insert(("A1 096", 0), AttackId::A1096PikachuExCircleCircuit);
         m.insert(("A1 101", 0), AttackId::A1101ElectabuzzThunderPunch);
         m.insert(("A1 104", 1), AttackId::A1104ZapdosExThunderingHurricane);
