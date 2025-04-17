@@ -32,6 +32,7 @@ pub enum AttackId {
     A1071SeadraWaterArrow,
     A1073SeakingHornHazard,
     A1078GyaradosHyperBeam,
+    A1079LaprasHydroPump,
     A1096PikachuExCircleCircuit,
     A1101ElectabuzzThunderPunch,
     A1104ZapdosExThunderingHurricane,
@@ -86,6 +87,8 @@ lazy_static::lazy_static! {
         m.insert(("A1 073", 0), AttackId::A1073SeakingHornHazard);
         m.insert(("A1 078", 0), AttackId::A1078GyaradosHyperBeam);
         m.insert(("A1 233", 0), AttackId::A1078GyaradosHyperBeam); // Full art version
+        m.insert(("A1 079", 0), AttackId::A1079LaprasHydroPump);
+        m.insert(("A1 234", 0), AttackId::A1079LaprasHydroPump); // Full art version
         m.insert(("A1 096", 0), AttackId::A1096PikachuExCircleCircuit);
         m.insert(("A1 101", 0), AttackId::A1101ElectabuzzThunderPunch);
         m.insert(("A1 104", 1), AttackId::A1104ZapdosExThunderingHurricane);

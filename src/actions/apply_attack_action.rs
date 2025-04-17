@@ -88,8 +88,8 @@ fn forecast_effect_attack(
         AttackId::A1052CentiskorchFireBlast => {
             self_energy_discard_attack(0, vec![EnergyType::Fire])
         }
-        AttackId::A1055BlastoiseHydroPump => hydro_pump_attack(acting_player, state, 80),
-        AttackId::A1056BlastoiseExHydroBazooka => hydro_pump_attack(acting_player, state, 100),
+        AttackId::A1055BlastoiseHydroPump => hydro_pump_attack(acting_player, state, 80, 5, 60),
+        AttackId::A1056BlastoiseExHydroBazooka => hydro_pump_attack(acting_player, state, 100, 5, 60),
         AttackId::A1057PsyduckHeadache => damage_and_turn_effect_attack(0, 1),
         AttackId::A1063TentacruelPoisonTentacles => {
             damage_status_attack(50, StatusCondition::Poisoned)
@@ -102,6 +102,7 @@ fn forecast_effect_attack(
             probabilistic_damage_attack(vec![0.5, 0.5], vec![80, 0])
         }
         AttackId::A1078GyaradosHyperBeam => damage_and_discard_energy(100, 1),
+        AttackId::A1079LaprasHydroPump => hydro_pump_attack(acting_player, state, 20, 4, 70),
         AttackId::A1096PikachuExCircleCircuit => {
             bench_count_attack(acting_player, state, 0, 30, Some(EnergyType::Lightning))
         }
@@ -407,24 +408,28 @@ fn draw_and_damage_outcome(damage: u32) -> (Probabilities, Mutations) {
 }
 
 // If this Pokemon has at least 2 extra Water Energy attached, this attack does 60 more damage.
+/// For water Pokémon with Hydro Pump attack that deals more damage with extra energy
 fn hydro_pump_attack(
     acting_player: usize,
     state: &State,
     base_damage: u32,
+    energy_threshold: usize,  // Minimum total water energy needed for bonus damage
+    bonus_damage: u32,        // Extra damage when threshold is met
 ) -> (Probabilities, Mutations) {
-    let blastoise = state.in_play_pokemon[acting_player][0]
+    let pokemon = state.in_play_pokemon[acting_player][0]
         .as_ref()
         .expect("Active Pokemon should be there if attacking");
-    // has 2 extra, if at least 5 energies, 4 of which are water
-    let has_2_extra = blastoise.attached_energy.len() >= 5
-        && blastoise
-            .attached_energy
-            .iter()
-            .filter(|&energy| *energy == EnergyType::Water)
-            .count()
-            >= 4;
-    if has_2_extra {
-        active_damage_doutcome(base_damage + 60)
+    
+    // Count total water energy
+    let water_energy_count = pokemon
+        .attached_energy
+        .iter()
+        .filter(|&energy| *energy == EnergyType::Water)
+        .count();
+    
+    // Check if we meet or exceed the energy threshold
+    if water_energy_count >= energy_threshold {
+        active_damage_doutcome(base_damage + bonus_damage)
     } else {
         active_damage_doutcome(base_damage)
     }
