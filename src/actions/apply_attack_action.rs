@@ -89,7 +89,9 @@ fn forecast_effect_attack(
             self_energy_discard_attack(0, vec![EnergyType::Fire])
         }
         AttackId::A1055BlastoiseHydroPump => hydro_pump_attack(acting_player, state, 80, 5, 60),
-        AttackId::A1056BlastoiseExHydroBazooka => hydro_pump_attack(acting_player, state, 100, 5, 60),
+        AttackId::A1056BlastoiseExHydroBazooka => {
+            hydro_pump_attack(acting_player, state, 100, 5, 60)
+        }
         AttackId::A1057PsyduckHeadache => damage_and_turn_effect_attack(0, 1),
         AttackId::A1063TentacruelPoisonTentacles => {
             damage_status_attack(50, StatusCondition::Poisoned)
@@ -104,7 +106,9 @@ fn forecast_effect_attack(
         AttackId::A1078GyaradosHyperBeam => damage_and_discard_energy(100, 1),
         AttackId::A1079LaprasHydroPump => hydro_pump_attack(acting_player, state, 20, 4, 70),
         AttackId::A1080VaporeonBubbleDrain => self_heal_attack(30, 0),
-        AttackId::A1083ArticunoIceBeam => damage_chance_status_attack(60, 0.5, StatusCondition::Paralyzed),
+        AttackId::A1083ArticunoIceBeam => {
+            damage_chance_status_attack(60, 0.5, StatusCondition::Paralyzed)
+        }
         AttackId::A1093FrosmothPowderSnow => damage_status_attack(40, StatusCondition::Asleep),
         AttackId::A1096PikachuExCircleCircuit => {
             bench_count_attack(acting_player, state, 0, 30, Some(EnergyType::Lightning))
@@ -416,20 +420,20 @@ fn hydro_pump_attack(
     acting_player: usize,
     state: &State,
     base_damage: u32,
-    energy_threshold: usize,  // Minimum total water energy needed for bonus damage
-    bonus_damage: u32,        // Extra damage when threshold is met
+    energy_threshold: usize, // Minimum total water energy needed for bonus damage
+    bonus_damage: u32,       // Extra damage when threshold is met
 ) -> (Probabilities, Mutations) {
     let pokemon = state.in_play_pokemon[acting_player][0]
         .as_ref()
         .expect("Active Pokemon should be there if attacking");
-    
+
     // Count total water energy
     let water_energy_count = pokemon
         .attached_energy
         .iter()
         .filter(|&energy| *energy == EnergyType::Water)
         .count();
-    
+
     // Check if we meet or exceed the energy threshold
     if water_energy_count >= energy_threshold {
         active_damage_doutcome(base_damage + bonus_damage)
