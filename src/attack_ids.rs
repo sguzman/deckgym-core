@@ -28,6 +28,14 @@ pub enum AttackId {
     A1056BlastoiseExHydroBazooka,
     A1057PsyduckHeadache,
     A1063TentacruelPoisonTentacles,
+    A1069KinglerKOCrab,
+    A1071SeadraWaterArrow,
+    A1073SeakingHornHazard,
+    A1078GyaradosHyperBeam,
+    A1079LaprasHydroPump,
+    A1080VaporeonBubbleDrain,
+    A1083ArticunoIceBeam,
+    A1093FrosmothPowderSnow,
     A1096PikachuExCircleCircuit,
     A1101ElectabuzzThunderPunch,
     A1104ZapdosExThunderingHurricane,
@@ -77,6 +85,16 @@ lazy_static::lazy_static! {
         m.insert(("A1 056", 1), AttackId::A1056BlastoiseExHydroBazooka);
         m.insert(("A1 057", 0), AttackId::A1057PsyduckHeadache);
         m.insert(("A1 063", 0), AttackId::A1063TentacruelPoisonTentacles);
+        m.insert(("A1 069", 0), AttackId::A1069KinglerKOCrab);
+        m.insert(("A1 071", 0), AttackId::A1071SeadraWaterArrow);
+        m.insert(("A1 073", 0), AttackId::A1073SeakingHornHazard);
+        m.insert(("A1 078", 0), AttackId::A1078GyaradosHyperBeam);
+        m.insert(("A1 233", 0), AttackId::A1078GyaradosHyperBeam); // Full art version
+        m.insert(("A1 079", 0), AttackId::A1079LaprasHydroPump);
+        m.insert(("A1 234", 0), AttackId::A1079LaprasHydroPump); // Full art version
+        m.insert(("A1 080", 0), AttackId::A1080VaporeonBubbleDrain);
+        m.insert(("A1 083", 0), AttackId::A1083ArticunoIceBeam);
+        m.insert(("A1 093", 0), AttackId::A1093FrosmothPowderSnow);
         m.insert(("A1 096", 0), AttackId::A1096PikachuExCircleCircuit);
         m.insert(("A1 101", 0), AttackId::A1101ElectabuzzThunderPunch);
         m.insert(("A1 104", 1), AttackId::A1104ZapdosExThunderingHurricane);

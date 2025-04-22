@@ -1,4 +1,5 @@
 use log::trace;
+use rand::Rng;
 
 use crate::{
     attack_ids::AttackId,
@@ -67,28 +68,48 @@ fn forecast_effect_attack(
         AttackId::A1029PetililBlot => self_heal_attack(10, index),
         AttackId::A1030LilligantLeafSupply => energy_bench_attack(0, 1, EnergyType::Grass),
         AttackId::A1031Skiddo => probabilistic_damage_attack(vec![0.5, 0.5], vec![0, 40]),
-        AttackId::A1033CharmanderEmber => energy_discard_attack(0, vec![EnergyType::Fire]),
+        AttackId::A1033CharmanderEmber => self_energy_discard_attack(0, vec![EnergyType::Fire]),
         AttackId::A1035CharizardFireSpin => {
-            energy_discard_attack(0, vec![EnergyType::Fire, EnergyType::Fire])
+            self_energy_discard_attack(0, vec![EnergyType::Fire, EnergyType::Fire])
         }
         AttackId::A1036CharizardExCrimsonStorm => {
-            energy_discard_attack(1, vec![EnergyType::Fire, EnergyType::Fire])
+            self_energy_discard_attack(1, vec![EnergyType::Fire, EnergyType::Fire])
         }
-        AttackId::A1038NinetalesFlamethrower => energy_discard_attack(0, vec![EnergyType::Fire]),
+        AttackId::A1038NinetalesFlamethrower => {
+            self_energy_discard_attack(0, vec![EnergyType::Fire])
+        }
         AttackId::A1040ArcanineHeatTackle => self_damage_attack(100, 20),
         AttackId::A1041ArcanineExInfernoOnrush => self_damage_attack(120, 20),
-        AttackId::A1045FlareonFlamethrower => energy_discard_attack(0, vec![EnergyType::Fire]),
+        AttackId::A1045FlareonFlamethrower => self_energy_discard_attack(0, vec![EnergyType::Fire]),
         AttackId::A1046MoltresSkyAttack => {
             probabilistic_damage_attack(vec![0.5, 0.5], vec![0, 130])
         }
         AttackId::A1047MoltresExInfernoDance => moltres_inferno_dance(),
-        AttackId::A1052CentiskorchFireBlast => energy_discard_attack(0, vec![EnergyType::Fire]),
-        AttackId::A1055BlastoiseHydroPump => hydro_pump_attack(acting_player, state, 80),
-        AttackId::A1056BlastoiseExHydroBazooka => hydro_pump_attack(acting_player, state, 100),
+        AttackId::A1052CentiskorchFireBlast => {
+            self_energy_discard_attack(0, vec![EnergyType::Fire])
+        }
+        AttackId::A1055BlastoiseHydroPump => hydro_pump_attack(acting_player, state, 80, 5, 60),
+        AttackId::A1056BlastoiseExHydroBazooka => {
+            hydro_pump_attack(acting_player, state, 100, 5, 60)
+        }
         AttackId::A1057PsyduckHeadache => damage_and_turn_effect_attack(0, 1),
         AttackId::A1063TentacruelPoisonTentacles => {
             damage_status_attack(50, StatusCondition::Poisoned)
         }
+        AttackId::A1069KinglerKOCrab => {
+            probabilistic_damage_attack(vec![0.25, 0.75], vec![160, 80])
+        }
+        AttackId::A1071SeadraWaterArrow => direct_damage(50, false),
+        AttackId::A1073SeakingHornHazard => {
+            probabilistic_damage_attack(vec![0.5, 0.5], vec![80, 0])
+        }
+        AttackId::A1078GyaradosHyperBeam => damage_and_discard_energy(100, 1),
+        AttackId::A1079LaprasHydroPump => hydro_pump_attack(acting_player, state, 20, 4, 70),
+        AttackId::A1080VaporeonBubbleDrain => self_heal_attack(30, 0),
+        AttackId::A1083ArticunoIceBeam => {
+            damage_chance_status_attack(60, 0.5, StatusCondition::Paralyzed)
+        }
+        AttackId::A1093FrosmothPowderSnow => damage_status_attack(40, StatusCondition::Asleep),
         AttackId::A1096PikachuExCircleCircuit => {
             bench_count_attack(acting_player, state, 0, 30, Some(EnergyType::Lightning))
         }
@@ -98,9 +119,11 @@ fn forecast_effect_attack(
             vec![0, 50, 100, 150, 200],
         ),
         AttackId::A1106ZebstrikaThunderSpear => direct_damage(30, false),
-        AttackId::A1128MewtwoPowerBlast => energy_discard_attack(index, vec![EnergyType::Psychic]),
+        AttackId::A1128MewtwoPowerBlast => {
+            self_energy_discard_attack(index, vec![EnergyType::Psychic])
+        }
         AttackId::A1129MewtwoExPsydrive => {
-            energy_discard_attack(index, vec![EnergyType::Psychic, EnergyType::Psychic])
+            self_energy_discard_attack(index, vec![EnergyType::Psychic, EnergyType::Psychic])
         }
         AttackId::A1149GolemDoubleEdge => self_damage_attack(150, 50),
         AttackId::A1153MarowakExBonemerang => {
@@ -337,7 +360,8 @@ fn direct_damage(damage: u32, bench_only: bool) -> (Probabilities, Mutations) {
     })
 }
 
-fn energy_discard_attack(
+/// Discard energy from the active (attacking) Pokémon.
+fn self_energy_discard_attack(
     attack_index: usize,
     to_discard: Vec<EnergyType>,
 ) -> (Probabilities, Mutations) {
@@ -345,6 +369,25 @@ fn energy_discard_attack(
         let active = state.get_active_mut(action.actor);
         for energy in to_discard.iter() {
             active.discard_energy(energy);
+        }
+    })
+}
+
+/// For attacks that deal damage and discard random energy from opponent's active Pokémon
+fn damage_and_discard_energy(damage: u32, discard_count: usize) -> (Probabilities, Mutations) {
+    active_damage_effect_doutcome(damage, move |rng, state, action| {
+        let opponent = (action.actor + 1) % 2;
+        let active = state.get_active_mut(opponent);
+
+        for _ in 0..discard_count {
+            if active.attached_energy.is_empty() {
+                break; // No more energy to discard
+            }
+
+            // Get a random index to discard
+            let energy_count = active.attached_energy.len();
+            let rand_idx = rng.gen_range(0..energy_count);
+            active.attached_energy.remove(rand_idx);
         }
     })
 }
@@ -372,24 +415,28 @@ fn draw_and_damage_outcome(damage: u32) -> (Probabilities, Mutations) {
 }
 
 // If this Pokemon has at least 2 extra Water Energy attached, this attack does 60 more damage.
+/// For water Pokémon with Hydro Pump attack that deals more damage with extra energy
 fn hydro_pump_attack(
     acting_player: usize,
     state: &State,
     base_damage: u32,
+    energy_threshold: usize, // Minimum total water energy needed for bonus damage
+    bonus_damage: u32,       // Extra damage when threshold is met
 ) -> (Probabilities, Mutations) {
-    let blastoise = state.in_play_pokemon[acting_player][0]
+    let pokemon = state.in_play_pokemon[acting_player][0]
         .as_ref()
         .expect("Active Pokemon should be there if attacking");
-    // has 2 extra, if at least 5 energies, 4 of which are water
-    let has_2_extra = blastoise.attached_energy.len() >= 5
-        && blastoise
-            .attached_energy
-            .iter()
-            .filter(|&energy| *energy == EnergyType::Water)
-            .count()
-            >= 4;
-    if has_2_extra {
-        active_damage_doutcome(base_damage + 60)
+
+    // Count total water energy
+    let water_energy_count = pokemon
+        .attached_energy
+        .iter()
+        .filter(|&energy| *energy == EnergyType::Water)
+        .count();
+
+    // Check if we meet or exceed the energy threshold
+    if water_energy_count >= energy_threshold {
+        active_damage_doutcome(base_damage + bonus_damage)
     } else {
         active_damage_doutcome(base_damage)
     }
