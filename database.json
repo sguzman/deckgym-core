@@ -15602,5 +15602,2506 @@
       "rarity": "♛",
       "booster_pack": "Triumphant Light (A2a) Arceus"
     }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 001",
+      "name": "Weedle",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 50,
+      "energy_type": "Grass",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Grass"],
+          "title": "Multiply",
+          "fixed_damage": 0,
+          "effect": "Put 1 random Weedle from your deck onto your Bench."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 002",
+      "name": "Kakuna",
+      "stage": 1,
+      "evolves_from": "Weedle",
+      "hp": 80,
+      "energy_type": "Grass",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Grass"],
+          "title": "String Shot",
+          "fixed_damage": 20,
+          "effect": "Flip a coin. If heads, your opponent's Active Pokemon is now Paralyzed."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 003",
+      "name": "Beedrill ex",
+      "stage": 2,
+      "evolves_from": "Kakuna",
+      "hp": 170,
+      "energy_type": "Grass",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Grass", "Grass"],
+          "title": "Crushing Spear",
+          "fixed_damage": 80,
+          "effect": "Discard a random Energy from your opponent's Active Pokemon."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 004",
+      "name": "Pinsir",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 90,
+      "energy_type": "Grass",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Grass", "Colorless", "Colorless"],
+          "title": "Guillotine Rush",
+          "fixed_damage": 0,
+          "effect": "Flip a coin until you get tails. This attack does 40 more damage for\n        each heads."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 005",
+      "name": "Sprigatito",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 60,
+      "energy_type": "Grass",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Grass"],
+          "title": "Cry for Help",
+          "fixed_damage": 0,
+          "effect": "Put 1 random Grass-type Pokemon from your deck into your hand."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 006",
+      "name": "Floragato",
+      "stage": 1,
+      "evolves_from": "Sprigatito",
+      "hp": 90,
+      "energy_type": "Grass",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Grass", "Grass"],
+          "title": "Slash",
+          "fixed_damage": 50,
+          "effect": null
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 007",
+      "name": "Meowscarada",
+      "stage": 2,
+      "evolves_from": "Floragato",
+      "hp": 140,
+      "energy_type": "Grass",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Grass", "Grass"],
+          "title": "Fighting Claws",
+          "fixed_damage": 0,
+          "effect": "If your opponent's Active Pokemon is a Pokemon ex, this attack does 70\n        more damage."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 008",
+      "name": "Charmander",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 60,
+      "energy_type": "Fire",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Fire"],
+          "title": "Combustion",
+          "fixed_damage": 20,
+          "effect": null
+        }
+      ],
+      "weakness": "Water",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 009",
+      "name": "Charmeleon",
+      "stage": 1,
+      "evolves_from": "Charmander",
+      "hp": 90,
+      "energy_type": "Fire",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Fire", "Fire"],
+          "title": "Combustion",
+          "fixed_damage": 40,
+          "effect": null
+        }
+      ],
+      "weakness": "Water",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 010",
+      "name": "Charizard ex",
+      "stage": 2,
+      "evolves_from": "Charmeleon",
+      "hp": 180,
+      "energy_type": "Fire",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Fire"],
+          "title": "Stoke",
+          "fixed_damage": 0,
+          "effect": "Take 3 Fire Energy from your Energy Zone and attach it to this Pokemon."
+        },
+        {
+          "energy_required": ["Fire", "Fire", "Fire"],
+          "title": "Steam Artillery",
+          "fixed_damage": 150,
+          "effect": null
+        }
+      ],
+      "weakness": "Water",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 011",
+      "name": "Magmar",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 70,
+      "energy_type": "Fire",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Fire"],
+          "title": "Flare",
+          "fixed_damage": 20,
+          "effect": null
+        }
+      ],
+      "weakness": "Water",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 012",
+      "name": "Magmortar",
+      "stage": 1,
+      "evolves_from": "Magmar",
+      "hp": 120,
+      "energy_type": "Fire",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Fire", "Fire", "Colorless"],
+          "title": "Smoke Bomb",
+          "fixed_damage": 70,
+          "effect": "During your opponent's next turn, if the Defending Pokemon tries to use\n        an attack, your opponent flips a coin. If tails, that attack doesn't\n        happen."
+        }
+      ],
+      "weakness": "Water",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 013",
+      "name": "Paldean Tauros",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 110,
+      "energy_type": "Fire",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Fire", "Colorless", "Colorless"],
+          "title": "Blaze Tackle",
+          "fixed_damage": 80,
+          "effect": "This Pokemon also does 10 damage to itself."
+        }
+      ],
+      "weakness": "Water",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 014",
+      "name": "Tentacool",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 70,
+      "energy_type": "Water",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Water"],
+          "title": "Rain Splash",
+          "fixed_damage": 10,
+          "effect": null
+        }
+      ],
+      "weakness": "Lightning",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 015",
+      "name": "Tentacruel",
+      "stage": 1,
+      "evolves_from": "Tentacool",
+      "hp": 100,
+      "energy_type": "Water",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Water"],
+          "title": "Wave Splash",
+          "fixed_damage": 40,
+          "effect": null
+        }
+      ],
+      "weakness": "Lightning",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 016",
+      "name": "Buizel",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 70,
+      "energy_type": "Water",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Water"],
+          "title": "Water Gun",
+          "fixed_damage": 10,
+          "effect": null
+        }
+      ],
+      "weakness": "Lightning",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 017",
+      "name": "Floatzel",
+      "stage": 1,
+      "evolves_from": "Buizel",
+      "hp": 90,
+      "energy_type": "Water",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Water"],
+          "title": "Water Arrow",
+          "fixed_damage": 0,
+          "effect": "This attack does 30 damage to 1 of your opponent's Pokemon."
+        }
+      ],
+      "weakness": "Lightning",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 018",
+      "name": "Wiglett",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 60,
+      "energy_type": "Water",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Water"],
+          "title": "Spring Out",
+          "fixed_damage": 0,
+          "effect": "1 of your opponent's Pokemon is chosen at random. Do 30 damage to it."
+        }
+      ],
+      "weakness": "Lightning",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 019",
+      "name": "Wugtrio ex",
+      "stage": 1,
+      "evolves_from": "Wiglett",
+      "hp": 140,
+      "energy_type": "Water",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Water", "Water", "Water"],
+          "title": "Pop Out Throughout",
+          "fixed_damage": 0,
+          "effect": "1 of your opponent's Pokemon is chosen at random 3 times. For each time\n        a Pokemon was chosen, do 50 damage to it."
+        }
+      ],
+      "weakness": "Lightning",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 020",
+      "name": "Dondozo",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 120,
+      "energy_type": "Water",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Water", "Water", "Colorless", "Colorless"],
+          "title": "Ocean Cyclone",
+          "fixed_damage": 80,
+          "effect": "This attack also does 10 damage to each of your opponent's Benched\n        Pokemon."
+        }
+      ],
+      "weakness": "Lightning",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 021",
+      "name": "Tatsugiri",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 70,
+      "energy_type": "Water",
+      "ability": {
+        "title": "Retreat Directive",
+        "effect": "Your Active Dondozo has no Retreat Cost."
+      },
+      "attacks": [
+        {
+          "energy_required": ["Water"],
+          "title": "Rain Splash",
+          "fixed_damage": 20,
+          "effect": null
+        }
+      ],
+      "weakness": "Lightning",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 022",
+      "name": "Pikachu ex",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 120,
+      "energy_type": "Lightning",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Lightning", "Lightning", "Lightning"],
+          "title": "Thunderbolt",
+          "fixed_damage": 150,
+          "effect": "Discard all Energy from this Pokemon."
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 023",
+      "name": "Voltorb",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 70,
+      "energy_type": "Lightning",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Lightning"],
+          "title": "Lightning Ball",
+          "fixed_damage": 10,
+          "effect": null
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 024",
+      "name": "Electrode",
+      "stage": 1,
+      "evolves_from": "Voltorb",
+      "hp": 90,
+      "energy_type": "Lightning",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Lightning", "Lightning"],
+          "title": "Tumbling Attack",
+          "fixed_damage": 0,
+          "effect": "Flip a coin. If heads, this attack does 30 more damage."
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 025",
+      "name": "Pachirisu",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 70,
+      "energy_type": "Lightning",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Lightning"],
+          "title": "Plasma",
+          "fixed_damage": 10,
+          "effect": "Take a Lightning Energy from your Energy Zone and attach it to 1 of your\n        Benched Lightning Pokemon."
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 026",
+      "name": "Pawmi",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 60,
+      "energy_type": "Lightning",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Lightning"],
+          "title": "Punch",
+          "fixed_damage": 20,
+          "effect": null
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 027",
+      "name": "Pawmo",
+      "stage": 1,
+      "evolves_from": "Pawmi",
+      "hp": 90,
+      "energy_type": "Lightning",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Lightning"],
+          "title": "Punch",
+          "fixed_damage": 40,
+          "effect": null
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 028",
+      "name": "Pawmot",
+      "stage": 2,
+      "evolves_from": "Pawmo",
+      "hp": 140,
+      "energy_type": "Lightning",
+      "ability": {
+        "title": "Counterattack",
+        "effect": "If this Pokemon is in the Active Spot and is damaged by an attack from\n        your opponent's Pokemon, do 20 damage to the Attacking Pokemon."
+      },
+      "attacks": [
+        {
+          "energy_required": ["Lightning", "Lightning"],
+          "title": "Electric Punch",
+          "fixed_damage": 70,
+          "effect": null
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 029",
+      "name": "Abra",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 60,
+      "energy_type": "Psychic",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Psychic"],
+          "title": "Psyshot",
+          "fixed_damage": 20,
+          "effect": null
+        }
+      ],
+      "weakness": "Darkness",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 030",
+      "name": "Kadabra",
+      "stage": 1,
+      "evolves_from": "Abra",
+      "hp": 80,
+      "energy_type": "Psychic",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Psychic"],
+          "title": "Psyshot",
+          "fixed_damage": 30,
+          "effect": null
+        }
+      ],
+      "weakness": "Darkness",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 031",
+      "name": "Alakazam",
+      "stage": 2,
+      "evolves_from": "Kadabra",
+      "hp": 130,
+      "energy_type": "Psychic",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Psychic", "Psychic"],
+          "title": "Psychic Suppression",
+          "fixed_damage": 80,
+          "effect": "This attack also does 20 damage to each of your opponent's Benched\n        Pokémon that has any Energy attached."
+        }
+      ],
+      "weakness": "Darkness",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 032",
+      "name": "Mr. Mime",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 90,
+      "energy_type": "Psychic",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Psychic", "Colorless"],
+          "title": "Juggling",
+          "fixed_damage": 0,
+          "effect": "Flip 4 coins. This attack does 20 damage for each heads."
+        }
+      ],
+      "weakness": "Darkness",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 033",
+      "name": "Drifloon",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 60,
+      "energy_type": "Psychic",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Psychic"],
+          "title": "Ram",
+          "fixed_damage": 20,
+          "effect": null
+        }
+      ],
+      "weakness": "Darkness",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 034",
+      "name": "Drifblim",
+      "stage": 1,
+      "evolves_from": "Drifloon",
+      "hp": 90,
+      "energy_type": "Psychic",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Psychic"],
+          "title": "Gust",
+          "fixed_damage": 40,
+          "effect": null
+        }
+      ],
+      "weakness": "Darkness",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 035",
+      "name": "Giratina ex",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 150,
+      "energy_type": "Psychic",
+      "ability": {
+        "title": "Broken Space Bellow",
+        "effect": "Once during your turn, you may take a Psychic Energy from your Energy\n        Zone and attach it to this Pokemon, if you use this Ability, your turn\n        ends."
+      },
+      "attacks": [
+        {
+          "energy_required": ["Psychic", "Psychic", "Psychic", "Colorless"],
+          "title": "Chaotic Impact",
+          "fixed_damage": 130,
+          "effect": "This Pokemon also does 20 damage to itself."
+        }
+      ],
+      "weakness": "Darkness",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 036",
+      "name": "Gimmighoul",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 60,
+      "energy_type": "Psychic",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Colorless"],
+          "title": "Chest-ouflage",
+          "fixed_damage": 0,
+          "effect": "Flip a coin. If heads, during your opponent's next turn, prevent all\n        damage from—and effects of—attacks done to this Pokémon."
+        }
+      ],
+      "weakness": "Darkness",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 037",
+      "name": "Machop",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 60,
+      "energy_type": "Fighting",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Fighting"],
+          "title": "Low Kick",
+          "fixed_damage": 20,
+          "effect": null
+        }
+      ],
+      "weakness": "Psychic",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 038",
+      "name": "Machoke",
+      "stage": 1,
+      "evolves_from": "Machop",
+      "hp": 100,
+      "energy_type": "Fighting",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Fighting", "Fighting"],
+          "title": "Pummel",
+          "fixed_damage": 0,
+          "effect": "Flip a coin. If heads, this attack does 30 more damage."
+        }
+      ],
+      "weakness": "Psychic",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 039",
+      "name": "Machamp",
+      "stage": 2,
+      "evolves_from": "Machoke",
+      "hp": 150,
+      "energy_type": "Fighting",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Fighting", "Fighting"],
+          "title": "Power Press",
+          "fixed_damage": 0,
+          "effect": "If this Pokemon has at least 2 extra Fighting Energy attached, this\n        attack does 50 more damage."
+        }
+      ],
+      "weakness": "Psychic",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 040",
+      "name": "Hitmonlee",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 80,
+      "energy_type": "Fighting",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Fighting"],
+          "title": "Kick",
+          "fixed_damage": 20,
+          "effect": null
+        }
+      ],
+      "weakness": "Psychic",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 041",
+      "name": "Hitmonchan",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 90,
+      "energy_type": "Fighting",
+      "ability": null,
+      "attacks": [],
+      "weakness": "Psychic",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 042",
+      "name": "Riolu",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 70,
+      "energy_type": "Fighting",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Fighting", "Fighting"],
+          "title": "Punch",
+          "fixed_damage": 40,
+          "effect": null
+        }
+      ],
+      "weakness": "Psychic",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 043",
+      "name": "Lucario ex",
+      "stage": 1,
+      "evolves_from": "Riolu",
+      "hp": 150,
+      "energy_type": "Fighting",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Fighting", "Fighting", "Fighting"],
+          "title": "Aura Sphere",
+          "fixed_damage": 100,
+          "effect": "This attack also does 30 damage to 1 of your opponent's Benched Pokemon."
+        }
+      ],
+      "weakness": "Psychic",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 044",
+      "name": "Flamigo",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 80,
+      "energy_type": "Fighting",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Fighting", "Fighting"],
+          "title": "Double Kick",
+          "fixed_damage": 0,
+          "effect": "Flip 2 coins. This attack does 50 damage for each heads."
+        }
+      ],
+      "weakness": "Psychic",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 045",
+      "name": "Ekans",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 70,
+      "energy_type": "Darkness",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Darkness", "Colorless"],
+          "title": "Ram",
+          "fixed_damage": 30,
+          "effect": null
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 046",
+      "name": "Arbok",
+      "stage": 1,
+      "evolves_from": "Ekans",
+      "hp": 110,
+      "energy_type": "Darkness",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Darkness", "Darkness", "Colorless"],
+          "title": "Venomous Fang",
+          "fixed_damage": 70,
+          "effect": "Your opponent's Active Pokemon is now Poisoned."
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 047",
+      "name": "Paldean Wooper",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 50,
+      "energy_type": "Darkness",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Darkness"],
+          "title": "Poison Jab",
+          "fixed_damage": 10,
+          "effect": "Your opponent's Active Pokemon is now Poisoned."
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 048",
+      "name": "Paldean Clodsire ex",
+      "stage": 1,
+      "evolves_from": "Paldean Wooper",
+      "hp": 160,
+      "energy_type": "Darkness",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Darkness", "Darkness"],
+          "title": "Venoshock",
+          "fixed_damage": 60,
+          "effect": "If your opponent's Active Pokemon is Poisoned, this attack does 60 more\n        damage."
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 049",
+      "name": "Spiritomb",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 80,
+      "energy_type": "Darkness",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Darkness"],
+          "title": "Confuse Ray",
+          "fixed_damage": 20,
+          "effect": "Flip a coin. If heads, your opponent's Active Pokemon is now Confused."
+        }
+      ],
+      "weakness": "Grass",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 050",
+      "name": "Shroodle",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 60,
+      "energy_type": "Darkness",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Darkness"],
+          "title": "Gnaw",
+          "fixed_damage": 20,
+          "effect": null
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 051",
+      "name": "Grafaiai",
+      "stage": 1,
+      "evolves_from": "Shroodle",
+      "hp": 90,
+      "energy_type": "Darkness",
+      "ability": {
+        "title": "Poison Coating",
+        "effect": "Once during your turn, you may flip a coin. If heads, your opponent's\n        Active Pokemon is now Poisoned."
+      },
+      "attacks": [
+        {
+          "energy_required": ["Darkness", "Darkness"],
+          "title": "Bite",
+          "fixed_damage": 40,
+          "effect": null
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 052",
+      "name": "Tinkatink",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 60,
+      "energy_type": "Metal",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Metal"],
+          "title": "Corkscrew Punch",
+          "fixed_damage": 20,
+          "effect": null
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 053",
+      "name": "Tinkatuff",
+      "stage": 1,
+      "evolves_from": "Tinkatink",
+      "hp": 90,
+      "energy_type": "Metal",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Metal", "Metal"],
+          "title": "Tenacious Hammer",
+          "fixed_damage": 0,
+          "effect": "Flip a coin. If heads, this attack does 30 more damage."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 054",
+      "name": "Tinkaton ex",
+      "stage": 2,
+      "evolves_from": "Tinkatuff",
+      "hp": 170,
+      "energy_type": "Metal",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Metal", "Metal", "Colorless"],
+          "title": "Terrific Thumping",
+          "fixed_damage": 0,
+          "effect": "Flip a coin. If heads, this attack does 80 more damage."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 055",
+      "name": "Varoom",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 70,
+      "energy_type": "Metal",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Metal"],
+          "title": "Headbutt",
+          "fixed_damage": 10,
+          "effect": null
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 056",
+      "name": "Revavroom",
+      "stage": 1,
+      "evolves_from": "Varoom",
+      "hp": 110,
+      "energy_type": "Metal",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Metal"],
+          "title": "Spinning Drift",
+          "fixed_damage": 70,
+          "effect": "Flip a coin. If heads, during your opponent's next turn, prevent all\n        damage from—and effects of—attacks done to this Pokémon."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 057",
+      "name": "Gholdengo",
+      "stage": 1,
+      "evolves_from": "Gimmighoul",
+      "hp": 120,
+      "energy_type": "Metal",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Metal", "Colorless", "Colorless"],
+          "title": "Scintillating Surfing",
+          "fixed_damage": 0,
+          "effect": "Flip a coin for each Metal Energy attached to this Pokemon. This attack\n        does 50 damage for each heads."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 058",
+      "name": "Rattata",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 50,
+      "energy_type": "Colorless",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Colorless"],
+          "title": "Tackle",
+          "fixed_damage": 10,
+          "effect": null
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 059",
+      "name": "Raticate",
+      "stage": 1,
+      "evolves_from": "Rattata",
+      "hp": 90,
+      "energy_type": "Colorless",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Colorless", "Colorless"],
+          "title": "Tackle",
+          "fixed_damage": 50,
+          "effect": null
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 060",
+      "name": "Jigglypuff",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 60,
+      "energy_type": "Colorless",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Colorless"],
+          "title": "Rollout",
+          "fixed_damage": 20,
+          "effect": null
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 061",
+      "name": "Wigglytuff",
+      "stage": 1,
+      "evolves_from": "Jigglypuff",
+      "hp": 100,
+      "energy_type": "Colorless",
+      "ability": {
+        "title": "Comforting Song",
+        "effect": "Once during your turn, you may heal 20 damage from your Active Pokemon."
+      },
+      "attacks": [
+        {
+          "energy_required": ["Colorless", "Colorless"],
+          "title": "Gentle Slap",
+          "fixed_damage": 50,
+          "effect": null
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 062",
+      "name": "Lickitung",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 80,
+      "energy_type": "Colorless",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Colorless", "Colorless"],
+          "title": "Rollout",
+          "fixed_damage": 30,
+          "effect": null
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 063",
+      "name": "Lickilicky",
+      "stage": 1,
+      "evolves_from": "Lickitung",
+      "hp": 130,
+      "energy_type": "Colorless",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Colorless", "Colorless", "Colorless"],
+          "title": "Rollout",
+          "fixed_damage": 70,
+          "effect": null
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 064",
+      "name": "Bidoof",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 70,
+      "energy_type": "Colorless",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Colorless", "Colorless"],
+          "title": "Headbutt",
+          "fixed_damage": 30,
+          "effect": null
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 065",
+      "name": "Bibarel ex",
+      "stage": 1,
+      "evolves_from": "Bidoof",
+      "hp": 160,
+      "energy_type": "Colorless",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": [
+            "Colorless",
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "title": "Carefree Press",
+          "fixed_damage": 100,
+          "effect": "Heal 30 damage from this Pokemon."
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 066",
+      "name": "Buneary",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 50,
+      "energy_type": "Colorless",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Colorless"],
+          "title": "Pound",
+          "fixed_damage": 20,
+          "effect": null
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 067",
+      "name": "Lopunny",
+      "stage": 1,
+      "evolves_from": "Buneary",
+      "hp": 100,
+      "energy_type": "Colorless",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Colorless"],
+          "title": "Hopping Shot",
+          "fixed_damage": 30,
+          "effect": null
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 068",
+      "name": "Cyclizar",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 80,
+      "energy_type": "Colorless",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Colorless"],
+          "title": "Overacceleration",
+          "fixed_damage": 20,
+          "effect": "During your next turn, this Pokemon's Overacceleration attack does +20\n        damage."
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Trainer": {
+      "id": "A2b 069",
+      "numeric_id": 20549,
+      "trainer_card_type": "Supporter",
+      "name": "Iono",
+      "effect": "Each player shuffles the cards in their hand into their deck, then draws\n        that many cards.",
+      "rarity": "◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Trainer": {
+      "id": "A2b 070",
+      "numeric_id": 20550,
+      "trainer_card_type": "Supporter",
+      "name": "Pokemon Center Lady",
+      "effect": "Heal 30 damage from 1 of your Pokémon, and it recovers from all Special\n        Conditions.",
+      "rarity": "◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Trainer": {
+      "id": "A2b 071",
+      "numeric_id": 20551,
+      "trainer_card_type": "Supporter",
+      "name": "Red",
+      "effect": "During this turn, attacks used by your Pokémon do +20 damage to your\n        opponent's Active Pokémon ex.",
+      "rarity": "◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Trainer": {
+      "id": "A2b 072",
+      "numeric_id": 20552,
+      "trainer_card_type": "Supporter",
+      "name": "Team Rocket Grunt",
+      "effect": "Flip a coin until you get tails. For each heads, discard a random Energy\n        from your opponent's Active Pokémon.",
+      "rarity": "◇◇",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 073",
+      "name": "Meowscarada",
+      "stage": 2,
+      "evolves_from": "Floragato",
+      "hp": 140,
+      "energy_type": "Grass",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Grass", "Grass"],
+          "title": "Fighting Claws",
+          "fixed_damage": 0,
+          "effect": "If your opponent's Active Pokemon is a Pokemon ex, this attack does 70\n        more damage."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 074",
+      "name": "Buizel",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 70,
+      "energy_type": "Water",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Water"],
+          "title": "Water Gun",
+          "fixed_damage": 10,
+          "effect": null
+        }
+      ],
+      "weakness": "Lightning",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 075",
+      "name": "Tatsugiri",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 70,
+      "energy_type": "Water",
+      "ability": {
+        "title": "Retreat Directive",
+        "effect": "Your Active Dondozo has no Retreat Cost."
+      },
+      "attacks": [
+        {
+          "energy_required": ["Water"],
+          "title": "Rain Splash",
+          "fixed_damage": 20,
+          "effect": null
+        }
+      ],
+      "weakness": "Lightning",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 076",
+      "name": "Grafaiai",
+      "stage": 1,
+      "evolves_from": "Shroodle",
+      "hp": 90,
+      "energy_type": "Darkness",
+      "ability": {
+        "title": "Poison Coating",
+        "effect": "Once during your turn, you may flip a coin. If heads, your opponent's\n        Active Pokémon is now Poisoned."
+      },
+      "attacks": [
+        {
+          "energy_required": ["Darkness", "Darkness"],
+          "title": "Bite",
+          "fixed_damage": 40,
+          "effect": null
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 077",
+      "name": "Gholdengo",
+      "stage": 1,
+      "evolves_from": "Gimmighoul",
+      "hp": 120,
+      "energy_type": "Metal",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Metal", "Colorless", "Colorless"],
+          "title": "Scintillating Surfing",
+          "fixed_damage": 0,
+          "effect": "Flip a coin for each Metal Energy attached to this Pokémon. This attack\n        does 50 damage for each heads."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 078",
+      "name": "Wigglytuff",
+      "stage": 1,
+      "evolves_from": "Jigglypuff",
+      "hp": 100,
+      "energy_type": "Colorless",
+      "ability": {
+        "title": "Comforting Song",
+        "effect": "Once during your turn, you may heal 20 damage from your Active Pokemon."
+      },
+      "attacks": [
+        {
+          "energy_required": ["Colorless", "Colorless"],
+          "title": "Gentle Slap",
+          "fixed_damage": 50,
+          "effect": null
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 079",
+      "name": "Beedrill ex",
+      "stage": 2,
+      "evolves_from": "Kakuna",
+      "hp": 170,
+      "energy_type": "Grass",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Grass", "Grass"],
+          "title": "Crushing Spear",
+          "fixed_damage": 80,
+          "effect": "Discard a random Energy from your opponent's Active Pokemon."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆☆",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 080",
+      "name": "Charizard ex",
+      "stage": 2,
+      "evolves_from": "Charmeleon",
+      "hp": 180,
+      "energy_type": "Fire",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Fire"],
+          "title": "Stoke",
+          "fixed_damage": 0,
+          "effect": "Take 3 Fire Energy from your Energy Zone and attach it to this pokemon."
+        },
+        {
+          "energy_required": ["Fire", "Fire", "Fire", "Colorless", "Colorless"],
+          "title": "Steam Artillery",
+          "fixed_damage": 150,
+          "effect": null
+        }
+      ],
+      "weakness": "Water",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆☆",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 081",
+      "name": "Wugtrio ex",
+      "stage": 1,
+      "evolves_from": "Wiglett",
+      "hp": 140,
+      "energy_type": "Water",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Water", "Water", "Water"],
+          "title": "Pop Out Throughout",
+          "fixed_damage": 0,
+          "effect": "1 of your opponent's Pokemon is chosen at random 3 times. For each time\n        a Pokemon was chosen, do 50 damage to it."
+        }
+      ],
+      "weakness": "Lightning",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆☆",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 082",
+      "name": "Pikachu ex",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 120,
+      "energy_type": "Lightning",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Lightning", "Lightning", "Lightning"],
+          "title": "Thunderbolt",
+          "fixed_damage": 150,
+          "effect": "Discard all energy from this Pokemon."
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆☆",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 083",
+      "name": "Giratina ex",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 150,
+      "energy_type": "Psychic",
+      "ability": {
+        "title": "Broken Space Bellow",
+        "effect": "Once during your turn, you may take a Psychic Energy from your Energy\n        Zone and attach it to this Pokemon, if you use this Ability, your turn\n        ends."
+      },
+      "attacks": [
+        {
+          "energy_required": ["Psychic", "Psychic", "Psychic", "Colorless"],
+          "title": "Chaotic Impact",
+          "fixed_damage": 130,
+          "effect": "This Pokemon also does 20 damage to itself."
+        }
+      ],
+      "weakness": "Darkness",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆☆",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 084",
+      "name": "Lucario ex",
+      "stage": 1,
+      "evolves_from": "Riolu",
+      "hp": 150,
+      "energy_type": "Fighting",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Fighting", "Fighting", "Fighting"],
+          "title": "Aura Sphere",
+          "fixed_damage": 100,
+          "effect": "The attack also does 30 damage to 1 of your opponent's benched Pokemon."
+        }
+      ],
+      "weakness": "Psychic",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆☆",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 085",
+      "name": "Paldean Clodsire ex",
+      "stage": 1,
+      "evolves_from": "Paldean Wooper",
+      "hp": 160,
+      "energy_type": "Darkness",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Darkness", "Darkness"],
+          "title": "Venoshock",
+          "fixed_damage": 0,
+          "effect": "If your opponent's Active Pokemon is Poisoned, this attack does 60 more\n        damage."
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆☆",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 086",
+      "name": "Tinkaton ex",
+      "stage": 2,
+      "evolves_from": "Tinkatuff",
+      "hp": 170,
+      "energy_type": "Metal",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Metal", "Metal", "Colorless"],
+          "title": "Terrific Thumping",
+          "fixed_damage": 0,
+          "effect": "Flip a coin. If heads, this attack does 80 more damage."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆☆",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 087",
+      "name": "Bibarel ex",
+      "stage": 1,
+      "evolves_from": "Bidoof",
+      "hp": 160,
+      "energy_type": "Colorless",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": [
+            "Colorless",
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "title": "Carefree Press",
+          "fixed_damage": 100,
+          "effect": "Heal 30 damage from this Pokémon."
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆☆",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Trainer": {
+      "id": "A2b 088",
+      "numeric_id": 20568,
+      "trainer_card_type": "Supporter",
+      "name": "Iono",
+      "effect": "Each player shuffles the cards in their hand into their deck, then draws\n        that many cards.",
+      "rarity": "☆☆",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Trainer": {
+      "id": "A2b 089",
+      "numeric_id": 20569,
+      "trainer_card_type": "Supporter",
+      "name": "Pokemon Center Lady",
+      "effect": "Heal 30 damage from 1 of your Pokémon, and it recovers from all Special\n        Conditions.",
+      "rarity": "☆☆",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Trainer": {
+      "id": "A2b 090",
+      "numeric_id": 20570,
+      "trainer_card_type": "Supporter",
+      "name": "Red",
+      "effect": "During this turn, attacks used by your Pokémon do +20 damage to your\n        opponent's Active Pokémon ex.",
+      "rarity": "☆☆",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Trainer": {
+      "id": "A2b 091",
+      "numeric_id": 20571,
+      "trainer_card_type": "Supporter",
+      "name": "Team Rocket Grunt",
+      "effect": "Flip a coin until you get tails. For each heads, discard a random Energy\n        from your opponent's Active Pokémon.",
+      "rarity": "☆☆",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 092",
+      "name": "Pikachu ex",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 120,
+      "energy_type": "Lightning",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Lightning", "Lightning", "Lightning"],
+          "title": "Thunderbolt",
+          "fixed_damage": 150,
+          "effect": "Discard all energy from this Pokemon."
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆☆",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 093",
+      "name": "Paldean Clodsire ex",
+      "stage": 1,
+      "evolves_from": "Paldean Wooper",
+      "hp": 160,
+      "energy_type": "Darkness",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Darkness", "Darkness"],
+          "title": "Venoshock",
+          "fixed_damage": 0,
+          "effect": "If your opponent's Active Pokemon is Poisoned, this attack does 60 more\n        damage."
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆☆",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 094",
+      "name": "Tinkaton ex",
+      "stage": 2,
+      "evolves_from": "Tinkatuff",
+      "hp": 170,
+      "energy_type": "Metal",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Metal", "Metal", "Colorless"],
+          "title": "Terrific Thumping",
+          "fixed_damage": 0,
+          "effect": "Flip a coin. If heads, this attack does 80 more damage."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆☆",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 095",
+      "name": "Bibarel ex",
+      "stage": 1,
+      "evolves_from": "Bidoof",
+      "hp": 160,
+      "energy_type": "Colorless",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": [
+            "Colorless",
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "title": "Carefree Press",
+          "fixed_damage": 100,
+          "effect": "Heal 30 damage from this Pokémon."
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆☆",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 096",
+      "name": "Giratina ex",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 150,
+      "energy_type": "Psychic",
+      "ability": {
+        "title": "Broken Space Bellow",
+        "effect": "Once during your turn, you may take a Psychic Energy from your Energy\n        Zone and attach it to this Pokemon, if you use this Ability, your turn\n        ends."
+      },
+      "attacks": [
+        {
+          "energy_required": ["Psychic", "Psychic", "Psychic", "Colorless"],
+          "title": "Chaotic Impact",
+          "fixed_damage": 130,
+          "effect": "This Pokemon also does 20 damage to itself."
+        }
+      ],
+      "weakness": "Darkness",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆☆☆",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 097",
+      "name": "Weedle",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 50,
+      "energy_type": "Grass",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Grass"],
+          "title": "Multiply",
+          "fixed_damage": 0,
+          "effect": "Put 1 random Weedle from your deck onto your Bench."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "✸",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 098",
+      "name": "Kakuna",
+      "stage": 1,
+      "evolves_from": "Weedle",
+      "hp": 80,
+      "energy_type": "Grass",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Grass"],
+          "title": "String Shot",
+          "fixed_damage": 20,
+          "effect": "Flip a coin. If heads, your opponent's Active Pokemon is now Paralyzed."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "✸",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 099",
+      "name": "Charmander",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 60,
+      "energy_type": "Fire",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Fire"],
+          "title": "Combustion",
+          "fixed_damage": 20,
+          "effect": null
+        }
+      ],
+      "weakness": "Water",
+      "retreat_cost": ["Colorless"],
+      "rarity": "✸",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 100",
+      "name": "Charmeleon",
+      "stage": 1,
+      "evolves_from": "Charmander",
+      "hp": 90,
+      "energy_type": "Fire",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Fire", "Fire"],
+          "title": "Combustion",
+          "fixed_damage": 40,
+          "effect": null
+        }
+      ],
+      "weakness": "Water",
+      "retreat_cost": ["Colorless"],
+      "rarity": "✸",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 101",
+      "name": "Wiglett",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 60,
+      "energy_type": "Water",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Water"],
+          "title": "Spring Out",
+          "fixed_damage": 0,
+          "effect": "1 of your opponent's Pokemon is chosen at random. Do 30 damage on it."
+        }
+      ],
+      "weakness": "Lightning",
+      "retreat_cost": ["Colorless"],
+      "rarity": "✸",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 102",
+      "name": "Dondozo",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 120,
+      "energy_type": "Water",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Water", "Water", "Water", "Water"],
+          "title": "Ocean Cyclone",
+          "fixed_damage": 80,
+          "effect": "This attack also does 10 damage to each of your opponent's Benched\n        Pokemon."
+        }
+      ],
+      "weakness": "Lightning",
+      "retreat_cost": ["Colorless"],
+      "rarity": "✸",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 103",
+      "name": "Pachirisu",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 70,
+      "energy_type": "Lightning",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Lightning"],
+          "title": "Plasma",
+          "fixed_damage": 10,
+          "effect": "Take a Lightning Energy from your Energy Zone and attach it to 1 of your\n        Benched Lightning Pokemon."
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "✸",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 104",
+      "name": "Riolu",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 70,
+      "energy_type": "Fighting",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Fighting", "Fighting"],
+          "title": "Punch",
+          "fixed_damage": 40,
+          "effect": null
+        }
+      ],
+      "weakness": "Psychic",
+      "retreat_cost": ["Colorless"],
+      "rarity": "✸",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 105",
+      "name": "Varoom",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 70,
+      "energy_type": "Metal",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Metal"],
+          "title": "Headbutt",
+          "fixed_damage": 10,
+          "effect": null
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "✸",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 106",
+      "name": "Revavroom",
+      "stage": 1,
+      "evolves_from": "Varoom",
+      "hp": 110,
+      "energy_type": "Metal",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Metal", "Metal", "Colorless"],
+          "title": "Spinning Drift",
+          "fixed_damage": 70,
+          "effect": "Flip a coin. If heads, during your opponent's next turn, prevent all\n        damage from–and effects of–attacks done to this Pokémon."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "✸",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 107",
+      "name": "Beedrill ex",
+      "stage": 2,
+      "evolves_from": "Kakuna",
+      "hp": 170,
+      "energy_type": "Grass",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Grass", "Grass"],
+          "title": "Crushing Spear",
+          "fixed_damage": 80,
+          "effect": "Discard a random Energy from your opponent's Active Pokemon."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "✸✸",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 108",
+      "name": "Charizard ex",
+      "stage": 2,
+      "evolves_from": "Charmeleon",
+      "hp": 180,
+      "energy_type": "Fire",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Fire"],
+          "title": "Stoke",
+          "fixed_damage": 0,
+          "effect": "Take 3 Fire Energy from your Energy Zone and attach it to this pokemon."
+        },
+        {
+          "energy_required": ["Fire", "Fire", "Fire", "Colorless", "Colorless"],
+          "title": "Steam Artillery",
+          "fixed_damage": 150,
+          "effect": null
+        }
+      ],
+      "weakness": "Water",
+      "retreat_cost": ["Colorless"],
+      "rarity": "✸✸",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 109",
+      "name": "Wugtrio ex",
+      "stage": 1,
+      "evolves_from": "Wiglett",
+      "hp": 140,
+      "energy_type": "Water",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Water", "Water", "Water"],
+          "title": "Pop Out Throughout",
+          "fixed_damage": 0,
+          "effect": "1 of your opponent's Pokemon is chosen at random 3 times. For each time\n        a Pokemon was chosen, do 50 damage to it."
+        }
+      ],
+      "weakness": "Lightning",
+      "retreat_cost": ["Colorless"],
+      "rarity": "✸✸",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A2b 110",
+      "name": "Lucario ex",
+      "stage": 1,
+      "evolves_from": "Riolu",
+      "hp": 150,
+      "energy_type": "Fighting",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Fighting", "Fighting", "Fighting"],
+          "title": "Aura Sphere",
+          "fixed_damage": 100,
+          "effect": "The attack also does 30 damage to 1 of your opponent's benched Pokemon."
+        }
+      ],
+      "weakness": "Psychic",
+      "retreat_cost": ["Colorless"],
+      "rarity": "✸✸",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
+  },
+  {
+    "Trainer": {
+      "id": "A2b 111",
+      "numeric_id": 20591,
+      "trainer_card_type": "Item",
+      "name": "Poke Ball",
+      "effect": "Put a random Basic Pokémon from your deck into your hand.",
+      "rarity": "♛",
+      "booster_pack": "Shining Revelry (A2b) Shiny Charizard"
+    }
   }
 ]
