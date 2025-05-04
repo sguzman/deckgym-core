@@ -137,6 +137,15 @@ fn forecast_effect_attack(
         AttackId::A1203KangaskhanDizzyPunch => {
             probabilistic_damage_attack(vec![0.25, 0.5, 0.25], vec![0, 30, 60])
         }
+        AttackId::A1a026RaichuGigashock => {
+            let opponent = (state.current_player + 1) % 2;
+            let targets: Vec<(u32, usize)> = state
+                .enumerate_bench_pokemon(opponent)
+                .map(|(idx, _)| (20, idx))
+                .chain(std::iter::once((60, 0)))
+                .collect();
+            damage_effect_doutcome(targets, |_, _, _| {})
+        }
         AttackId::A1a030DedenneThunderShock => {
             damage_chance_status_attack(10, 0.5, StatusCondition::Paralyzed)
         }
