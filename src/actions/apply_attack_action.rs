@@ -110,6 +110,7 @@ fn forecast_effect_attack(
             damage_chance_status_attack(60, 0.5, StatusCondition::Paralyzed)
         }
         AttackId::A1093FrosmothPowderSnow => damage_status_attack(40, StatusCondition::Asleep),
+        AttackId::A1095RaichuThunderbolt => thunderbolt_attack(),
         AttackId::A1096PikachuExCircleCircuit => {
             bench_count_attack(acting_player, state, 0, 30, Some(EnergyType::Lightning))
         }
@@ -466,6 +467,14 @@ fn damage_and_turn_effect_attack(index: usize, effect_duration: u8) -> (Probabil
         let active = state.get_active(action.actor);
         // TODO: Maybe create an EffectId enum and have a mapping between card,attack_idx to effect?
         state.add_turn_effect(active.card.clone(), effect_duration);
+    })
+}
+
+/// For Raichu's Thunderbolt attack that deals 140 damage and discards all energy
+fn thunderbolt_attack() -> (Probabilities, Mutations) {
+    active_damage_effect_doutcome(140, move |_, state, action| {
+        let active = state.get_active_mut(action.actor);
+        active.attached_energy.clear(); // Discard all energy
     })
 }
 
