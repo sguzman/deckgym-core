@@ -51,6 +51,7 @@ pub enum AttackId {
     A1195WigglytuffSleepySong,
     A1196MeowthPayDay,
     A1203KangaskhanDizzyPunch,
+    A1a026RaichuGigashock,
     A1a030DedenneThunderShock,
     A2049PalkiaDimensionalStorm,
     A2119DialgaExMetallicTurbo,
@@ -137,6 +138,7 @@ lazy_static::lazy_static! {
         m.insert(("A1 285", 0), AttackId::A1096PikachuExCircleCircuit);
         m.insert(("A1 286", 1), AttackId::A1129MewtwoExPsydrive);
         // A1a
+        m.insert(("A1a 026", 0), AttackId::A1a026RaichuGigashock);
         m.insert(("A1a 030", 0), AttackId::A1a030DedenneThunderShock);
         // Full Arts A1a
         m.insert(("A1a 073", 0), AttackId::A1a030DedenneThunderShock);
