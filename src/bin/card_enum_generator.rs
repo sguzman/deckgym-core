@@ -29,11 +29,15 @@ fn main() {
     let mut id_to_enum: IndexMap<String, String> = IndexMap::new();
     let mut numeric_id_to_enum: IndexMap<u16, String> = IndexMap::new();
     for card in deserialized_cards {
+        // Remove special characters from the name
         let mut enum_name = (card.get_id() + &card.get_name())
             .replace(" ", "")
             .replace("-", "")
             .replace(".", "")
-            .replace("'", "");
+            .replace("'", "")
+            .replace("♀", "F")
+            .replace("♂", "M")
+            .replace("é", "e");
         if enum_name.ends_with("ex") {
             enum_name = enum_name[..enum_name.len() - 2].to_string();
             enum_name.push_str("Ex");
