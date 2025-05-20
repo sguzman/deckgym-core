@@ -1,11 +1,11 @@
 use std::panic;
 
-use rand::{distributions::WeightedIndex, prelude::Distribution, rngs::StdRng};
+use rand::{distributions::WeightedIndex, prelude::Distribution, rngs::StdRng, thread_rng, Rng};
 
 use crate::{
     hooks::{get_retreat_cost, on_attach_tool, to_playable_card},
     state::State,
-    types::{Card, PlayedCard},
+    types::{Card, EnergyType, PlayedCard},
 };
 
 use super::{
@@ -133,12 +133,11 @@ fn apply_deterministic_action(state: &mut State, action: &Action) {
 
 /// Function to handle searching the deck for a Grass Pokémon card (Caterpie's "Find a Friend" attack)
 fn apply_search_deck(acting_player: usize, state: &mut State) {
-    use crate::types::{Card, EnergyType};
-    use rand::{thread_rng, Rng};
-    
+    // Note: Currently hard-coded for Grass type Pokémon for Caterpie's "Find a Friend" attack.
+    // In the future, this function could be refactored to be more generic for other energy types.
+
     // Find all Grass-type Pokémon cards in the deck
-    let grass_pokemon_cards = state
-        .decks[acting_player]
+    let grass_pokemon_cards = state.decks[acting_player]
         .iter()
         .enumerate()
         .filter_map(|(idx, card)| {
@@ -164,11 +163,11 @@ fn apply_search_deck(acting_player: usize, state: &mut State) {
     let mut rng = thread_rng();
     let random_index = rng.gen_range(0..grass_pokemon_cards.len());
     let chosen_card_idx = grass_pokemon_cards[random_index];
-    
+
     // Add the chosen card to the player's hand
     let card = state.decks[acting_player].remove(chosen_card_idx);
     state.hands[acting_player].push(card);
-    
+
     // Shuffle the deck after search
     state.shuffle_deck(acting_player);
 }
