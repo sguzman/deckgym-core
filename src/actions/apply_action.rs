@@ -131,36 +131,46 @@ fn apply_deterministic_action(state: &mut State, action: &Action) {
     }
 }
 
-/// Function to handle searching the deck for a Pokémon card (Caterpie's "Find a Friend" attack)
+/// Function to handle searching the deck for a Grass Pokémon card (Caterpie's "Find a Friend" attack)
 fn apply_search_deck(acting_player: usize, state: &mut State) {
-    // First, find the Pokémon cards in the deck
-    let pokemon_cards = state
+    use crate::types::{Card, EnergyType};
+    use rand::{thread_rng, Rng};
+    
+    // Find all Grass-type Pokémon cards in the deck
+    let grass_pokemon_cards = state
         .decks[acting_player]
         .iter()
         .enumerate()
         .filter_map(|(idx, card)| {
             if let Card::Pokemon(_) = card {
-                Some(idx)
+                // Check if the Pokémon is Grass type
+                if card.get_type() == Some(EnergyType::Grass) {
+                    Some(idx)
+                } else {
+                    None
+                }
             } else {
                 None
             }
         })
         .collect::<Vec<usize>>();
 
-    if pokemon_cards.is_empty() {
-        // No Pokémon cards in the deck, nothing to do
+    if grass_pokemon_cards.is_empty() {
+        // No Grass Pokémon cards in the deck, nothing to do
         return;
     }
 
-    // In a real game, the player would choose which Pokémon card to add to their hand
-    // For simplicity, we'll just add the first Pokémon card
-    if let Some(&first_pokemon_idx) = pokemon_cards.first() {
-        let card = state.decks[acting_player].remove(first_pokemon_idx);
-        state.hands[acting_player].push(card);
-        
-        // Shuffle the deck after search
-        state.shuffle_deck(acting_player);
-    }
+    // Choose a random Grass Pokémon card from the deck
+    let mut rng = thread_rng();
+    let random_index = rng.gen_range(0..grass_pokemon_cards.len());
+    let chosen_card_idx = grass_pokemon_cards[random_index];
+    
+    // Add the chosen card to the player's hand
+    let card = state.decks[acting_player].remove(chosen_card_idx);
+    state.hands[acting_player].push(card);
+    
+    // Shuffle the deck after search
+    state.shuffle_deck(acting_player);
 }
 
 fn apply_healing(acting_player: usize, state: &mut State, position: usize, amount: u32) {

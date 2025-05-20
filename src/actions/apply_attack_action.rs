@@ -546,9 +546,10 @@ mod test {
         let caterpie = get_card_by_enum(CardId::A1005Caterpie);
         state.in_play_pokemon[0][0] = Some(to_playable_card(&caterpie, false));
         
-        // Add a Pokémon card to the deck
-        let bulbasaur = get_card_by_enum(CardId::A1001Bulbasaur);
-        state.decks[0].cards = vec![bulbasaur.clone()];
+        // Add various Pokémon cards to the deck, including Grass and non-Grass types
+        let bulbasaur = get_card_by_enum(CardId::A1001Bulbasaur); // Grass type
+        let charmander = get_card_by_enum(CardId::A1007Charmander); // Non-Grass (Fire) type
+        state.decks[0].cards = vec![bulbasaur.clone(), charmander.clone()];
         
         // Initial hand size
         let initial_hand_size = state.hands[0].len();
@@ -563,14 +564,57 @@ mod test {
             action: SimpleAction::SearchDeck,
             is_stack: false,
         };
+        
+        // Apply the search action
         apply_search_deck(0, &mut state);
         
-        // Check that the Pokémon was added to the hand
+        // Check that a card was added to the hand
         assert_eq!(state.hands[0].len(), initial_hand_size + 1);
-        assert!(state.hands[0].contains(&bulbasaur));
         
-        // Check that the deck is empty (as we only had one card)
-        assert_eq!(state.decks[0].cards.len(), 0);
+        // Check that we added the Grass-type Pokémon (Bulbasaur) 
+        // and not the Fire-type Pokémon (Charmander)
+        assert!(state.hands[0].contains(&bulbasaur));
+        assert!(!state.hands[0].contains(&charmander));
+        
+        // Check that the deck now has 1 card (the non-Grass Pokémon)
+        assert_eq!(state.decks[0].cards.len(), 1);
+        assert!(state.decks[0].cards.contains(&charmander));
+    }
+    
+    #[test]
+    fn test_caterpie_find_a_friend_no_grass_pokemon() {
+        let mut rng = StdRng::seed_from_u64(0);
+        let mut state = State::default();
+        let action = Action {
+            actor: 0,
+            action: SimpleAction::Attack(0),
+            is_stack: false,
+        };
+
+        // Set up the game state
+        let caterpie = get_card_by_enum(CardId::A1005Caterpie);
+        state.in_play_pokemon[0][0] = Some(to_playable_card(&caterpie, false));
+        
+        // Add a non-Grass Pokémon card to the deck
+        let charmander = get_card_by_enum(CardId::A1007Charmander); // Fire type
+        state.decks[0].cards = vec![charmander.clone()];
+        
+        // Initial hand size
+        let initial_hand_size = state.hands[0].len();
+
+        // Execute the Find a Friend attack
+        let (_, mut lazy_mutations) = search_deck_for_pokemon();
+        lazy_mutations.remove(0)(&mut rng, &mut state, &action);
+        
+        // Apply the search action
+        apply_search_deck(0, &mut state);
+        
+        // Check that no cards were added to the hand (since there are no Grass Pokémon)
+        assert_eq!(state.hands[0].len(), initial_hand_size);
+        
+        // Check that the deck still contains the non-Grass Pokémon
+        assert_eq!(state.decks[0].cards.len(), 1);
+        assert!(state.decks[0].cards.contains(&charmander));
     }
 
     #[test]
