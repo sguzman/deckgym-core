@@ -55,6 +55,7 @@ fn forecast_effect_attack(
     match attack_id {
         AttackId::A1003VenusaurMegaDrain => self_heal_attack(30, index),
         AttackId::A1004VenusaurExGiantBloom => self_heal_attack(30, index),
+        AttackId::A1005CaterpieFindAFriend => search_deck_for_pokemon(),
         AttackId::A1013VileplumeSoothingScent => damage_status_attack(80, StatusCondition::Asleep),
         AttackId::A1017VenomothPoisonPowder => damage_status_attack(30, StatusCondition::Poisoned),
         AttackId::A1022ExeggutorStomp => probabilistic_damage_attack(vec![0.5, 0.5], vec![30, 60]),
@@ -269,6 +270,16 @@ fn generate_distributions(
         );
     }
     current[start_idx] = 0;
+}
+
+/// For Caterpie's "Find a Friend" attack that lets you search your deck for a Pokémon card
+fn search_deck_for_pokemon() -> (Probabilities, Mutations) {
+    active_damage_effect_doutcome(0, move |_, state, action| {
+        // Queue a deck search action for the player to choose a Pokémon card
+        state
+            .move_generation_stack
+            .push((action.actor, vec![SimpleAction::SearchDeck]));
+    })
 }
 
 /// Deal damage and attach energy to a pokemon of choice in the bench.
@@ -493,6 +504,7 @@ mod test {
 
     use crate::{
         actions::Action, card_ids::CardId, database::get_card_by_enum, hooks::to_playable_card,
+        types::{Card, PlayedCard},
     };
 
     use super::*;
@@ -518,6 +530,47 @@ mod test {
         lazy_mutations.remove(0)(&mut rng, &mut state, &action);
 
         assert_eq!(state.get_active(1).remaining_hp, 70);
+    }
+
+    #[test]
+    fn test_caterpie_find_a_friend() {
+        let mut rng = StdRng::seed_from_u64(0);
+        let mut state = State::default();
+        let action = Action {
+            actor: 0,
+            action: SimpleAction::Attack(0),
+            is_stack: false,
+        };
+
+        // Set up the game state
+        let caterpie = get_card_by_enum(CardId::A1005Caterpie);
+        state.in_play_pokemon[0][0] = Some(to_playable_card(&caterpie, false));
+        
+        // Add a Pokémon card to the deck
+        let bulbasaur = get_card_by_enum(CardId::A1001Bulbasaur);
+        state.decks[0].cards = vec![bulbasaur.clone()];
+        
+        // Initial hand size
+        let initial_hand_size = state.hands[0].len();
+
+        // Execute the Find a Friend attack
+        let (_, mut lazy_mutations) = search_deck_for_pokemon();
+        lazy_mutations.remove(0)(&mut rng, &mut state, &action);
+        
+        // Since SearchDeck is queued in the move_generation_stack, we need to execute it
+        let search_action = Action {
+            actor: 0,
+            action: SimpleAction::SearchDeck,
+            is_stack: false,
+        };
+        apply_search_deck(0, &mut state);
+        
+        // Check that the Pokémon was added to the hand
+        assert_eq!(state.hands[0].len(), initial_hand_size + 1);
+        assert!(state.hands[0].contains(&bulbasaur));
+        
+        // Check that the deck is empty (as we only had one card)
+        assert_eq!(state.decks[0].cards.len(), 0);
     }
 
     #[test]

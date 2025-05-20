@@ -246,6 +246,12 @@ impl State {
             .filter(|(_, x)| x.get_energy_type() == Some(energy))
             .count()
     }
+
+    /// Shuffles the deck of the specified player
+    pub(crate) fn shuffle_deck(&mut self, player: usize) {
+        let mut rng = rand::thread_rng();
+        self.decks[player].shuffle(false, &mut rng);
+    }
 }
 
 fn format_cards(played_cards: &[Option<PlayedCard>]) -> Vec<String> {

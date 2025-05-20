@@ -52,6 +52,8 @@ pub enum SimpleAction {
     Activate {
         in_play_idx: usize,
     },
+    // Search deck for a Pokémon card and add to hand, then shuffle deck
+    SearchDeck,
 }
 
 impl fmt::Display for SimpleAction {
@@ -97,6 +99,7 @@ impl fmt::Display for SimpleAction {
                 write!(f, "ApplyDamage({})", targets_str)
             }
             SimpleAction::Activate { in_play_idx } => write!(f, "Activate({})", in_play_idx),
+            SimpleAction::SearchDeck => write!(f, "SearchDeck"),
         }
     }
 }

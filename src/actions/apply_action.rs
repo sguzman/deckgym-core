@@ -46,6 +46,7 @@ pub fn forecast_action(state: &State, action: &Action) -> (Probabilities, Mutati
         | SimpleAction::Activate { .. }
         | SimpleAction::Retreat(_)
         | SimpleAction::ApplyDamage { .. }
+        | SimpleAction::SearchDeck
         | SimpleAction::Heal { .. } => (
             vec![1.0],
             vec![Box::new({
@@ -122,7 +123,43 @@ fn apply_deterministic_action(state: &mut State, action: &Action) {
         } => {
             apply_healing(action.actor, state, *in_play_idx, *amount);
         }
+        SimpleAction::SearchDeck => {
+            // Logic for searching the deck for a Pokémon card
+            apply_search_deck(action.actor, state);
+        }
         _ => panic!("Deterministic Action expected"),
+    }
+}
+
+/// Function to handle searching the deck for a Pokémon card (Caterpie's "Find a Friend" attack)
+fn apply_search_deck(acting_player: usize, state: &mut State) {
+    // First, find the Pokémon cards in the deck
+    let pokemon_cards = state
+        .decks[acting_player]
+        .iter()
+        .enumerate()
+        .filter_map(|(idx, card)| {
+            if let Card::Pokemon(_) = card {
+                Some(idx)
+            } else {
+                None
+            }
+        })
+        .collect::<Vec<usize>>();
+
+    if pokemon_cards.is_empty() {
+        // No Pokémon cards in the deck, nothing to do
+        return;
+    }
+
+    // In a real game, the player would choose which Pokémon card to add to their hand
+    // For simplicity, we'll just add the first Pokémon card
+    if let Some(&first_pokemon_idx) = pokemon_cards.first() {
+        let card = state.decks[acting_player].remove(first_pokemon_idx);
+        state.hands[acting_player].push(card);
+        
+        // Shuffle the deck after search
+        state.shuffle_deck(acting_player);
     }
 }
 
