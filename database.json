@@ -23201,6 +23201,2353 @@
     }
   },
   {
+    "Pokemon": {
+      "id": "A3a 001",
+      "name": "Petilil",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 60,
+      "energy_type": "Grass",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Grass"],
+          "title": "Seed Bomb",
+          "fixed_damage": 20,
+          "effect": null
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 002",
+      "name": "Lilligant",
+      "stage": 1,
+      "evolves_from": "Petilil",
+      "hp": 110,
+      "energy_type": "Grass",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Grass", "Colorless"],
+          "title": "Cut",
+          "fixed_damage": 60,
+          "effect": null
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless", "Colorless"],
+      "rarity": "◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 003",
+      "name": "Rowlet",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 60,
+      "energy_type": "Grass",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Grass"],
+          "title": "Fury Attack",
+          "fixed_damage": 0,
+          "effect": "Flip 3 coins. This attack does 10 damage for each heads."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 004",
+      "name": "Dartrix",
+      "stage": 1,
+      "evolves_from": "Rowlet",
+      "hp": 80,
+      "energy_type": "Grass",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Grass"],
+          "title": "Skill",
+          "fixed_damage": 0,
+          "effect": "This attack does 20 damage to 1 of your opponent's Pokémon."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 005",
+      "name": "Decidueye",
+      "stage": 2,
+      "evolves_from": "Dartrix",
+      "hp": 130,
+      "energy_type": "Grass",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Grass", "Grass"],
+          "title": "Sniping",
+          "fixed_damage": 0,
+          "effect": "This attack does 70 damage to 1 of your opponent's Pokémon."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless", "Colorless"],
+      "rarity": "◊◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 006",
+      "name": "Buzzwole ex",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 140,
+      "energy_type": "Grass",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Colorless", "Colorless"],
+          "title": "Punch",
+          "fixed_damage": 30,
+          "effect": null
+        },
+        {
+          "energy_required": ["Grass", "Grass", "Colorless"],
+          "title": "Big Beat",
+          "fixed_damage": 120,
+          "effect": "During your next turn, this Pokémon can't use Big Beat."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless", "Colorless"],
+      "rarity": "◊◊◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 007",
+      "name": "Pheromosa",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 70,
+      "energy_type": "Grass",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Grass"],
+          "title": "Jump Blues",
+          "fixed_damage": 20,
+          "effect": "This attack also does 20 damage to 1 of your opponent's Benched Pokémon."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 008",
+      "name": "Kartana",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 60,
+      "energy_type": "Grass",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Grass"],
+          "title": "Thrash Metal",
+          "fixed_damage": 40,
+          "effect": null
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 009",
+      "name": "Blacephalon",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 100,
+      "energy_type": "Fire",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Fire", "Fire", "Colorless"],
+          "title": "Beat Punk",
+          "fixed_damage": 130,
+          "effect": "This Pokémon also does 70 damage to itself."
+        }
+      ],
+      "weakness": "Water",
+      "retreat_cost": ["Colorless", "Colorless"],
+      "rarity": "◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 010",
+      "name": "Mantine",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 90,
+      "energy_type": "Water",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Water", "Colorless"],
+          "title": "Surf",
+          "fixed_damage": 50,
+          "effect": null
+        }
+      ],
+      "weakness": "Lightning",
+      "retreat_cost": ["Colorless", "Colorless"],
+      "rarity": "◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 011",
+      "name": "Carvanha",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 60,
+      "energy_type": "Water",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Water"],
+          "title": "Bite",
+          "fixed_damage": 20,
+          "effect": null
+        }
+      ],
+      "weakness": "Lightning",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 012",
+      "name": "Sharpedo",
+      "stage": 1,
+      "evolves_from": "Carvanha",
+      "hp": 90,
+      "energy_type": "Water",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Water", "Colorless"],
+          "title": "Crunch",
+          "fixed_damage": 50,
+          "effect": "Flip a coin. If heads, discard a random Energy from your opponent's Active Pokémon."
+        }
+      ],
+      "weakness": "Lightning",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 013",
+      "name": "Shinx",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 60,
+      "energy_type": "Lightning",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Lightning"],
+          "title": "Bite",
+          "fixed_damage": 20,
+          "effect": null
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 014",
+      "name": "Luxio",
+      "stage": 1,
+      "evolves_from": "Shinx",
+      "hp": 80,
+      "energy_type": "Lightning",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Lightning", "Lightning"],
+          "title": "Head Bolt",
+          "fixed_damage": 50,
+          "effect": null
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 015",
+      "name": "Luxray",
+      "stage": 2,
+      "evolves_from": "Luxio",
+      "hp": 130,
+      "energy_type": "Lightning",
+      "ability": {
+        "title": "Intimidating Fang",
+        "effect": "As long as this Pokémon is in the Active Spot, attacks used by your opponent's Active Pokémon do −20 damage."
+      },
+      "attacks": [
+        {
+          "energy_required": ["Lightning", "Lightning", "Colorless"],
+          "title": "Electric Ball",
+          "fixed_damage": 90,
+          "effect": null
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◊◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 016",
+      "name": "Blitzle",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 60,
+      "energy_type": "Lightning",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Lightning", "Lightning"],
+          "title": "Rear Kick",
+          "fixed_damage": 40,
+          "effect": null
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 017",
+      "name": "Zebstrika",
+      "stage": 1,
+      "evolves_from": "Blitzle",
+      "hp": 90,
+      "energy_type": "Lightning",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Lightning", "Lightning"],
+          "title": "Head Bolt",
+          "fixed_damage": 70,
+          "effect": null
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 018",
+      "name": "Emolga",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 70,
+      "energy_type": "Lightning",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Lightning"],
+          "title": "Static Shock",
+          "fixed_damage": 30,
+          "effect": null
+        }
+      ],
+      "weakness": "Lightning",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 019",
+      "name": "Tapu Koko ex",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 130,
+      "energy_type": "Lightning",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Lightning"],
+          "title": "Plasma Hurricane",
+          "fixed_damage": 20,
+          "effect": "Take a [L] Energy from your Energy Zone and attach it to this Pokémon."
+        },
+        {
+          "energy_required": ["Lightning", "Lightning", "Colorless"],
+          "title": "Mach Bolt",
+          "fixed_damage": 90,
+          "effect": null
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◊◊◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 020",
+      "name": "Xurkitree",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 100,
+      "energy_type": "Lightning",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Lightning", "Colorless", "Colorless"],
+          "title": "Electronica",
+          "fixed_damage": 60,
+          "effect": "Your opponent's Active Pokémon is now Confused."
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless", "Colorless"],
+      "rarity": "◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 021",
+      "name": "Zeraora",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 90,
+      "energy_type": "Lightning",
+      "ability": {
+        "title": "Thunderclap Flash",
+        "effect": "At the end of your first turn, take a  Energy from your Energy Zone and attach it to this Pokémon."
+      },
+      "attacks": [
+        {
+          "energy_required": ["Lightning", "Lightning"],
+          "title": "Lightning Claw",
+          "fixed_damage": 50,
+          "effect": null
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◊◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 022",
+      "name": "Clefairy",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 60,
+      "energy_type": "Psychic",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Colorless"],
+          "title": "Pound",
+          "fixed_damage": 10,
+          "effect": null
+        }
+      ],
+      "weakness": "Metal",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 023",
+      "name": "Clefable",
+      "stage": 1,
+      "evolves_from": "Clefairy",
+      "hp": 100,
+      "energy_type": "Psychic",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Psychic", "Colorless"],
+          "title": "Moon Kick",
+          "fixed_damage": 60,
+          "effect": null
+        }
+      ],
+      "weakness": "Metal",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 024",
+      "name": "Phantump",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 70,
+      "energy_type": "Psychic",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Psychic", "Colorless"],
+          "title": "Spooky Shot",
+          "fixed_damage": 30,
+          "effect": null
+        }
+      ],
+      "weakness": "Darkness",
+      "retreat_cost": ["Colorless", "Colorless"],
+      "rarity": "◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 025",
+      "name": "Trevenant",
+      "stage": 1,
+      "evolves_from": "Phantump",
+      "hp": 120,
+      "energy_type": "Psychic",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Psychic", "Colorless", "Colorless"],
+          "title": "Wrack Down",
+          "fixed_damage": 70,
+          "effect": null
+        }
+      ],
+      "weakness": "Darkness",
+      "retreat_cost": ["Colorless", "Colorless"],
+      "rarity": "◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 026",
+      "name": "Morelull",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 50,
+      "energy_type": "Psychic",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Psychic"],
+          "title": "Hook",
+          "fixed_damage": 20,
+          "effect": null
+        }
+      ],
+      "weakness": "Metal",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 027",
+      "name": "Shiinotic",
+      "stage": 1,
+      "evolves_from": "Morelull",
+      "hp": 90,
+      "energy_type": "Psychic",
+      "ability": {
+        "title": "Illuminate",
+        "effect": "Once during your turn, you may put a random Pokémon from your deck into your hand."
+      },
+      "attacks": [
+        {
+          "energy_required": ["Colorless", "Colorless"],
+          "title": "Gentle Slap",
+          "fixed_damage": 40,
+          "effect": null
+        }
+      ],
+      "weakness": "Metal",
+      "retreat_cost": ["Colorless", "Colorless"],
+      "rarity": "◊◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 028",
+      "name": "Meditite",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 60,
+      "energy_type": "Fighting",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Fighting"],
+          "title": "Trip Over",
+          "fixed_damage": 0,
+          "effect": "Flip a coin. If heads, this attack does 20 more damage."
+        }
+      ],
+      "weakness": "Psychic",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 029",
+      "name": "Medicham",
+      "stage": 1,
+      "evolves_from": "Meditite",
+      "hp": 90,
+      "energy_type": "Fighting",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Fighting"],
+          "title": "High Jump Kick",
+          "fixed_damage": 50,
+          "effect": null
+        }
+      ],
+      "weakness": "Psychic",
+      "retreat_cost": ["Colorless", "Colorless"],
+      "rarity": "◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 030",
+      "name": "Baltoy",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 60,
+      "energy_type": "Fighting",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Colorless", "Colorless"],
+          "title": "Spinning Attack",
+          "fixed_damage": 30,
+          "effect": null
+        }
+      ],
+      "weakness": "Grass",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 031",
+      "name": "Claydol",
+      "stage": 1,
+      "evolves_from": "Baltoy",
+      "hp": 100,
+      "energy_type": "Fighting",
+      "ability": {
+        "title": "Heal Block",
+        "effect": "Pokémon (both yours and your opponent's) can't be healed."
+      },
+      "attacks": [
+        {
+          "energy_required": ["Colorless", "Colorless", "Colorless"],
+          "title": "Power Beam",
+          "fixed_damage": 50,
+          "effect": null
+        }
+      ],
+      "weakness": "Grass",
+      "retreat_cost": ["Colorless", "Colorless"],
+      "rarity": "◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 032",
+      "name": "Rockruff",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 60,
+      "energy_type": "Fighting",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Fighting", "Colorless"],
+          "title": "Rock Throw",
+          "fixed_damage": 40,
+          "effect": null
+        }
+      ],
+      "weakness": "Grass",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 033",
+      "name": "Lycanroc ex",
+      "stage": 1,
+      "evolves_from": "Rockruff",
+      "hp": 150,
+      "energy_type": "Fighting",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Fighting", "Fighting", "Colorless"],
+          "title": "Lycanfang",
+          "fixed_damage": 130,
+          "effect": "Discard a [F] Energy from this Pokémon."
+        }
+      ],
+      "weakness": "Grass",
+      "retreat_cost": ["Colorless", "Colorless"],
+      "rarity": "◊◊◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 034",
+      "name": "Passimian",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 100,
+      "energy_type": "Fighting",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Fighting", "Fighting"],
+          "title": "Let’s Throw",
+          "fixed_damage": 0,
+          "effect": "If Passimian is on your Bench, this attack does 40 more damage."
+        }
+      ],
+      "weakness": "Psychic",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 035",
+      "name": "Sandygast",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 80,
+      "energy_type": "Fighting",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Fighting", "Colorless"],
+          "title": "Sandy Shot",
+          "fixed_damage": 30,
+          "effect": null
+        }
+      ],
+      "weakness": "Grass",
+      "retreat_cost": ["Colorless", "Colorless"],
+      "rarity": "◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 036",
+      "name": "Palossand",
+      "stage": 1,
+      "evolves_from": "Sandygast",
+      "hp": 130,
+      "energy_type": "Fighting",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": [
+            "Fighting",
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "title": "Sand Tomb",
+          "fixed_damage": 90,
+          "effect": "During your opponent's next turn, the Defending Pokémon can't retreat."
+        }
+      ],
+      "weakness": "Grass",
+      "retreat_cost": ["Colorless", "Colorless", "Colorless"],
+      "rarity": "◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 037",
+      "name": "Alolan Meowth",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 60,
+      "energy_type": "Darkness",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Darkness"],
+          "title": "Unknown",
+          "fixed_damage": 0,
+          "effect": "Discard a random Pokémon Tool card from your opponent's hand."
+        }
+      ],
+      "weakness": "Grass",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 038",
+      "name": "Alolan Persian",
+      "stage": 1,
+      "evolves_from": "Alolan Meowth",
+      "hp": 100,
+      "energy_type": "Darkness",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Darkness", "Colorless"],
+          "title": "Fake Out",
+          "fixed_damage": 50,
+          "effect": "Flip a coin. If heads, your opponent's Active Pokémon is now Paralyzed."
+        }
+      ],
+      "weakness": "Grass",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 039",
+      "name": "Sandile",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 70,
+      "energy_type": "Darkness",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Darkness"],
+          "title": "Bite",
+          "fixed_damage": 20,
+          "effect": null
+        }
+      ],
+      "weakness": "Grass",
+      "retreat_cost": ["Colorless", "Colorless"],
+      "rarity": "◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 040",
+      "name": "Krokorok",
+      "stage": 1,
+      "evolves_from": "Sandile",
+      "hp": 90,
+      "energy_type": "Darkness",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Darkness", "Colorless"],
+          "title": "Light Punch",
+          "fixed_damage": 40,
+          "effect": null
+        }
+      ],
+      "weakness": "Grass",
+      "retreat_cost": ["Colorless", "Colorless"],
+      "rarity": "◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 041",
+      "name": "Krookodile",
+      "stage": 2,
+      "evolves_from": "Krokorok",
+      "hp": 140,
+      "energy_type": "Darkness",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Darkness", "Darkness", "Colorless"],
+          "title": "Poaching Fangs",
+          "fixed_damage": 90,
+          "effect": "Flip 3 coins. For each heads, a card is chosen at random from your opponent's hand. Your opponent reveals that card and shuffles it into their deck."
+        }
+      ],
+      "weakness": "Grass",
+      "retreat_cost": ["Colorless", "Colorless", "Colorless"],
+      "rarity": "◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 042",
+      "name": "Nihilego",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 70,
+      "energy_type": "Darkness",
+      "ability": {
+        "title": "More Poison",
+        "effect": "Your opponent's Active Pokémon takes +10 damage from being Poisoned."
+      },
+      "attacks": [
+        {
+          "energy_required": ["Darkness", "Colorless"],
+          "title": "New Wave",
+          "fixed_damage": 30,
+          "effect": "Your opponent's Active Pokémon is now Poisoned."
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◊◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 043",
+      "name": "Guzzlord ex",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 170,
+      "energy_type": "Darkness",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Colorless", "Colorless"],
+          "title": "Grindcore",
+          "fixed_damage": 30,
+          "effect": "Flip a coin until you get tails. For each heads, discard a random Energy from your opponent's Active Pokémon."
+        },
+        {
+          "energy_required": ["Darkness", "Darkness", "Darkness", "Colorless"],
+          "title": "Tyrannical Hole",
+          "fixed_damage": 120,
+          "effect": null
+        }
+      ],
+      "weakness": "Grass",
+      "retreat_cost": ["Colorless", "Colorless", "Colorless", "Colorless"],
+      "rarity": "◊◊◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 044",
+      "name": "Poipole",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 60,
+      "energy_type": "Darkness",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Darkness"],
+          "title": "2-Step",
+          "fixed_damage": 0,
+          "effect": "Flip 2 coins. This attack does 20 damage for each heads."
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 045",
+      "name": "Naganadel",
+      "stage": 1,
+      "evolves_from": "Poipole",
+      "hp": 100,
+      "energy_type": "Darkness",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Darkness"],
+          "title": "Electro House",
+          "fixed_damage": 40,
+          "effect": "Your opponent's Active Pokémon is now Poisoned."
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless", "Colorless"],
+      "rarity": "◊◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 046",
+      "name": "Alolan Diglett",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 60,
+      "energy_type": "Metal",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Metal"],
+          "title": "Happened to Headbutt",
+          "fixed_damage": 40,
+          "effect": "Flip a coin. If tails, this attack does nothing."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 047",
+      "name": "Alolan Dugtrio ex",
+      "stage": 1,
+      "evolves_from": "Alolan Diglett",
+      "hp": 130,
+      "energy_type": "Metal",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Metal", "Colorless"],
+          "title": "Triplet Headbutt",
+          "fixed_damage": 0,
+          "effect": "Flip 3 coins. This attack does 60 damage for each heads."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◊◊◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 048",
+      "name": "Aron",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 70,
+      "energy_type": "Metal",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Metal", "Colorless"],
+          "title": "Headbutt",
+          "fixed_damage": 40,
+          "effect": null
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless", "Colorless"],
+      "rarity": "◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 049",
+      "name": "Lairon",
+      "stage": 1,
+      "evolves_from": "Aron",
+      "hp": 100,
+      "energy_type": "Metal",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Metal", "Metal", "Colorless"],
+          "title": "Lunge Out",
+          "fixed_damage": 60,
+          "effect": null
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless", "Colorless", "Colorless"],
+      "rarity": "◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 050",
+      "name": "Aggron",
+      "stage": 2,
+      "evolves_from": "Lairon",
+      "hp": 160,
+      "energy_type": "Metal",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Metal", "Metal", "Colorless", "Colorless"],
+          "title": "Giga Impact",
+          "fixed_damage": 150,
+          "effect": "During your next turn, this Pokémon can't attack."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless", "Colorless", "Colorless", "Colorless"],
+      "rarity": "◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 051",
+      "name": "Ferroseed",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 60,
+      "energy_type": "Metal",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Metal", "Colorless"],
+          "title": "Spike Sting",
+          "fixed_damage": 40,
+          "effect": null
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless", "Colorless"],
+      "rarity": "◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 052",
+      "name": "Ferrothorn",
+      "stage": 1,
+      "evolves_from": "Ferroseed",
+      "hp": 110,
+      "energy_type": "Metal",
+      "ability": {
+        "title": "Steel Spikes",
+        "effect": "If this Pokémon is in the Active Spot and is damaged by an attack from your opponent's Pokémon, do 20 damage to the Attacking Pokémon."
+      },
+      "attacks": [
+        {
+          "energy_required": ["Metal", "Metal", "Colorless"],
+          "title": "Spinning Attack",
+          "fixed_damage": 70,
+          "effect": null
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless", "Colorless", "Colorless"],
+      "rarity": "◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 053",
+      "name": "Stakataka",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 110,
+      "energy_type": "Metal",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Metal", "Colorless"],
+          "title": "Brass Rock",
+          "fixed_damage": 40,
+          "effect": "During your opponent's next turn, this Pokémon takes −20 damage from attacks."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless", "Colorless", "Colorless"],
+      "rarity": "◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 054",
+      "name": "Lillipup",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 60,
+      "energy_type": "Colorless",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Colorless"],
+          "title": "Tackle",
+          "fixed_damage": 20,
+          "effect": null
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 055",
+      "name": "Herdier",
+      "stage": 1,
+      "evolves_from": "Lillipup",
+      "hp": 80,
+      "energy_type": "Colorless",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Colorless"],
+          "title": "Bite",
+          "fixed_damage": 30,
+          "effect": null
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 056",
+      "name": "Stoutland",
+      "stage": 2,
+      "evolves_from": "Herdier",
+      "hp": 140,
+      "energy_type": "Colorless",
+      "ability": {
+        "title": "Guard Dog Visage",
+        "effect": "As long as this Pokémon is in the Active Spot, attacks used by your opponent's Active Pokémon cost 1  more."
+      },
+      "attacks": [
+        {
+          "energy_required": ["Colorless", "Colorless"],
+          "title": "Sharp Fang",
+          "fixed_damage": 70,
+          "effect": null
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless", "Colorless"],
+      "rarity": "◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 057",
+      "name": "Stufful",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 70,
+      "energy_type": "Colorless",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Colorless", "Colorless"],
+          "title": "Ram",
+          "fixed_damage": 40,
+          "effect": null
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless", "Colorless"],
+      "rarity": "◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 058",
+      "name": "Bewear",
+      "stage": 1,
+      "evolves_from": "Stufful",
+      "hp": 120,
+      "energy_type": "Colorless",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Colorless", "Colorless", "Colorless"],
+          "title": "Superpowered",
+          "fixed_damage": 0,
+          "effect": "Flip 2 coins. If both of them are heads, your opponent's Active Pokémon is Knocked Out."
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless", "Colorless", "Colorless"],
+      "rarity": "◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 059",
+      "name": "Oranguru",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 100,
+      "energy_type": "Colorless",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Colorless", "Colorless", "Colorless"],
+          "title": "Hammer In",
+          "fixed_damage": 70,
+          "effect": null
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless", "Colorless"],
+      "rarity": "◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 060",
+      "name": "Type: Null",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 80,
+      "energy_type": "Colorless",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Colorless"],
+          "title": "Quick Blow",
+          "fixed_damage": 0,
+          "effect": "Flip a coin. If heads, this attack does 20 more damage."
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless", "Colorless"],
+      "rarity": "◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 061",
+      "name": "Silvally",
+      "stage": 1,
+      "evolves_from": "Type: Null",
+      "hp": 110,
+      "energy_type": "Colorless",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Colorless", "Colorless"],
+          "title": "Brave Buddies",
+          "fixed_damage": 0,
+          "effect": "If you played a Supporter card from your hand during this turn, this attack does 50 more damage."
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "◊◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 062",
+      "name": "Celesteela",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 120,
+      "energy_type": "Colorless",
+      "ability": {
+        "title": "Ultra Thrusters",
+        "effect": "Once during your turn, you may switch your Active Ultra Beast with 1 of your Benched Ultra Beasts."
+      },
+      "attacks": [
+        {
+          "energy_required": ["Colorless", "Colorless", "Colorless"],
+          "title": "Moombahton",
+          "fixed_damage": 100,
+          "effect": "Flip a coin. If tails, this attack does nothing."
+        }
+      ],
+      "weakness": "Lightning",
+      "retreat_cost": ["Colorless", "Colorless", "Colorless", "Colorless"],
+      "rarity": "◊◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Trainer": {
+      "id": "A3a 063",
+      "numeric_id": 28735,
+      "trainer_card_type": "Item",
+      "name": "Beast Wall",
+      "effect": "You can use this card only if your opponent hasn't gotten any points.During your opponent's next turn, all of your Ultra Beasts take −20 damage from attacks from your opponent's Pokémon.",
+      "rarity": "◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Trainer": {
+      "id": "A3a 064",
+      "numeric_id": 28736,
+      "trainer_card_type": "Item",
+      "name": "Repel",
+      "effect": "Switch out your opponent's Active Basic Pokémon to the Bench. (Your opponent chooses the new Active Pokémon.)",
+      "rarity": "◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Trainer": {
+      "id": "A3a 065",
+      "numeric_id": 28737,
+      "trainer_card_type": "Tool",
+      "name": "Electrical Cord",
+      "effect": "If the [L] Pokémon this card is attached to is in the Active Spot and is Knocked Out by damage from an attack from your opponent's Pokémon, move 2 [L] Energy from that Pokémon and attach 1 Energy each to 2 of your Benched Pokémon.",
+      "rarity": "◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Trainer": {
+      "id": "A3a 066",
+      "numeric_id": 28738,
+      "trainer_card_type": "Tool",
+      "name": "Beastite",
+      "effect": "Attacks used by the Ultra Beast this card is attached to do +10 damage to your opponent's Active Pokémon for each point you have gotten.",
+      "rarity": "◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Trainer": {
+      "id": "A3a 067",
+      "numeric_id": 28739,
+      "trainer_card_type": "Supporter",
+      "name": "Gladion",
+      "effect": "Put 1 random Type: Null or Silvally from your deck into your hand.",
+      "rarity": "◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Trainer": {
+      "id": "A3a 068",
+      "numeric_id": 28740,
+      "trainer_card_type": "Supporter",
+      "name": "Looker",
+      "effect": "Your opponent reveals all of the Supporter cards in their deck.",
+      "rarity": "◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Trainer": {
+      "id": "A3a 069",
+      "numeric_id": 28741,
+      "trainer_card_type": "Supporter",
+      "name": "Lusamine",
+      "effect": "You can use this card only if your opponent has gotten at least 1 point.Choose 1 of your Ultra Beasts. Attach 2 random Energy from your discard pile to that Pokémon.",
+      "rarity": "◊◊",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 070",
+      "name": "Rowlet",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 60,
+      "energy_type": "Grass",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Grass"],
+          "title": "Fury Attack",
+          "fixed_damage": 0,
+          "effect": "Flip 3 coins. This attack does 10 damage for each heads."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 071",
+      "name": "Pheromosa",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 70,
+      "energy_type": "Grass",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Grass"],
+          "title": "Jump Blues",
+          "fixed_damage": 20,
+          "effect": "This attack also does 20 damage to 1 of your opponent's Benched Pokémon."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 072",
+      "name": "Blacephalon",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 100,
+      "energy_type": "Fire",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Fire", "Fire", "Colorless"],
+          "title": "Beat Punk",
+          "fixed_damage": 130,
+          "effect": "This Pokémon also does 70 damage to itself."
+        }
+      ],
+      "weakness": "Water",
+      "retreat_cost": ["Colorless", "Colorless"],
+      "rarity": "☆",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 073",
+      "name": "Alolan Meowth",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 60,
+      "energy_type": "Darkness",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Darkness"],
+          "title": "Unknown",
+          "fixed_damage": 0,
+          "effect": "Discard a random Pokémon Tool card from your opponent's hand."
+        }
+      ],
+      "weakness": "Grass",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 074",
+      "name": "Silvally",
+      "stage": 1,
+      "evolves_from": "Type: Null",
+      "hp": 110,
+      "energy_type": "Colorless",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Colorless", "Colorless"],
+          "title": "Brave Buddies",
+          "fixed_damage": 0,
+          "effect": "If you played a Supporter card from your hand during this turn, this attack does 50 more damage."
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 075",
+      "name": "Celesteela",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 120,
+      "energy_type": "Colorless",
+      "ability": {
+        "title": "Ultra Thrusters",
+        "effect": "Once during your turn, you may switch your Active Ultra Beast with 1 of your Benched Ultra Beasts."
+      },
+      "attacks": [
+        {
+          "energy_required": ["Colorless", "Colorless", "Colorless"],
+          "title": "Moombahton",
+          "fixed_damage": 100,
+          "effect": "Flip a coin. If tails, this attack does nothing."
+        }
+      ],
+      "weakness": "Lightning",
+      "retreat_cost": ["Colorless", "Colorless", "Colorless", "Colorless"],
+      "rarity": "☆",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 076",
+      "name": "Buzzwole ex",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 140,
+      "energy_type": "Grass",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Colorless", "Colorless"],
+          "title": "Punch",
+          "fixed_damage": 30,
+          "effect": null
+        },
+        {
+          "energy_required": ["Grass", "Grass", "Colorless"],
+          "title": "Big Beat",
+          "fixed_damage": 120,
+          "effect": "During your next turn, this Pokémon can't use Big Beat."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless", "Colorless"],
+      "rarity": "☆☆",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 077",
+      "name": "Tapu Koko ex",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 130,
+      "energy_type": "Lightning",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Lightning"],
+          "title": "Plasma Hurricane",
+          "fixed_damage": 20,
+          "effect": "Take a [L] Energy from your Energy Zone and attach it to this Pokémon."
+        },
+        {
+          "energy_required": ["Lightning", "Lightning", "Colorless"],
+          "title": "Mach Bolt",
+          "fixed_damage": 90,
+          "effect": null
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆☆",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 078",
+      "name": "Lycanroc ex",
+      "stage": 1,
+      "evolves_from": "Rockruff",
+      "hp": 150,
+      "energy_type": "Fighting",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Fighting", "Fighting", "Colorless"],
+          "title": "Lycanfang",
+          "fixed_damage": 130,
+          "effect": "Discard a [F] Energy from this Pokémon."
+        }
+      ],
+      "weakness": "Grass",
+      "retreat_cost": ["Colorless", "Colorless"],
+      "rarity": "☆☆",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 079",
+      "name": "Guzzlord ex",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 170,
+      "energy_type": "Darkness",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Colorless", "Colorless"],
+          "title": "Grindcore",
+          "fixed_damage": 30,
+          "effect": "Flip a coin until you get tails. For each heads, discard a random Energy from your opponent's Active Pokémon."
+        },
+        {
+          "energy_required": ["Darkness", "Darkness", "Darkness", "Colorless"],
+          "title": "Tyrannical Hole",
+          "fixed_damage": 120,
+          "effect": null
+        }
+      ],
+      "weakness": "Grass",
+      "retreat_cost": ["Colorless", "Colorless", "Colorless", "Colorless"],
+      "rarity": "☆☆",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 080",
+      "name": "Alolan Dugtrio ex",
+      "stage": 1,
+      "evolves_from": "Alolan Diglett",
+      "hp": 130,
+      "energy_type": "Metal",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Metal", "Colorless"],
+          "title": "Triplet Headbutt",
+          "fixed_damage": 0,
+          "effect": "Flip 3 coins. This attack does 60 damage for each heads."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆☆",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Trainer": {
+      "id": "A3a 081",
+      "numeric_id": 28753,
+      "trainer_card_type": "Supporter",
+      "name": "Gladion",
+      "effect": "Put 1 random Type: Null or Silvally from your deck into your hand.",
+      "rarity": "☆☆",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Trainer": {
+      "id": "A3a 082",
+      "numeric_id": 28754,
+      "trainer_card_type": "Supporter",
+      "name": "Looker",
+      "effect": "Your opponent reveals all of the Supporter cards in their deck.",
+      "rarity": "☆☆",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Trainer": {
+      "id": "A3a 083",
+      "numeric_id": 28755,
+      "trainer_card_type": "Supporter",
+      "name": "Lusamine",
+      "effect": "You can use this card only if your opponent has gotten at least 1 point.Choose 1 of your Ultra Beasts. Attach 2 random Energy from your discard pile to that Pokémon.",
+      "rarity": "☆☆",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 084",
+      "name": "Tapu Koko ex",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 130,
+      "energy_type": "Lightning",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Lightning"],
+          "title": "Plasma Hurricane",
+          "fixed_damage": 20,
+          "effect": "Take a [L] Energy from your Energy Zone and attach it to this Pokémon."
+        },
+        {
+          "energy_required": ["Lightning", "Lightning", "Colorless"],
+          "title": "Mach Bolt",
+          "fixed_damage": 90,
+          "effect": null
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆☆",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 085",
+      "name": "Lycanroc ex",
+      "stage": 1,
+      "evolves_from": "Rockruff",
+      "hp": 150,
+      "energy_type": "Fighting",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Fighting", "Fighting", "Colorless"],
+          "title": "Lycanfang",
+          "fixed_damage": 130,
+          "effect": "Discard a [F] Energy from this Pokémon."
+        }
+      ],
+      "weakness": "Grass",
+      "retreat_cost": ["Colorless", "Colorless"],
+      "rarity": "☆☆",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 086",
+      "name": "Guzzlord ex",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 170,
+      "energy_type": "Darkness",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Colorless", "Colorless"],
+          "title": "Grindcore",
+          "fixed_damage": 30,
+          "effect": "Flip a coin until you get tails. For each heads, discard a random Energy from your opponent's Active Pokémon."
+        },
+        {
+          "energy_required": ["Darkness", "Darkness", "Darkness", "Colorless"],
+          "title": "Tyrannical Hole",
+          "fixed_damage": 120,
+          "effect": null
+        }
+      ],
+      "weakness": "Grass",
+      "retreat_cost": ["Colorless", "Colorless", "Colorless", "Colorless"],
+      "rarity": "☆☆",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 087",
+      "name": "Alolan Dugtrio ex",
+      "stage": 1,
+      "evolves_from": "Alolan Diglett",
+      "hp": 130,
+      "energy_type": "Metal",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Metal", "Colorless"],
+          "title": "Triplet Headbutt",
+          "fixed_damage": 0,
+          "effect": "Flip 3 coins. This attack does 60 damage for each heads."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆☆",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 088",
+      "name": "Buzzwole ex",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 140,
+      "energy_type": "Grass",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Colorless", "Colorless"],
+          "title": "Punch",
+          "fixed_damage": 30,
+          "effect": null
+        },
+        {
+          "energy_required": ["Grass", "Grass", "Colorless"],
+          "title": "Big Beat",
+          "fixed_damage": 120,
+          "effect": "During your next turn, this Pokémon can't use Big Beat."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless", "Colorless"],
+      "rarity": "☆☆☆",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 089",
+      "name": "Growlithe",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 70,
+      "energy_type": "Fire",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Colorless", "Colorless"],
+          "title": "Bite",
+          "fixed_damage": 20,
+          "effect": null
+        }
+      ],
+      "weakness": "Water",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 090",
+      "name": "Arcanine",
+      "stage": 1,
+      "evolves_from": "Growlithe",
+      "hp": 130,
+      "energy_type": "Fire",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Fire", "Fire", "Colorless"],
+          "title": "Heat Tackle",
+          "fixed_damage": 100,
+          "effect": "This Pokémon also does 20 damage to itself."
+        }
+      ],
+      "weakness": "Water",
+      "retreat_cost": ["Colorless", "Colorless"],
+      "rarity": "☆",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 091",
+      "name": "Froakie",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 60,
+      "energy_type": "Water",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Colorless"],
+          "title": "Flop",
+          "fixed_damage": 10,
+          "effect": null
+        }
+      ],
+      "weakness": "Lightning",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 092",
+      "name": "Frogadier",
+      "stage": 1,
+      "evolves_from": "Froakie",
+      "hp": 80,
+      "energy_type": "Water",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Colorless"],
+          "title": "Water Drip",
+          "fixed_damage": 30,
+          "effect": null
+        }
+      ],
+      "weakness": "Lightning",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 093",
+      "name": "Greninja",
+      "stage": 2,
+      "evolves_from": "Frogadier",
+      "hp": 120,
+      "energy_type": "Water",
+      "ability": {
+        "title": "Water Shuriken",
+        "effect": "Once during your turn, you may do 20 damage to 1 of your opponent's Pokémon."
+      },
+      "attacks": [
+        {
+          "energy_required": ["Water", "Colorless"],
+          "title": "Mist Slash",
+          "fixed_damage": 60,
+          "effect": null
+        }
+      ],
+      "weakness": "Lightning",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 094",
+      "name": "Jynx",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 80,
+      "energy_type": "Psychic",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Psychic", "Colorless"],
+          "title": "Psychic",
+          "fixed_damage": 0,
+          "effect": "This attack does 20 more damage for each Energy attached to your opponent's Active Pokémon."
+        }
+      ],
+      "weakness": "Darkness",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 095",
+      "name": "Pidgey",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 60,
+      "energy_type": "Colorless",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Colorless"],
+          "title": "Gust",
+          "fixed_damage": 10,
+          "effect": null
+        }
+      ],
+      "weakness": "Lightning",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 096",
+      "name": "Pidgeotto",
+      "stage": 1,
+      "evolves_from": "Pidgey",
+      "hp": 80,
+      "energy_type": "Colorless",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Colorless"],
+          "title": "Gust",
+          "fixed_damage": 30,
+          "effect": null
+        }
+      ],
+      "weakness": "Lightning",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 097",
+      "name": "Pidgeot",
+      "stage": 2,
+      "evolves_from": "Pidgeotto",
+      "hp": 130,
+      "energy_type": "Colorless",
+      "ability": {
+        "title": "Drive Off",
+        "effect": "Once during your turn, you may switch out your opponent's Active Pokémon to the Bench. (Your opponent chooses the new Active Pokémon.)"
+      },
+      "attacks": [
+        {
+          "energy_required": ["Colorless", "Colorless"],
+          "title": "Wing Attack",
+          "fixed_damage": 70,
+          "effect": null
+        }
+      ],
+      "weakness": "Lightning",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 098",
+      "name": "Aerodactyl",
+      "stage": 1,
+      "evolves_from": "Old Amber",
+      "hp": 100,
+      "energy_type": "Colorless",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Colorless", "Colorless"],
+          "title": "Primal",
+          "fixed_damage": 0,
+          "effect": "Flip a coin. If heads, your opponent shuffles their Active Pokémon back into their deck."
+        }
+      ],
+      "weakness": "Lightning",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 099",
+      "name": "Celebi ex",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 130,
+      "energy_type": "Grass",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Grass", "Colorless"],
+          "title": "Powerful Bloom",
+          "fixed_damage": 0,
+          "effect": "Flip a coin for each Energy attached to this Pokémon. This attack does 50 damage for each heads."
+        }
+      ],
+      "weakness": "Fire",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆☆",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 100",
+      "name": "Arcanine ex",
+      "stage": 1,
+      "evolves_from": "Growlithe",
+      "hp": 150,
+      "energy_type": "Fire",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Fire", "Fire", "Colorless"],
+          "title": "Inferno Onrush",
+          "fixed_damage": 120,
+          "effect": "This Pokémon also does 20 damage to itself."
+        }
+      ],
+      "weakness": "Water",
+      "retreat_cost": ["Colorless", "Colorless"],
+      "rarity": "☆☆",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 101",
+      "name": "Aerodactyl ex",
+      "stage": 1,
+      "evolves_from": "Old Amber",
+      "hp": 140,
+      "energy_type": "Fighting",
+      "ability": {
+        "title": "Primeval Law",
+        "effect": "Your opponent can't play any Pokémon from their hand to evolve their Active Pokémon."
+      },
+      "attacks": [
+        {
+          "energy_required": ["Fighting", "Colorless"],
+          "title": "Land Crush",
+          "fixed_damage": 80,
+          "effect": null
+        }
+      ],
+      "weakness": "Lightning",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆☆",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 102",
+      "name": "Pidgeot ex",
+      "stage": 2,
+      "evolves_from": "Pidgeotto",
+      "hp": 170,
+      "energy_type": "Colorless",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Colorless", "Colorless", "Colorless"],
+          "title": "Scattering Cyclone",
+          "fixed_damage": 0,
+          "effect": "This attack does 20 more damage for each of your opponent's Benched Pokémon."
+        }
+      ],
+      "weakness": "Lightning",
+      "retreat_cost": ["Colorless"],
+      "rarity": "☆☆",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
+    "Pokemon": {
+      "id": "A3a 103",
+      "name": "Nihilego",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 70,
+      "energy_type": "Darkness",
+      "ability": {
+        "title": "More Poison",
+        "effect": "Your opponent's Active Pokémon takes +10 damage from being Poisoned."
+      },
+      "attacks": [
+        {
+          "energy_required": ["Darkness", "Colorless"],
+          "title": "New Wave",
+          "fixed_damage": 30,
+          "effect": "Your opponent's Active Pokémon is now Poisoned."
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "Crown Rare",
+      "booster_pack": "Extradimensional Crisis (A3a)"
+    }
+  },
+  {
     "Trainer": {
       "id": "P-A 001",
       "numeric_id": 4097,

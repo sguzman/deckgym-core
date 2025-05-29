@@ -84,6 +84,11 @@ it compiles mid-way through the generation.
 
 ```bash
 cargo run --bin card_enum_generator > tmp.rs && mv tmp.rs src/card_ids.rs && cargo fmt
+```
+
+Then temporarily edit `database.rs` for `_` to match Bulbasaur (this is so that the next code can compile-run).
+
+```bash
 cargo run --bin card_enum_generator -- --database > tmp.rs && mv tmp.rs src/database.rs && cargo fmt
 ```
 
