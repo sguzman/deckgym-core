@@ -13,7 +13,7 @@
     in
     {
       packages.${system}.default = pkgs.rustPlatform.buildRustPackage {
-        pname = "deckgym-core-cli";
+        pname = "deckgym";
         version = "0.1.0";
 
         # Set your source directory (can be a relative path to Cargo.toml)
@@ -33,7 +33,7 @@
       # This allows you to run the package as a flake app
       apps.default = {
         type = "app";
-        program = "${self.packages.${system}.default}/bin/deckgym-core-cli";
+        program = "${self.packages.${system}.default}/bin/deckgym";
       };
     };
 }
