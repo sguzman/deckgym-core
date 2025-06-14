@@ -115,9 +115,10 @@ fn forecast_effect_attack(
             bench_count_attack(acting_player, state, 0, 30, Some(EnergyType::Lightning))
         }
         AttackId::A1101ElectabuzzThunderPunch => extra_or_self_damage_attack(40, 40, 20),
-        AttackId::A1102JolteonPinMissile => {
-            probabilistic_damage_attack(vec![0.0625, 0.25, 0.375, 0.25, 0.0625], vec![0, 40, 80, 120, 160])
-        }
+        AttackId::A1102JolteonPinMissile => probabilistic_damage_attack(
+            vec![0.0625, 0.25, 0.375, 0.25, 0.0625],
+            vec![0, 40, 80, 120, 160],
+        ),
         AttackId::A1104ZapdosExThunderingHurricane => probabilistic_damage_attack(
             vec![0.0625, 0.25, 0.375, 0.25, 0.0625],
             vec![0, 50, 100, 150, 200],
@@ -480,19 +481,19 @@ fn flip_until_tails_attack(damage_per_heads: u32) -> (Probabilities, Mutations) 
     let max_heads = 8;
     let mut probabilities = Vec::new();
     let mut damages = Vec::new();
-    
+
     for heads in 0..=max_heads {
         let probability = 0.5_f64.powi(heads as i32 + 1);
         probabilities.push(probability);
         damages.push(heads * damage_per_heads);
     }
-    
+
     // Ensure probabilities sum to 1 by adjusting the last one for any floating point errors
     let sum: f64 = probabilities.iter().sum();
     if let Some(last) = probabilities.last_mut() {
         *last += 1.0 - sum;
     }
-    
+
     probabilistic_damage_attack(probabilities, damages)
 }
 
@@ -632,37 +633,37 @@ mod test {
     fn test_flip_until_tails_probabilities() {
         // Test that flip_until_tails_attack generates correct probabilities
         let (probabilities, _mutations) = flip_until_tails_attack(20);
-        
+
         // Check that we have 9 outcomes (0 to 8 heads)
         assert_eq!(probabilities.len(), 9);
-        
+
         // Check first few probabilities match geometric distribution
         // P(0 heads) = 0.5, P(1 heads) = 0.25, P(2 heads) = 0.125, etc.
         assert!((probabilities[0] - 0.5).abs() < 0.001);
         assert!((probabilities[1] - 0.25).abs() < 0.001);
         assert!((probabilities[2] - 0.125).abs() < 0.001);
-        
+
         // Check probabilities sum to approximately 1
         let sum: f64 = probabilities.iter().sum();
         assert!((sum - 1.0).abs() < 0.001);
     }
 
-    #[test] 
+    #[test]
     fn test_fixed_coin_probabilistic_attack() {
         // Test Jolteon Pin Missile (4 coins, 40 damage each)
         let (probabilities, _mutations) = probabilistic_damage_attack(
-            vec![0.0625, 0.25, 0.375, 0.25, 0.0625], 
-            vec![0, 40, 80, 120, 160]
+            vec![0.0625, 0.25, 0.375, 0.25, 0.0625],
+            vec![0, 40, 80, 120, 160],
         );
-        
+
         // Check we have 5 outcomes (0 to 4 heads)
         assert_eq!(probabilities.len(), 5);
-        
+
         // Check that probabilities match expected binomial distribution for 4 coins
-        assert!((probabilities[0] - 0.0625).abs() < 0.001);  // 0 heads
-        assert!((probabilities[1] - 0.25).abs() < 0.001);    // 1 heads
-        assert!((probabilities[2] - 0.375).abs() < 0.001);   // 2 heads
-        assert!((probabilities[3] - 0.25).abs() < 0.001);    // 3 heads
-        assert!((probabilities[4] - 0.0625).abs() < 0.001);  // 4 heads
+        assert!((probabilities[0] - 0.0625).abs() < 0.001); // 0 heads
+        assert!((probabilities[1] - 0.25).abs() < 0.001); // 1 heads
+        assert!((probabilities[2] - 0.375).abs() < 0.001); // 2 heads
+        assert!((probabilities[3] - 0.25).abs() < 0.001); // 3 heads
+        assert!((probabilities[4] - 0.0625).abs() < 0.001); // 4 heads
     }
 }
