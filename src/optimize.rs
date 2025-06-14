@@ -59,7 +59,7 @@ pub fn optimize(
             .iter()
             .filter(|c| c.get_card_id() == *card)
             .count();
-        let allowed = if count >= 2 { 0 } else { 2 - count };
+        let allowed = 2_usize.saturating_sub(count);
         allowed_map.insert(*card, allowed as u32);
     }
 
