@@ -115,6 +115,10 @@ fn forecast_effect_attack(
             bench_count_attack(acting_player, state, 0, 30, Some(EnergyType::Lightning))
         }
         AttackId::A1101ElectabuzzThunderPunch => extra_or_self_damage_attack(40, 40, 20),
+        AttackId::A1102JolteonPinMissile => probabilistic_damage_attack(
+            vec![0.0625, 0.25, 0.375, 0.25, 0.0625],
+            vec![0, 40, 80, 120, 160],
+        ),
         AttackId::A1104ZapdosExThunderingHurricane => probabilistic_damage_attack(
             vec![0.0625, 0.25, 0.375, 0.25, 0.0625],
             vec![0, 50, 100, 150, 200],
@@ -126,6 +130,9 @@ fn forecast_effect_attack(
         AttackId::A1129MewtwoExPsydrive => {
             self_energy_discard_attack(index, vec![EnergyType::Psychic, EnergyType::Psychic])
         }
+        AttackId::A1136GolurkDoubleLariat => {
+            probabilistic_damage_attack(vec![0.25, 0.5, 0.25], vec![0, 100, 200])
+        }
         AttackId::A1149GolemDoubleEdge => self_damage_attack(150, 50),
         AttackId::A1153MarowakExBonemerang => {
             probabilistic_damage_attack(vec![0.25, 0.5, 0.25], vec![0, 80, 160])
@@ -135,6 +142,7 @@ fn forecast_effect_attack(
         AttackId::A1171NidokingPoisonHorn => damage_status_attack(90, StatusCondition::Poisoned),
         AttackId::A1195WigglytuffSleepySong => damage_status_attack(80, StatusCondition::Asleep),
         AttackId::A1196MeowthPayDay => draw_and_damage_outcome(10),
+        AttackId::A1201LickitungContinuousLick => flip_until_tails_attack(60),
         AttackId::A1203KangaskhanDizzyPunch => {
             probabilistic_damage_attack(vec![0.25, 0.5, 0.25], vec![0, 30, 60])
         }
@@ -150,6 +158,7 @@ fn forecast_effect_attack(
         AttackId::A1a030DedenneThunderShock => {
             damage_chance_status_attack(10, 0.5, StatusCondition::Paralyzed)
         }
+        AttackId::A1a061EeveeContinuousSteps => flip_until_tails_attack(20),
         AttackId::A2049PalkiaDimensionalStorm => palkia_dimensional_storm(state),
         AttackId::A2119DialgaExMetallicTurbo => energy_bench_attack(index, 2, EnergyType::Metal),
         AttackId::A2a071ArceusExUltimateForce => {
@@ -464,6 +473,30 @@ fn probabilistic_damage_attack(
     (probabilities, mutations)
 }
 
+/// For attacks that flip a coin until tails, dealing damage for each heads.
+/// Uses geometric distribution truncated at a reasonable number to avoid infinite outcomes.
+fn flip_until_tails_attack(damage_per_heads: u32) -> (Probabilities, Mutations) {
+    // Truncate at 8 heads to keep the probability space manageable
+    // P(k heads) = (1/2)^(k+1) for k = 0, 1, 2, ...
+    let max_heads = 8;
+    let mut probabilities = Vec::new();
+    let mut damages = Vec::new();
+
+    for heads in 0..=max_heads {
+        let probability = 0.5_f64.powi(heads as i32 + 1);
+        probabilities.push(probability);
+        damages.push(heads * damage_per_heads);
+    }
+
+    // Ensure probabilities sum to 1 by adjusting the last one for any floating point errors
+    let sum: f64 = probabilities.iter().sum();
+    if let Some(last) = probabilities.last_mut() {
+        *last += 1.0 - sum;
+    }
+
+    probabilistic_damage_attack(probabilities, damages)
+}
+
 fn self_heal_attack(heal: u32, index: usize) -> (Probabilities, Mutations) {
     index_active_damage_doutcome(index, move |_, state, action| {
         let active = state.get_active_mut(action.actor);
@@ -594,5 +627,43 @@ mod test {
                 panic!("Expected SimpleAction::Attach");
             }
         }
+    }
+
+    #[test]
+    fn test_flip_until_tails_probabilities() {
+        // Test that flip_until_tails_attack generates correct probabilities
+        let (probabilities, _mutations) = flip_until_tails_attack(20);
+
+        // Check that we have 9 outcomes (0 to 8 heads)
+        assert_eq!(probabilities.len(), 9);
+
+        // Check first few probabilities match geometric distribution
+        // P(0 heads) = 0.5, P(1 heads) = 0.25, P(2 heads) = 0.125, etc.
+        assert!((probabilities[0] - 0.5).abs() < 0.001);
+        assert!((probabilities[1] - 0.25).abs() < 0.001);
+        assert!((probabilities[2] - 0.125).abs() < 0.001);
+
+        // Check probabilities sum to approximately 1
+        let sum: f64 = probabilities.iter().sum();
+        assert!((sum - 1.0).abs() < 0.001);
+    }
+
+    #[test]
+    fn test_fixed_coin_probabilistic_attack() {
+        // Test Jolteon Pin Missile (4 coins, 40 damage each)
+        let (probabilities, _mutations) = probabilistic_damage_attack(
+            vec![0.0625, 0.25, 0.375, 0.25, 0.0625],
+            vec![0, 40, 80, 120, 160],
+        );
+
+        // Check we have 5 outcomes (0 to 4 heads)
+        assert_eq!(probabilities.len(), 5);
+
+        // Check that probabilities match expected binomial distribution for 4 coins
+        assert!((probabilities[0] - 0.0625).abs() < 0.001); // 0 heads
+        assert!((probabilities[1] - 0.25).abs() < 0.001); // 1 heads
+        assert!((probabilities[2] - 0.375).abs() < 0.001); // 2 heads
+        assert!((probabilities[3] - 0.25).abs() < 0.001); // 3 heads
+        assert!((probabilities[4] - 0.0625).abs() < 0.001); // 4 heads
     }
 }

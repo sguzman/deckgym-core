@@ -39,10 +39,12 @@ pub enum AttackId {
     A1095RaichuThunderbolt,
     A1096PikachuExCircleCircuit,
     A1101ElectabuzzThunderPunch,
+    A1102JolteonPinMissile,
     A1104ZapdosExThunderingHurricane,
     A1106ZebstrikaThunderSpear,
     A1128MewtwoPowerBlast,
     A1129MewtwoExPsydrive,
+    A1136GolurkDoubleLariat,
     A1149GolemDoubleEdge,
     A1153MarowakExBonemerang,
     A1154HitmonleeStretchKick,
@@ -50,9 +52,11 @@ pub enum AttackId {
     A1171NidokingPoisonHorn,
     A1195WigglytuffSleepySong,
     A1196MeowthPayDay,
+    A1201LickitungContinuousLick,
     A1203KangaskhanDizzyPunch,
     A1a026RaichuGigashock,
     A1a030DedenneThunderShock,
+    A1a061EeveeContinuousSteps,
     A2049PalkiaDimensionalStorm,
     A2119DialgaExMetallicTurbo,
     A2a071ArceusExUltimateForce,
@@ -100,10 +104,12 @@ lazy_static::lazy_static! {
         m.insert(("A1 095", 0), AttackId::A1095RaichuThunderbolt);
         m.insert(("A1 096", 0), AttackId::A1096PikachuExCircleCircuit);
         m.insert(("A1 101", 0), AttackId::A1101ElectabuzzThunderPunch);
+        m.insert(("A1 102", 0), AttackId::A1102JolteonPinMissile);
         m.insert(("A1 104", 1), AttackId::A1104ZapdosExThunderingHurricane);
         m.insert(("A1 106", 0), AttackId::A1106ZebstrikaThunderSpear);
         m.insert(("A1 128", 0), AttackId::A1128MewtwoPowerBlast);
         m.insert(("A1 129", 1), AttackId::A1129MewtwoExPsydrive);
+        m.insert(("A1 136", 0), AttackId::A1136GolurkDoubleLariat);
         m.insert(("A1 149", 0), AttackId::A1149GolemDoubleEdge);
         m.insert(("A1 153", 0), AttackId::A1153MarowakExBonemerang);
         m.insert(("A1 154", 0), AttackId::A1154HitmonleeStretchKick);
@@ -111,6 +117,7 @@ lazy_static::lazy_static! {
         m.insert(("A1 171", 0), AttackId::A1171NidokingPoisonHorn);
         m.insert(("A1 195", 0), AttackId::A1195WigglytuffSleepySong);
         m.insert(("A1 196", 0), AttackId::A1196MeowthPayDay);
+        m.insert(("A1 201", 0), AttackId::A1201LickitungContinuousLick);
         m.insert(("A1 203", 0), AttackId::A1203KangaskhanDizzyPunch);
         // Full Arts A1
         m.insert(("A1 229", 0), AttackId::A1026PinsirDoubleHorn);
@@ -140,6 +147,7 @@ lazy_static::lazy_static! {
         // A1a
         m.insert(("A1a 026", 0), AttackId::A1a026RaichuGigashock);
         m.insert(("A1a 030", 0), AttackId::A1a030DedenneThunderShock);
+        m.insert(("A1a 061", 0), AttackId::A1a061EeveeContinuousSteps);
         // Full Arts A1a
         m.insert(("A1a 073", 0), AttackId::A1a030DedenneThunderShock);
 
