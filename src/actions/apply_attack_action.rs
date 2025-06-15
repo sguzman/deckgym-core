@@ -188,9 +188,9 @@ fn forecast_effect_attack(
             probabilistic_damage_attack(vec![0.25, 0.5, 0.25], vec![0, 30, 60])
         }
         AttackId::A1a003CelebiExPowerfulBloom => celebi_powerful_bloom(acting_player, state),
-        AttackId::A1a010PonytaStomp => probabilistic_damage_attack(vec![0.5, 0.5], vec![0, 30]),
+        AttackId::A1a010PonytaStomp => probabilistic_damage_attack(vec![0.5, 0.5], vec![10, 40]),
         AttackId::A1a011RapidashRisingLunge => {
-            probabilistic_damage_attack(vec![0.5, 0.5], vec![0, 60])
+            probabilistic_damage_attack(vec![0.5, 0.5], vec![40, 100])
         }
         AttackId::A1a026RaichuGigashock => {
             let opponent = (state.current_player + 1) % 2;
@@ -725,7 +725,7 @@ mod test {
 
         let active = state.get_active_mut(0);
         active.attached_energy.push(EnergyType::Grass);
-        active.attached_energy.push(EnergyType::Colorless);
+        active.attached_energy.push(EnergyType::Fire);
 
         let (probabilities, _mutations) = celebi_powerful_bloom(0, &state);
 
