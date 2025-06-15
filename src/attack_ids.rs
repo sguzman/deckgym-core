@@ -54,8 +54,12 @@ pub enum AttackId {
     A1196MeowthPayDay,
     A1201LickitungContinuousLick,
     A1203KangaskhanDizzyPunch,
+    A1a003CelebiExPowerfulBloom,
+    A1a010PonytaStomp,
+    A1a011RapidashRisingLunge,
     A1a026RaichuGigashock,
     A1a030DedenneThunderShock,
+    A1a041MankeyFocusFist,
     A1a061EeveeContinuousSteps,
     A2049PalkiaDimensionalStorm,
     A2119DialgaExMetallicTurbo,
@@ -145,11 +149,17 @@ lazy_static::lazy_static! {
         m.insert(("A1 285", 0), AttackId::A1096PikachuExCircleCircuit);
         m.insert(("A1 286", 1), AttackId::A1129MewtwoExPsydrive);
         // A1a
+        m.insert(("A1a 003", 0), AttackId::A1a003CelebiExPowerfulBloom);
+        m.insert(("A1a 010", 0), AttackId::A1a010PonytaStomp);
+        m.insert(("A1a 011", 0), AttackId::A1a011RapidashRisingLunge);
         m.insert(("A1a 026", 0), AttackId::A1a026RaichuGigashock);
         m.insert(("A1a 030", 0), AttackId::A1a030DedenneThunderShock);
+        m.insert(("A1a 041", 0), AttackId::A1a041MankeyFocusFist);
         m.insert(("A1a 061", 0), AttackId::A1a061EeveeContinuousSteps);
         // Full Arts A1a
         m.insert(("A1a 073", 0), AttackId::A1a030DedenneThunderShock);
+        m.insert(("A1a 075", 0), AttackId::A1a003CelebiExPowerfulBloom);
+        m.insert(("A1a 085", 0), AttackId::A1a003CelebiExPowerfulBloom);
 
         // A2
         m.insert(("A2 049", 1), AttackId::A2049PalkiaDimensionalStorm);

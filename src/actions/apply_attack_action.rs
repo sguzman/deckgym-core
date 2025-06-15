@@ -35,6 +35,47 @@ pub(crate) fn forecast_attack(
     }
 }
 
+fn celebi_powerful_bloom(acting_player: usize, state: &State) -> (Probabilities, Mutations) {
+    let active_pokemon = state.get_active(acting_player);
+    let total_energy = active_pokemon.attached_energy.len();
+
+    if total_energy == 0 {
+        // No energy attached, no coins to flip
+        return probabilistic_damage_attack(vec![1.0], vec![0]);
+    }
+
+    // Generate all possible outcomes for flipping N coins
+    // Each coin can be heads (1) or tails (0)
+    let num_outcomes = 2_usize.pow(total_energy as u32);
+    let mut probabilities = vec![0.0; total_energy + 1]; // 0 to total_energy heads
+    let mut damages = Vec::new();
+
+    // For each possible outcome (0 to total_energy heads)
+    for (heads, prob) in probabilities.iter_mut().enumerate() {
+        // Probability of getting exactly 'heads' heads out of 'total_energy' coins
+        // This follows a binomial distribution: C(n,k) * (1/2)^n
+        *prob = binomial_coefficient(total_energy, heads) as f64 / (num_outcomes as f64);
+        damages.push((heads as u32) * 50); // 50 damage per heads
+    }
+
+    probabilistic_damage_attack(probabilities, damages)
+}
+
+fn binomial_coefficient(n: usize, k: usize) -> usize {
+    if k > n {
+        return 0;
+    }
+    if k == 0 || k == n {
+        return 1;
+    }
+
+    let mut result = 1;
+    for i in 0..k {
+        result = result * (n - i) / (i + 1);
+    }
+    result
+}
+
 /// Handles attacks that have effects.
 fn forecast_effect_attack(
     acting_player: usize,
@@ -146,6 +187,11 @@ fn forecast_effect_attack(
         AttackId::A1203KangaskhanDizzyPunch => {
             probabilistic_damage_attack(vec![0.25, 0.5, 0.25], vec![0, 30, 60])
         }
+        AttackId::A1a003CelebiExPowerfulBloom => celebi_powerful_bloom(acting_player, state),
+        AttackId::A1a010PonytaStomp => probabilistic_damage_attack(vec![0.5, 0.5], vec![10, 40]),
+        AttackId::A1a011RapidashRisingLunge => {
+            probabilistic_damage_attack(vec![0.5, 0.5], vec![40, 100])
+        }
         AttackId::A1a026RaichuGigashock => {
             let opponent = (state.current_player + 1) % 2;
             let targets: Vec<(u32, usize)> = state
@@ -158,6 +204,7 @@ fn forecast_effect_attack(
         AttackId::A1a030DedenneThunderShock => {
             damage_chance_status_attack(10, 0.5, StatusCondition::Paralyzed)
         }
+        AttackId::A1a041MankeyFocusFist => probabilistic_damage_attack(vec![0.5, 0.5], vec![0, 50]),
         AttackId::A1a061EeveeContinuousSteps => flip_until_tails_attack(20),
         AttackId::A2049PalkiaDimensionalStorm => palkia_dimensional_storm(state),
         AttackId::A2119DialgaExMetallicTurbo => energy_bench_attack(index, 2, EnergyType::Metal),
@@ -665,5 +712,72 @@ mod test {
         assert!((probabilities[2] - 0.375).abs() < 0.001); // 2 heads
         assert!((probabilities[3] - 0.25).abs() < 0.001); // 3 heads
         assert!((probabilities[4] - 0.0625).abs() < 0.001); // 4 heads
+    }
+
+    #[test]
+    fn test_celebi_powerful_bloom_probabilities() {
+        // Test with 2 energy attached (2 coins)
+        let mut state = State::default();
+
+        // Set up a Pokemon in the active position
+        let celebi = get_card_by_enum(CardId::A1a003CelebiEx);
+        state.in_play_pokemon[0][0] = Some(to_playable_card(&celebi, false));
+
+        let active = state.get_active_mut(0);
+        active.attached_energy.push(EnergyType::Grass);
+        active.attached_energy.push(EnergyType::Fire);
+
+        let (probabilities, _mutations) = celebi_powerful_bloom(0, &state);
+
+        // Should have 3 outcomes (0, 1, 2 heads)
+        assert_eq!(probabilities.len(), 3);
+
+        // Check probabilities for 2 coins: 0.25, 0.5, 0.25
+        assert!((probabilities[0] - 0.25).abs() < 0.001); // 0 heads: C(2,0) / 4 = 1/4
+        assert!((probabilities[1] - 0.5).abs() < 0.001); // 1 heads: C(2,1) / 4 = 2/4
+        assert!((probabilities[2] - 0.25).abs() < 0.001); // 2 heads: C(2,2) / 4 = 1/4
+
+        // Test with no energy attached
+        let mut state_no_energy = State::default();
+        state_no_energy.in_play_pokemon[0][0] = Some(to_playable_card(&celebi, false));
+        let (probabilities_no_energy, _) = celebi_powerful_bloom(0, &state_no_energy);
+
+        // Should have 1 outcome (0 damage)
+        assert_eq!(probabilities_no_energy.len(), 1);
+        assert!((probabilities_no_energy[0] - 1.0).abs() < 0.001);
+    }
+
+    #[test]
+    fn test_binomial_coefficient() {
+        assert_eq!(binomial_coefficient(0, 0), 1);
+        assert_eq!(binomial_coefficient(1, 0), 1);
+        assert_eq!(binomial_coefficient(1, 1), 1);
+        assert_eq!(binomial_coefficient(2, 0), 1);
+        assert_eq!(binomial_coefficient(2, 1), 2);
+        assert_eq!(binomial_coefficient(2, 2), 1);
+        assert_eq!(binomial_coefficient(4, 2), 6);
+        assert_eq!(binomial_coefficient(5, 3), 10);
+        assert_eq!(binomial_coefficient(6, 2), 15);
+    }
+
+    #[test]
+    fn test_single_coin_attacks() {
+        // Test Ponyta Stomp (1 coin, 0 or 30 damage)
+        let (probabilities, _mutations) = probabilistic_damage_attack(vec![0.5, 0.5], vec![0, 30]);
+        assert_eq!(probabilities.len(), 2);
+        assert!((probabilities[0] - 0.5).abs() < 0.001);
+        assert!((probabilities[1] - 0.5).abs() < 0.001);
+
+        // Test Rapidash Rising Lunge (1 coin, 0 or 60 damage)
+        let (probabilities, _mutations) = probabilistic_damage_attack(vec![0.5, 0.5], vec![0, 60]);
+        assert_eq!(probabilities.len(), 2);
+        assert!((probabilities[0] - 0.5).abs() < 0.001);
+        assert!((probabilities[1] - 0.5).abs() < 0.001);
+
+        // Test Mankey Focus Fist (1 coin, 0 or 50 damage)
+        let (probabilities, _mutations) = probabilistic_damage_attack(vec![0.5, 0.5], vec![0, 50]);
+        assert_eq!(probabilities.len(), 2);
+        assert!((probabilities[0] - 0.5).abs() < 0.001);
+        assert!((probabilities[1] - 0.5).abs() < 0.001);
     }
 }
