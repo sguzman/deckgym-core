@@ -37,6 +37,7 @@ fn main() {
             .replace("'", "")
             .replace("♀", "F")
             .replace("♂", "M")
+            .replace(":", "")
             .replace("é", "e");
         if enum_name.ends_with("ex") {
             enum_name = enum_name[..enum_name.len() - 2].to_string();
