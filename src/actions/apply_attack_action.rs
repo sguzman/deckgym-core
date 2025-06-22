@@ -150,6 +150,7 @@ fn forecast_effect_attack(
         AttackId::A1083ArticunoIceBeam => {
             damage_chance_status_attack(60, 0.5, StatusCondition::Paralyzed)
         }
+        AttackId::A1084ArticunoExBlizzard => articuno_ex_blizzard(state),
         AttackId::A1093FrosmothPowderSnow => damage_status_attack(40, StatusCondition::Asleep),
         AttackId::A1095RaichuThunderbolt => thunderbolt_attack(),
         AttackId::A1096PikachuExCircleCircuit => {
@@ -565,6 +566,18 @@ fn thunderbolt_attack() -> (Probabilities, Mutations) {
         let active = state.get_active_mut(action.actor);
         active.attached_energy.clear(); // Discard all energy
     })
+}
+
+fn articuno_ex_blizzard(state: &State) -> (Probabilities, Mutations) {
+    // Blizzard: 80 to active, 10 to each opponent's benched Pokémon
+    let opponent = (state.current_player + 1) % 2;
+    let mut targets: Vec<(u32, usize)> = state
+        .enumerate_bench_pokemon(opponent)
+        .map(|(idx, _)| (10, idx))
+        .collect();
+    // Active Pokémon is always index 0
+    targets.push((80, 0));
+    damage_effect_doutcome(targets, |_, _, _| {})
 }
 
 #[cfg(test)]
