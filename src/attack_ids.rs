@@ -36,6 +36,7 @@ pub enum AttackId {
     A1080VaporeonBubbleDrain,
     A1083ArticunoIceBeam,
     A1084ArticunoExBlizzard,
+    A1091BruxishSecondStrike,
     A1093FrosmothPowderSnow,
     A1095RaichuThunderbolt,
     A1096PikachuExCircleCircuit,
@@ -106,6 +107,7 @@ lazy_static::lazy_static! {
         m.insert(("A1 080", 0), AttackId::A1080VaporeonBubbleDrain);
         m.insert(("A1 083", 0), AttackId::A1083ArticunoIceBeam);
         m.insert(("A1 084", 1), AttackId::A1084ArticunoExBlizzard);
+        m.insert(("A1 091", 0), AttackId::A1091BruxishSecondStrike);
         m.insert(("A1 093", 0), AttackId::A1093FrosmothPowderSnow);
         m.insert(("A1 095", 0), AttackId::A1095RaichuThunderbolt);
         m.insert(("A1 096", 0), AttackId::A1096PikachuExCircleCircuit);

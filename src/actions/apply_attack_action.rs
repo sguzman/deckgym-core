@@ -151,6 +151,7 @@ fn forecast_effect_attack(
             damage_chance_status_attack(60, 0.5, StatusCondition::Paralyzed)
         }
         AttackId::A1084ArticunoExBlizzard => articuno_ex_blizzard(state),
+        AttackId::A1091BruxishSecondStrike => extra_damage_if_hurt(10, 60, acting_player, state),
         AttackId::A1093FrosmothPowderSnow => damage_status_attack(40, StatusCondition::Asleep),
         AttackId::A1095RaichuThunderbolt => thunderbolt_attack(),
         AttackId::A1096PikachuExCircleCircuit => {
@@ -578,6 +579,21 @@ fn articuno_ex_blizzard(state: &State) -> (Probabilities, Mutations) {
     // Active Pokémon is always index 0
     targets.push((80, 0));
     damage_effect_doutcome(targets, |_, _, _| {})
+}
+
+fn extra_damage_if_hurt(
+    base: u32,
+    extra: u32,
+    acting_player: usize,
+    state: &State,
+) -> (Probabilities, Mutations) {
+    let opponent = (acting_player + 1) % 2;
+    let opponent_active = state.get_active(opponent);
+    if opponent_active.remaining_hp < opponent_active.total_hp {
+        active_damage_doutcome(base + extra)
+    } else {
+        active_damage_doutcome(base)
+    }
 }
 
 #[cfg(test)]
