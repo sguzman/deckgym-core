@@ -63,9 +63,11 @@ pub enum AttackId {
     A1a030DedenneThunderShock,
     A1a041MankeyFocusFist,
     A1a061EeveeContinuousSteps,
+    A2035PiplupHeal,
     A2049PalkiaDimensionalStorm,
     A2119DialgaExMetallicTurbo,
     A2a071ArceusExUltimateForce,
+    PA034PiplupHeal,
 }
 
 // Create a static HashMap for fast (pokemon, index) lookup
@@ -166,6 +168,7 @@ lazy_static::lazy_static! {
         m.insert(("A1a 085", 0), AttackId::A1a003CelebiExPowerfulBloom);
 
         // A2
+        m.insert(("A2 035", 0), AttackId::A2035PiplupHeal);
         m.insert(("A2 049", 1), AttackId::A2049PalkiaDimensionalStorm);
         m.insert(("A2 182", 1), AttackId::A2049PalkiaDimensionalStorm);
         m.insert(("A2 204", 1), AttackId::A2049PalkiaDimensionalStorm);
@@ -183,6 +186,7 @@ lazy_static::lazy_static! {
 
         // Promo
         m.insert(("P-A 012", 0), AttackId::A1196MeowthPayDay);
+        m.insert(("P-A 034", 0), AttackId::PA034PiplupHeal);
 
         m
     };

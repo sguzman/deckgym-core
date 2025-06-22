@@ -213,6 +213,7 @@ fn forecast_effect_attack(
         AttackId::A2a071ArceusExUltimateForce => {
             bench_count_attack(acting_player, state, 70, 20, None)
         }
+        AttackId::A2035PiplupHeal | AttackId::PA034PiplupHeal => self_heal_attack(20, index),
     }
 }
 
