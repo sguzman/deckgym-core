@@ -60,6 +60,7 @@ pub enum AttackId {
     A1a010PonytaStomp,
     A1a011RapidashRisingLunge,
     A1a026RaichuGigashock,
+    A1a021LumineonAqua,
     A1a030DedenneThunderShock,
     A1a041MankeyFocusFist,
     A1a061EeveeContinuousSteps,
@@ -158,6 +159,7 @@ lazy_static::lazy_static! {
         m.insert(("A1a 003", 0), AttackId::A1a003CelebiExPowerfulBloom);
         m.insert(("A1a 010", 0), AttackId::A1a010PonytaStomp);
         m.insert(("A1a 011", 0), AttackId::A1a011RapidashRisingLunge);
+        m.insert(("A1a 021", 0), AttackId::A1a021LumineonAqua);
         m.insert(("A1a 026", 0), AttackId::A1a026RaichuGigashock);
         m.insert(("A1a 030", 0), AttackId::A1a030DedenneThunderShock);
         m.insert(("A1a 041", 0), AttackId::A1a041MankeyFocusFist);
