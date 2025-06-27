@@ -168,6 +168,7 @@ fn forecast_effect_attack(
             vec![0, 50, 100, 150, 200],
         ),
         AttackId::A1106ZebstrikaThunderSpear => direct_damage(30, false),
+        AttackId::A1109EelektrossThunderFang => damage_chance_status_attack(80, 0.5, StatusCondition::Paralyzed),
         AttackId::A1128MewtwoPowerBlast => {
             self_energy_discard_attack(index, vec![EnergyType::Psychic])
         }
