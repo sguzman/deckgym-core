@@ -42,6 +42,7 @@ pub enum AttackId {
     A1096PikachuExCircleCircuit,
     A1101ElectabuzzThunderPunch,
     A1102JolteonPinMissile,
+    A1103ZapdosRagingThunder,
     A1104ZapdosExThunderingHurricane,
     A1106ZebstrikaThunderSpear,
     A1128MewtwoPowerBlast,
@@ -116,6 +117,7 @@ lazy_static::lazy_static! {
         m.insert(("A1 096", 0), AttackId::A1096PikachuExCircleCircuit);
         m.insert(("A1 101", 0), AttackId::A1101ElectabuzzThunderPunch);
         m.insert(("A1 102", 0), AttackId::A1102JolteonPinMissile);
+        m.insert(("A1 103", 0), AttackId::A1103ZapdosRagingThunder);
         m.insert(("A1 104", 1), AttackId::A1104ZapdosExThunderingHurricane);
         m.insert(("A1 106", 0), AttackId::A1106ZebstrikaThunderSpear);
         m.insert(("A1 128", 0), AttackId::A1128MewtwoPowerBlast);
