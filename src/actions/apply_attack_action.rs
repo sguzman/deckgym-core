@@ -162,6 +162,7 @@ fn forecast_effect_attack(
             vec![0.0625, 0.25, 0.375, 0.25, 0.0625],
             vec![0, 40, 80, 120, 160],
         ),
+        AttackId::A1103ZapdosRagingThunder => self_benched_damage(30, index),
         AttackId::A1104ZapdosExThunderingHurricane => probabilistic_damage_attack(
             vec![0.0625, 0.25, 0.375, 0.25, 0.0625],
             vec![0, 50, 100, 150, 200],
@@ -382,7 +383,7 @@ fn damage_chance_status_attack(
     (probabilities, mutations)
 }
 
-/// Used for attacks that do damage for each pokemon (optionally of a type) in your bench.
+/// For attacks that do damage for each pokemon (optionally of a type) in your bench.
 ///  e.g. "Pikachu Ex Circle Circuit".
 fn bench_count_attack(
     acting_player: usize,
@@ -402,6 +403,22 @@ fn bench_count_attack(
         }
     }
     active_damage_doutcome(base_damage + damage_per * bench_count)
+}
+
+/// Used for attacks that can go directly to one of your own benched Pokémon.
+fn self_benched_damage(damage: u32, attack_index: usize) -> (Probabilities, Mutations) {
+    index_active_damage_doutcome(attack_index, move |_, state, action| {
+        let mut choices = Vec::new();
+        for (in_play_idx, _) in state.enumerate_bench_pokemon(action.actor) {
+            choices.push(SimpleAction::ApplyDamage {
+                targets: vec![(damage, in_play_idx)],
+            });
+        }
+        if choices.is_empty() {
+            return;
+        }
+        state.move_generation_stack.push((action.actor, choices));
+    })
 }
 
 /// Used for attacks that can go directly to bench.
