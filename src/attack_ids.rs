@@ -49,6 +49,7 @@ pub enum AttackId {
     A1128MewtwoPowerBlast,
     A1129MewtwoExPsydrive,
     A1136GolurkDoubleLariat,
+    A1142PrimeapeFightBack,
     A1149GolemDoubleEdge,
     A1153MarowakExBonemerang,
     A1154HitmonleeStretchKick,
@@ -125,6 +126,7 @@ lazy_static::lazy_static! {
         m.insert(("A1 128", 0), AttackId::A1128MewtwoPowerBlast);
         m.insert(("A1 129", 1), AttackId::A1129MewtwoExPsydrive);
         m.insert(("A1 136", 0), AttackId::A1136GolurkDoubleLariat);
+        m.insert(("A1 142", 0), AttackId::A1142PrimeapeFightBack);
         m.insert(("A1 149", 0), AttackId::A1149GolemDoubleEdge);
         m.insert(("A1 153", 0), AttackId::A1153MarowakExBonemerang);
         m.insert(("A1 154", 0), AttackId::A1154HitmonleeStretchKick);

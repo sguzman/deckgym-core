@@ -180,6 +180,7 @@ fn forecast_effect_attack(
         AttackId::A1136GolurkDoubleLariat => {
             probabilistic_damage_attack(vec![0.25, 0.5, 0.25], vec![0, 100, 200])
         }
+        AttackId::A1142PrimeapeFightBack => extra_damage_if_hurt(40, 60, acting_player, state),
         AttackId::A1149GolemDoubleEdge => self_damage_attack(150, 50),
         AttackId::A1153MarowakExBonemerang => {
             probabilistic_damage_attack(vec![0.25, 0.5, 0.25], vec![0, 80, 160])
