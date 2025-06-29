@@ -171,6 +171,7 @@ fn forecast_effect_attack(
         AttackId::A1109EelektrossThunderFang => {
             damage_chance_status_attack(80, 0.5, StatusCondition::Paralyzed)
         }
+        AttackId::A1115AbraTeleport => teleport_attack(),
         AttackId::A1128MewtwoPowerBlast => {
             self_energy_discard_attack(index, vec![EnergyType::Psychic])
         }
@@ -617,6 +618,19 @@ fn extra_damage_if_hurt(
     } else {
         active_damage_doutcome(base)
     }
+}
+
+fn teleport_attack() -> (Probabilities, Mutations) {
+    active_damage_effect_doutcome(0, move |_, state, action| {
+        let mut choices = Vec::new();
+        for (in_play_idx, _) in state.enumerate_bench_pokemon(action.actor) {
+            choices.push(SimpleAction::Activate { in_play_idx });
+        }
+        if choices.is_empty() {
+            return; // No benched pokemon to switch with
+        }
+        state.move_generation_stack.push((action.actor, choices));
+    })
 }
 
 #[cfg(test)]
