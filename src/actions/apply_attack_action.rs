@@ -172,6 +172,9 @@ fn forecast_effect_attack(
             damage_chance_status_attack(80, 0.5, StatusCondition::Paralyzed)
         }
         AttackId::A1115AbraTeleport => teleport_attack(),
+        AttackId::A1117AlakazamPsychic => {
+            damage_based_on_opponent_energy(acting_player, state, 60, 30)
+        }
         AttackId::A1128MewtwoPowerBlast => {
             self_energy_discard_attack(index, vec![EnergyType::Psychic])
         }
@@ -631,6 +634,18 @@ fn teleport_attack() -> (Probabilities, Mutations) {
         }
         state.move_generation_stack.push((action.actor, choices));
     })
+}
+
+fn damage_based_on_opponent_energy(
+    acting_player: usize,
+    state: &State,
+    base_damage: u32,
+    damage_per_energy: u32,
+) -> (Probabilities, Mutations) {
+    let opponent = (acting_player + 1) % 2;
+    let opponent_active = state.get_active(opponent);
+    let damage = base_damage + (opponent_active.attached_energy.len() as u32) * damage_per_energy;
+    active_damage_doutcome(damage)
 }
 
 #[cfg(test)]
