@@ -171,6 +171,10 @@ fn forecast_effect_attack(
         AttackId::A1109EelektrossThunderFang => {
             damage_chance_status_attack(80, 0.5, StatusCondition::Paralyzed)
         }
+        AttackId::A1115AbraTeleport => teleport_attack(),
+        AttackId::A1117AlakazamPsychic => {
+            damage_based_on_opponent_energy(acting_player, state, 60, 30)
+        }
         AttackId::A1128MewtwoPowerBlast => {
             self_energy_discard_attack(index, vec![EnergyType::Psychic])
         }
@@ -180,13 +184,16 @@ fn forecast_effect_attack(
         AttackId::A1136GolurkDoubleLariat => {
             probabilistic_damage_attack(vec![0.25, 0.5, 0.25], vec![0, 100, 200])
         }
+        AttackId::A1142PrimeapeFightBack => extra_damage_if_hurt(40, 60, acting_player, state),
         AttackId::A1149GolemDoubleEdge => self_damage_attack(150, 50),
         AttackId::A1153MarowakExBonemerang => {
             probabilistic_damage_attack(vec![0.25, 0.5, 0.25], vec![0, 80, 160])
         }
         AttackId::A1154HitmonleeStretchKick => direct_damage(30, true),
+        AttackId::A1163GrapploctKnockBack => knock_back_attack(60),
         AttackId::A1165ArbokCorner => damage_and_turn_effect_attack(index, 1),
         AttackId::A1171NidokingPoisonHorn => damage_status_attack(90, StatusCondition::Poisoned),
+        AttackId::A1174GrimerPoisonGas => damage_status_attack(10, StatusCondition::Poisoned),
         AttackId::A1195WigglytuffSleepySong => damage_status_attack(80, StatusCondition::Asleep),
         AttackId::A1196MeowthPayDay => draw_and_damage_outcome(10),
         AttackId::A1201LickitungContinuousLick => flip_until_tails_attack(60),
@@ -219,6 +226,7 @@ fn forecast_effect_attack(
             bench_count_attack(acting_player, state, 70, 20, None)
         }
         AttackId::A2035PiplupHeal | AttackId::PA034PiplupHeal => self_heal_attack(20, index),
+        AttackId::PA072AlolanGrimerPoison => damage_status_attack(0, StatusCondition::Poisoned),
     }
 }
 
@@ -616,6 +624,45 @@ fn extra_damage_if_hurt(
     } else {
         active_damage_doutcome(base)
     }
+}
+
+fn teleport_attack() -> (Probabilities, Mutations) {
+    active_damage_effect_doutcome(0, move |_, state, action| {
+        let mut choices = Vec::new();
+        for (in_play_idx, _) in state.enumerate_bench_pokemon(action.actor) {
+            choices.push(SimpleAction::Activate { in_play_idx });
+        }
+        if choices.is_empty() {
+            return; // No benched pokemon to switch with
+        }
+        state.move_generation_stack.push((action.actor, choices));
+    })
+}
+
+fn damage_based_on_opponent_energy(
+    acting_player: usize,
+    state: &State,
+    base_damage: u32,
+    damage_per_energy: u32,
+) -> (Probabilities, Mutations) {
+    let opponent = (acting_player + 1) % 2;
+    let opponent_active = state.get_active(opponent);
+    let damage = base_damage + (opponent_active.attached_energy.len() as u32) * damage_per_energy;
+    active_damage_doutcome(damage)
+}
+
+fn knock_back_attack(damage: u32) -> (Probabilities, Mutations) {
+    active_damage_effect_doutcome(damage, move |_, state, action| {
+        let opponent = (action.actor + 1) % 2;
+        let mut choices = Vec::new();
+        for (in_play_idx, _) in state.enumerate_bench_pokemon(opponent) {
+            choices.push(SimpleAction::Activate { in_play_idx });
+        }
+        if choices.is_empty() {
+            return; // No benched pokemon to knock back
+        }
+        state.move_generation_stack.push((opponent, choices));
+    })
 }
 
 #[cfg(test)]

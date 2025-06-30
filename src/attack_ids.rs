@@ -46,14 +46,19 @@ pub enum AttackId {
     A1104ZapdosExThunderingHurricane,
     A1106ZebstrikaThunderSpear,
     A1109EelektrossThunderFang,
+    A1115AbraTeleport,
+    A1117AlakazamPsychic,
     A1128MewtwoPowerBlast,
     A1129MewtwoExPsydrive,
     A1136GolurkDoubleLariat,
+    A1142PrimeapeFightBack,
     A1149GolemDoubleEdge,
     A1153MarowakExBonemerang,
     A1154HitmonleeStretchKick,
+    A1163GrapploctKnockBack,
     A1165ArbokCorner,
     A1171NidokingPoisonHorn,
+    A1174GrimerPoisonGas,
     A1195WigglytuffSleepySong,
     A1196MeowthPayDay,
     A1201LickitungContinuousLick,
@@ -71,6 +76,7 @@ pub enum AttackId {
     A2119DialgaExMetallicTurbo,
     A2a071ArceusExUltimateForce,
     PA034PiplupHeal,
+    PA072AlolanGrimerPoison,
 }
 
 // Create a static HashMap for fast (pokemon, index) lookup
@@ -122,14 +128,19 @@ lazy_static::lazy_static! {
         m.insert(("A1 104", 1), AttackId::A1104ZapdosExThunderingHurricane);
         m.insert(("A1 106", 0), AttackId::A1106ZebstrikaThunderSpear);
         m.insert(("A1 109", 0), AttackId::A1109EelektrossThunderFang);
+        m.insert(("A1 115", 0), AttackId::A1115AbraTeleport);
+        m.insert(("A1 117", 0), AttackId::A1117AlakazamPsychic);
         m.insert(("A1 128", 0), AttackId::A1128MewtwoPowerBlast);
         m.insert(("A1 129", 1), AttackId::A1129MewtwoExPsydrive);
         m.insert(("A1 136", 0), AttackId::A1136GolurkDoubleLariat);
+        m.insert(("A1 142", 0), AttackId::A1142PrimeapeFightBack);
         m.insert(("A1 149", 0), AttackId::A1149GolemDoubleEdge);
         m.insert(("A1 153", 0), AttackId::A1153MarowakExBonemerang);
         m.insert(("A1 154", 0), AttackId::A1154HitmonleeStretchKick);
+        m.insert(("A1 163", 0), AttackId::A1163GrapploctKnockBack);
         m.insert(("A1 165", 0), AttackId::A1165ArbokCorner);
         m.insert(("A1 171", 0), AttackId::A1171NidokingPoisonHorn);
+        m.insert(("A1 174", 0), AttackId::A1174GrimerPoisonGas);
         m.insert(("A1 195", 0), AttackId::A1195WigglytuffSleepySong);
         m.insert(("A1 196", 0), AttackId::A1196MeowthPayDay);
         m.insert(("A1 201", 0), AttackId::A1201LickitungContinuousLick);
@@ -193,6 +204,7 @@ lazy_static::lazy_static! {
         // Promo
         m.insert(("P-A 012", 0), AttackId::A1196MeowthPayDay);
         m.insert(("P-A 034", 0), AttackId::PA034PiplupHeal);
+        m.insert(("P-A 072", 0), AttackId::PA072AlolanGrimerPoison);
 
         m
     };
