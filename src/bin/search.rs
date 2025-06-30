@@ -98,7 +98,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // Output the results as JSON
     let output = serde_json::to_string_pretty(&matches)?;
-    println!("{}", output);
+    println!("{output}");
 
     Ok(())
 }
