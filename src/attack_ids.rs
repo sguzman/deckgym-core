@@ -50,6 +50,7 @@ pub enum AttackId {
     A1112PincurchinThunderShock,
     A1115AbraTeleport,
     A1117AlakazamPsychic,
+    A1127JynxPsychic,
     A1128MewtwoPowerBlast,
     A1129MewtwoExPsydrive,
     A1136GolurkDoubleLariat,
@@ -77,6 +78,7 @@ pub enum AttackId {
     A2049PalkiaDimensionalStorm,
     A2119DialgaExMetallicTurbo,
     A2a071ArceusExUltimateForce,
+    A3a094JynxPsychic,
     PA034PiplupHeal,
     PA072AlolanGrimerPoison,
 }
@@ -134,6 +136,7 @@ lazy_static::lazy_static! {
         m.insert(("A1 112", 0), AttackId::A1112PincurchinThunderShock);
         m.insert(("A1 115", 0), AttackId::A1115AbraTeleport);
         m.insert(("A1 117", 0), AttackId::A1117AlakazamPsychic);
+        m.insert(("A1 127", 0), AttackId::A1127JynxPsychic);
         m.insert(("A1 128", 0), AttackId::A1128MewtwoPowerBlast);
         m.insert(("A1 129", 1), AttackId::A1129MewtwoExPsydrive);
         m.insert(("A1 136", 0), AttackId::A1136GolurkDoubleLariat);
@@ -204,6 +207,9 @@ lazy_static::lazy_static! {
         m.insert(("A2a 086", 0), AttackId::A2a071ArceusExUltimateForce);
         m.insert(("A2a 095", 0), AttackId::A2a071ArceusExUltimateForce);
         m.insert(("A2a 096", 0), AttackId::A2a071ArceusExUltimateForce);
+
+        // A3a
+        m.insert(("A3a 094", 0), AttackId::A3a094JynxPsychic);
 
         // Promo
         m.insert(("P-A 012", 0), AttackId::A1196MeowthPayDay);

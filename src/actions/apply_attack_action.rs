@@ -181,6 +181,7 @@ fn forecast_effect_attack(
         AttackId::A1117AlakazamPsychic => {
             damage_based_on_opponent_energy(acting_player, state, 60, 30)
         }
+        AttackId::A1127JynxPsychic => damage_based_on_opponent_energy(acting_player, state, 30, 20),
         AttackId::A1128MewtwoPowerBlast => {
             self_energy_discard_attack(index, vec![EnergyType::Psychic])
         }
@@ -232,6 +233,9 @@ fn forecast_effect_attack(
             bench_count_attack(acting_player, state, 70, 20, None)
         }
         AttackId::A2035PiplupHeal | AttackId::PA034PiplupHeal => self_heal_attack(20, index),
+        AttackId::A3a094JynxPsychic => {
+            damage_based_on_opponent_energy(acting_player, state, 30, 20)
+        }
         AttackId::PA072AlolanGrimerPoison => damage_status_attack(0, StatusCondition::Poisoned),
     }
 }
