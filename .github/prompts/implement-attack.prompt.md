@@ -9,4 +9,4 @@ mode: agent
 - Review similar attacks in `apply_attack_action.rs` to ensure consistency in implementation.
 - Implement the attack logic in `forecast_effect_attack` in `apply_attack_action.rs`.
   - Keep the code as a one-liner in the match statement, and implement the logic using a helper function.
-- Make sure to run `cargo clippy --fix -- -D warnings` and `cargo fmt` to format the code.
+- Make sure to run `cargo clippy --fix --allow-dirty -- -D warnings` and `cargo fmt` to format the code.
