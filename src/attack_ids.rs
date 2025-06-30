@@ -66,6 +66,7 @@ pub enum AttackId {
     A1196MeowthPayDay,
     A1201LickitungContinuousLick,
     A1203KangaskhanDizzyPunch,
+    A1213CinccinoDoTheWave,
     A1a003CelebiExPowerfulBloom,
     A1a010PonytaStomp,
     A1a011RapidashRisingLunge,
@@ -79,6 +80,7 @@ pub enum AttackId {
     A2119DialgaExMetallicTurbo,
     A2a071ArceusExUltimateForce,
     A3a094JynxPsychic,
+    PA031CinccinoDoTheWave,
     PA034PiplupHeal,
     PA072AlolanGrimerPoison,
 }
@@ -152,6 +154,7 @@ lazy_static::lazy_static! {
         m.insert(("A1 196", 0), AttackId::A1196MeowthPayDay);
         m.insert(("A1 201", 0), AttackId::A1201LickitungContinuousLick);
         m.insert(("A1 203", 0), AttackId::A1203KangaskhanDizzyPunch);
+        m.insert(("A1 213", 0), AttackId::A1213CinccinoDoTheWave);
         // Full Arts A1
         m.insert(("A1 229", 0), AttackId::A1026PinsirDoubleHorn);
         m.insert(("A1 230", 0), AttackId::A1033CharmanderEmber);
@@ -213,6 +216,7 @@ lazy_static::lazy_static! {
 
         // Promo
         m.insert(("P-A 012", 0), AttackId::A1196MeowthPayDay);
+        m.insert(("P-A 031", 0), AttackId::PA031CinccinoDoTheWave);
         m.insert(("P-A 034", 0), AttackId::PA034PiplupHeal);
         m.insert(("P-A 072", 0), AttackId::PA072AlolanGrimerPoison);
 
