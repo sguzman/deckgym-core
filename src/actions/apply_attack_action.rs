@@ -190,6 +190,7 @@ fn forecast_effect_attack(
             probabilistic_damage_attack(vec![0.25, 0.5, 0.25], vec![0, 80, 160])
         }
         AttackId::A1154HitmonleeStretchKick => direct_damage(30, true),
+        AttackId::A1163GrapploctKnockBack => knock_back_attack(60),
         AttackId::A1165ArbokCorner => damage_and_turn_effect_attack(index, 1),
         AttackId::A1171NidokingPoisonHorn => damage_status_attack(90, StatusCondition::Poisoned),
         AttackId::A1195WigglytuffSleepySong => damage_status_attack(80, StatusCondition::Asleep),
@@ -646,6 +647,20 @@ fn damage_based_on_opponent_energy(
     let opponent_active = state.get_active(opponent);
     let damage = base_damage + (opponent_active.attached_energy.len() as u32) * damage_per_energy;
     active_damage_doutcome(damage)
+}
+
+fn knock_back_attack(damage: u32) -> (Probabilities, Mutations) {
+    active_damage_effect_doutcome(damage, move |_, state, action| {
+        let opponent = (action.actor + 1) % 2;
+        let mut choices = Vec::new();
+        for (in_play_idx, _) in state.enumerate_bench_pokemon(opponent) {
+            choices.push(SimpleAction::Activate { in_play_idx });
+        }
+        if choices.is_empty() {
+            return; // No benched pokemon to knock back
+        }
+        state.move_generation_stack.push((opponent, choices));
+    })
 }
 
 #[cfg(test)]
