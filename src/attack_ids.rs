@@ -62,6 +62,7 @@ pub enum AttackId {
     A1165ArbokCorner,
     A1171NidokingPoisonHorn,
     A1174GrimerPoisonGas,
+    A1178MawileCrunch,
     A1195WigglytuffSleepySong,
     A1196MeowthPayDay,
     A1201LickitungContinuousLick,
@@ -150,6 +151,7 @@ lazy_static::lazy_static! {
         m.insert(("A1 165", 0), AttackId::A1165ArbokCorner);
         m.insert(("A1 171", 0), AttackId::A1171NidokingPoisonHorn);
         m.insert(("A1 174", 0), AttackId::A1174GrimerPoisonGas);
+        m.insert(("A1 178", 0), AttackId::A1178MawileCrunch);
         m.insert(("A1 195", 0), AttackId::A1195WigglytuffSleepySong);
         m.insert(("A1 196", 0), AttackId::A1196MeowthPayDay);
         m.insert(("A1 201", 0), AttackId::A1201LickitungContinuousLick);

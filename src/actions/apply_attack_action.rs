@@ -201,6 +201,7 @@ fn forecast_effect_attack(
         AttackId::A1165ArbokCorner => damage_and_turn_effect_attack(index, 1),
         AttackId::A1171NidokingPoisonHorn => damage_status_attack(90, StatusCondition::Poisoned),
         AttackId::A1174GrimerPoisonGas => damage_status_attack(10, StatusCondition::Poisoned),
+        AttackId::A1178MawileCrunch => mawile_crunch(),
         AttackId::A1195WigglytuffSleepySong => damage_status_attack(80, StatusCondition::Asleep),
         AttackId::A1196MeowthPayDay => draw_and_damage_outcome(10),
         AttackId::A1201LickitungContinuousLick => flip_until_tails_attack(60),
@@ -676,6 +677,26 @@ fn knock_back_attack(damage: u32) -> (Probabilities, Mutations) {
         }
         state.move_generation_stack.push((opponent, choices));
     })
+}
+
+/// For Mawile's Crunch attack: deals 20 damage, flip a coin, if heads discard a random energy from opponent's active
+fn mawile_crunch() -> (Probabilities, Mutations) {
+    let probabilities = vec![0.5, 0.5]; // 50% tails (no discard), 50% heads (discard)
+    let mutations = vec![
+        active_damage_mutation(20), // Tails: just damage
+        active_damage_effect_mutation(20, move |rng, state, action| {
+            // Heads: damage + discard random energy
+            let opponent = (action.actor + 1) % 2;
+            let active = state.get_active_mut(opponent);
+
+            if !active.attached_energy.is_empty() {
+                let energy_count = active.attached_energy.len();
+                let rand_idx = rng.gen_range(0..energy_count);
+                active.attached_energy.remove(rand_idx);
+            }
+        }),
+    ];
+    (probabilities, mutations)
 }
 
 #[cfg(test)]
