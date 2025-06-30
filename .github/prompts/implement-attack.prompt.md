@@ -2,7 +2,7 @@
 mode: agent
 ---
 
-- Copy the ids of cards to implement (including full art versions) in `database.json`.
+- Copy the ids of cards to implement (including full art versions) in the given JSON.
 - In `attack_ids.rs` add the attack to the `AttackId` enum and the `ATTACK_ID_MAP` map (with the correct index).
   - Only implement attacks with effects.
   - Keep the file ordered by set and number.
