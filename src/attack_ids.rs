@@ -58,6 +58,7 @@ pub enum AttackId {
     A1163GrapploctKnockBack,
     A1165ArbokCorner,
     A1171NidokingPoisonHorn,
+    A1174GrimerPoisonGas,
     A1195WigglytuffSleepySong,
     A1196MeowthPayDay,
     A1201LickitungContinuousLick,
@@ -75,6 +76,7 @@ pub enum AttackId {
     A2119DialgaExMetallicTurbo,
     A2a071ArceusExUltimateForce,
     PA034PiplupHeal,
+    PA072AlolanGrimerPoison,
 }
 
 // Create a static HashMap for fast (pokemon, index) lookup
@@ -138,6 +140,7 @@ lazy_static::lazy_static! {
         m.insert(("A1 163", 0), AttackId::A1163GrapploctKnockBack);
         m.insert(("A1 165", 0), AttackId::A1165ArbokCorner);
         m.insert(("A1 171", 0), AttackId::A1171NidokingPoisonHorn);
+        m.insert(("A1 174", 0), AttackId::A1174GrimerPoisonGas);
         m.insert(("A1 195", 0), AttackId::A1195WigglytuffSleepySong);
         m.insert(("A1 196", 0), AttackId::A1196MeowthPayDay);
         m.insert(("A1 201", 0), AttackId::A1201LickitungContinuousLick);
@@ -201,6 +204,7 @@ lazy_static::lazy_static! {
         // Promo
         m.insert(("P-A 012", 0), AttackId::A1196MeowthPayDay);
         m.insert(("P-A 034", 0), AttackId::PA034PiplupHeal);
+        m.insert(("P-A 072", 0), AttackId::PA072AlolanGrimerPoison);
 
         m
     };

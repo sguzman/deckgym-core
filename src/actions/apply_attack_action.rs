@@ -193,6 +193,7 @@ fn forecast_effect_attack(
         AttackId::A1163GrapploctKnockBack => knock_back_attack(60),
         AttackId::A1165ArbokCorner => damage_and_turn_effect_attack(index, 1),
         AttackId::A1171NidokingPoisonHorn => damage_status_attack(90, StatusCondition::Poisoned),
+        AttackId::A1174GrimerPoisonGas => damage_status_attack(10, StatusCondition::Poisoned),
         AttackId::A1195WigglytuffSleepySong => damage_status_attack(80, StatusCondition::Asleep),
         AttackId::A1196MeowthPayDay => draw_and_damage_outcome(10),
         AttackId::A1201LickitungContinuousLick => flip_until_tails_attack(60),
@@ -225,6 +226,7 @@ fn forecast_effect_attack(
             bench_count_attack(acting_player, state, 70, 20, None)
         }
         AttackId::A2035PiplupHeal | AttackId::PA034PiplupHeal => self_heal_attack(20, index),
+        AttackId::PA072AlolanGrimerPoison => damage_status_attack(0, StatusCondition::Poisoned),
     }
 }
 
