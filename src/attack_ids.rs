@@ -46,8 +46,11 @@ pub enum AttackId {
     A1104ZapdosExThunderingHurricane,
     A1106ZebstrikaThunderSpear,
     A1109EelektrossThunderFang,
+    A1111HelioliskQuickAttack,
+    A1112PincurchinThunderShock,
     A1115AbraTeleport,
     A1117AlakazamPsychic,
+    A1127JynxPsychic,
     A1128MewtwoPowerBlast,
     A1129MewtwoExPsydrive,
     A1136GolurkDoubleLariat,
@@ -59,10 +62,12 @@ pub enum AttackId {
     A1165ArbokCorner,
     A1171NidokingPoisonHorn,
     A1174GrimerPoisonGas,
+    A1178MawileCrunch,
     A1195WigglytuffSleepySong,
     A1196MeowthPayDay,
     A1201LickitungContinuousLick,
     A1203KangaskhanDizzyPunch,
+    A1213CinccinoDoTheWave,
     A1a003CelebiExPowerfulBloom,
     A1a010PonytaStomp,
     A1a011RapidashRisingLunge,
@@ -75,6 +80,8 @@ pub enum AttackId {
     A2049PalkiaDimensionalStorm,
     A2119DialgaExMetallicTurbo,
     A2a071ArceusExUltimateForce,
+    A3a094JynxPsychic,
+    PA031CinccinoDoTheWave,
     PA034PiplupHeal,
     PA072AlolanGrimerPoison,
 }
@@ -128,8 +135,11 @@ lazy_static::lazy_static! {
         m.insert(("A1 104", 1), AttackId::A1104ZapdosExThunderingHurricane);
         m.insert(("A1 106", 0), AttackId::A1106ZebstrikaThunderSpear);
         m.insert(("A1 109", 0), AttackId::A1109EelektrossThunderFang);
+        m.insert(("A1 111", 0), AttackId::A1111HelioliskQuickAttack);
+        m.insert(("A1 112", 0), AttackId::A1112PincurchinThunderShock);
         m.insert(("A1 115", 0), AttackId::A1115AbraTeleport);
         m.insert(("A1 117", 0), AttackId::A1117AlakazamPsychic);
+        m.insert(("A1 127", 0), AttackId::A1127JynxPsychic);
         m.insert(("A1 128", 0), AttackId::A1128MewtwoPowerBlast);
         m.insert(("A1 129", 1), AttackId::A1129MewtwoExPsydrive);
         m.insert(("A1 136", 0), AttackId::A1136GolurkDoubleLariat);
@@ -141,10 +151,12 @@ lazy_static::lazy_static! {
         m.insert(("A1 165", 0), AttackId::A1165ArbokCorner);
         m.insert(("A1 171", 0), AttackId::A1171NidokingPoisonHorn);
         m.insert(("A1 174", 0), AttackId::A1174GrimerPoisonGas);
+        m.insert(("A1 178", 0), AttackId::A1178MawileCrunch);
         m.insert(("A1 195", 0), AttackId::A1195WigglytuffSleepySong);
         m.insert(("A1 196", 0), AttackId::A1196MeowthPayDay);
         m.insert(("A1 201", 0), AttackId::A1201LickitungContinuousLick);
         m.insert(("A1 203", 0), AttackId::A1203KangaskhanDizzyPunch);
+        m.insert(("A1 213", 0), AttackId::A1213CinccinoDoTheWave);
         // Full Arts A1
         m.insert(("A1 229", 0), AttackId::A1026PinsirDoubleHorn);
         m.insert(("A1 230", 0), AttackId::A1033CharmanderEmber);
@@ -201,8 +213,12 @@ lazy_static::lazy_static! {
         m.insert(("A2a 095", 0), AttackId::A2a071ArceusExUltimateForce);
         m.insert(("A2a 096", 0), AttackId::A2a071ArceusExUltimateForce);
 
+        // A3a
+        m.insert(("A3a 094", 0), AttackId::A3a094JynxPsychic);
+
         // Promo
         m.insert(("P-A 012", 0), AttackId::A1196MeowthPayDay);
+        m.insert(("P-A 031", 0), AttackId::PA031CinccinoDoTheWave);
         m.insert(("P-A 034", 0), AttackId::PA034PiplupHeal);
         m.insert(("P-A 072", 0), AttackId::PA072AlolanGrimerPoison);
 
