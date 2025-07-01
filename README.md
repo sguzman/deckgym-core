@@ -77,6 +77,18 @@ cargo run simulate example_decks/venusaur-exeggutor.txt example_decks/weezing-ar
 cargo run optimize example_decks/incomplete-chari.txt A2147,A2148 example_decks/ --num 10 --players e,e -v
 ```
 
+**Card Search Tool**
+
+The repository includes a search utility that's particularly useful for agentic AI applications, as reading the complete `database.json` file (which contains all card data) often exceeds context limits.
+
+```bash
+# Search for cards by name
+cargo run --bin search "Charizard"
+
+# Search for cards with specific attacks
+cargo run --bin search "Venusaur" --attack "Giant Bloom"
+```
+
 **Generating database.rs**
 
 Ensure database.json is up-to-date with latest data. Mock the `get_card_by_enum` in `database.rs` with a `_ => panic` so that
@@ -84,6 +96,11 @@ it compiles mid-way through the generation.
 
 ```bash
 cargo run --bin card_enum_generator > tmp.rs && mv tmp.rs src/card_ids.rs && cargo fmt
+```
+
+Then temporarily edit `database.rs` for `_` to match Bulbasaur (this is so that the next code can compile-run).
+
+```bash
 cargo run --bin card_enum_generator -- --database > tmp.rs && mv tmp.rs src/database.rs && cargo fmt
 ```
 

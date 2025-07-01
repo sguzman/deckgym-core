@@ -31,7 +31,7 @@ pub fn optimize(
             }
             let number = &s[s.len() - 3..];
             let prefix = &s[..s.len() - 3];
-            let id = format!("{} {}", prefix, number);
+            let id = format!("{prefix} {number}");
             CardId::from_card_id(id.as_str()).expect("Card ID should be valid")
         })
         .collect();
@@ -59,7 +59,7 @@ pub fn optimize(
             .iter()
             .filter(|c| c.get_card_id() == *card)
             .count();
-        let allowed = if count >= 2 { 0 } else { 2 - count };
+        let allowed = 2_usize.saturating_sub(count);
         allowed_map.insert(*card, allowed as u32);
     }
 

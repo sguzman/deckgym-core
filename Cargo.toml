@@ -29,3 +29,7 @@ harness = false
 [[bench]]
 name = "card_lookup_benchmark"
 harness = false
+
+[[bin]]
+name = "search"
+path = "src/bin/search.rs"

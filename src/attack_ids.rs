@@ -35,27 +35,55 @@ pub enum AttackId {
     A1079LaprasHydroPump,
     A1080VaporeonBubbleDrain,
     A1083ArticunoIceBeam,
+    A1084ArticunoExBlizzard,
+    A1091BruxishSecondStrike,
     A1093FrosmothPowderSnow,
     A1095RaichuThunderbolt,
     A1096PikachuExCircleCircuit,
     A1101ElectabuzzThunderPunch,
+    A1102JolteonPinMissile,
+    A1103ZapdosRagingThunder,
     A1104ZapdosExThunderingHurricane,
     A1106ZebstrikaThunderSpear,
+    A1109EelektrossThunderFang,
+    A1111HelioliskQuickAttack,
+    A1112PincurchinThunderShock,
+    A1115AbraTeleport,
+    A1117AlakazamPsychic,
+    A1127JynxPsychic,
     A1128MewtwoPowerBlast,
     A1129MewtwoExPsydrive,
+    A1136GolurkDoubleLariat,
+    A1142PrimeapeFightBack,
     A1149GolemDoubleEdge,
     A1153MarowakExBonemerang,
     A1154HitmonleeStretchKick,
+    A1163GrapploctKnockBack,
     A1165ArbokCorner,
     A1171NidokingPoisonHorn,
+    A1174GrimerPoisonGas,
+    A1178MawileCrunch,
     A1195WigglytuffSleepySong,
     A1196MeowthPayDay,
+    A1201LickitungContinuousLick,
     A1203KangaskhanDizzyPunch,
+    A1213CinccinoDoTheWave,
+    A1a003CelebiExPowerfulBloom,
+    A1a010PonytaStomp,
+    A1a011RapidashRisingLunge,
     A1a026RaichuGigashock,
+    A1a021LumineonAqua,
     A1a030DedenneThunderShock,
+    A1a041MankeyFocusFist,
+    A1a061EeveeContinuousSteps,
+    A2035PiplupHeal,
     A2049PalkiaDimensionalStorm,
     A2119DialgaExMetallicTurbo,
     A2a071ArceusExUltimateForce,
+    A3a094JynxPsychic,
+    PA031CinccinoDoTheWave,
+    PA034PiplupHeal,
+    PA072AlolanGrimerPoison,
 }
 
 // Create a static HashMap for fast (pokemon, index) lookup
@@ -96,22 +124,39 @@ lazy_static::lazy_static! {
         m.insert(("A1 234", 0), AttackId::A1079LaprasHydroPump); // Full art version
         m.insert(("A1 080", 0), AttackId::A1080VaporeonBubbleDrain);
         m.insert(("A1 083", 0), AttackId::A1083ArticunoIceBeam);
+        m.insert(("A1 084", 1), AttackId::A1084ArticunoExBlizzard);
+        m.insert(("A1 091", 0), AttackId::A1091BruxishSecondStrike);
         m.insert(("A1 093", 0), AttackId::A1093FrosmothPowderSnow);
         m.insert(("A1 095", 0), AttackId::A1095RaichuThunderbolt);
         m.insert(("A1 096", 0), AttackId::A1096PikachuExCircleCircuit);
         m.insert(("A1 101", 0), AttackId::A1101ElectabuzzThunderPunch);
+        m.insert(("A1 102", 0), AttackId::A1102JolteonPinMissile);
+        m.insert(("A1 103", 0), AttackId::A1103ZapdosRagingThunder);
         m.insert(("A1 104", 1), AttackId::A1104ZapdosExThunderingHurricane);
         m.insert(("A1 106", 0), AttackId::A1106ZebstrikaThunderSpear);
+        m.insert(("A1 109", 0), AttackId::A1109EelektrossThunderFang);
+        m.insert(("A1 111", 0), AttackId::A1111HelioliskQuickAttack);
+        m.insert(("A1 112", 0), AttackId::A1112PincurchinThunderShock);
+        m.insert(("A1 115", 0), AttackId::A1115AbraTeleport);
+        m.insert(("A1 117", 0), AttackId::A1117AlakazamPsychic);
+        m.insert(("A1 127", 0), AttackId::A1127JynxPsychic);
         m.insert(("A1 128", 0), AttackId::A1128MewtwoPowerBlast);
         m.insert(("A1 129", 1), AttackId::A1129MewtwoExPsydrive);
+        m.insert(("A1 136", 0), AttackId::A1136GolurkDoubleLariat);
+        m.insert(("A1 142", 0), AttackId::A1142PrimeapeFightBack);
         m.insert(("A1 149", 0), AttackId::A1149GolemDoubleEdge);
         m.insert(("A1 153", 0), AttackId::A1153MarowakExBonemerang);
         m.insert(("A1 154", 0), AttackId::A1154HitmonleeStretchKick);
+        m.insert(("A1 163", 0), AttackId::A1163GrapploctKnockBack);
         m.insert(("A1 165", 0), AttackId::A1165ArbokCorner);
         m.insert(("A1 171", 0), AttackId::A1171NidokingPoisonHorn);
+        m.insert(("A1 174", 0), AttackId::A1174GrimerPoisonGas);
+        m.insert(("A1 178", 0), AttackId::A1178MawileCrunch);
         m.insert(("A1 195", 0), AttackId::A1195WigglytuffSleepySong);
         m.insert(("A1 196", 0), AttackId::A1196MeowthPayDay);
+        m.insert(("A1 201", 0), AttackId::A1201LickitungContinuousLick);
         m.insert(("A1 203", 0), AttackId::A1203KangaskhanDizzyPunch);
+        m.insert(("A1 213", 0), AttackId::A1213CinccinoDoTheWave);
         // Full Arts A1
         m.insert(("A1 229", 0), AttackId::A1026PinsirDoubleHorn);
         m.insert(("A1 230", 0), AttackId::A1033CharmanderEmber);
@@ -138,12 +183,21 @@ lazy_static::lazy_static! {
         m.insert(("A1 285", 0), AttackId::A1096PikachuExCircleCircuit);
         m.insert(("A1 286", 1), AttackId::A1129MewtwoExPsydrive);
         // A1a
+        m.insert(("A1a 003", 0), AttackId::A1a003CelebiExPowerfulBloom);
+        m.insert(("A1a 010", 0), AttackId::A1a010PonytaStomp);
+        m.insert(("A1a 011", 0), AttackId::A1a011RapidashRisingLunge);
+        m.insert(("A1a 021", 0), AttackId::A1a021LumineonAqua);
         m.insert(("A1a 026", 0), AttackId::A1a026RaichuGigashock);
         m.insert(("A1a 030", 0), AttackId::A1a030DedenneThunderShock);
+        m.insert(("A1a 041", 0), AttackId::A1a041MankeyFocusFist);
+        m.insert(("A1a 061", 0), AttackId::A1a061EeveeContinuousSteps);
         // Full Arts A1a
         m.insert(("A1a 073", 0), AttackId::A1a030DedenneThunderShock);
+        m.insert(("A1a 075", 0), AttackId::A1a003CelebiExPowerfulBloom);
+        m.insert(("A1a 085", 0), AttackId::A1a003CelebiExPowerfulBloom);
 
         // A2
+        m.insert(("A2 035", 0), AttackId::A2035PiplupHeal);
         m.insert(("A2 049", 1), AttackId::A2049PalkiaDimensionalStorm);
         m.insert(("A2 182", 1), AttackId::A2049PalkiaDimensionalStorm);
         m.insert(("A2 204", 1), AttackId::A2049PalkiaDimensionalStorm);
@@ -159,8 +213,14 @@ lazy_static::lazy_static! {
         m.insert(("A2a 095", 0), AttackId::A2a071ArceusExUltimateForce);
         m.insert(("A2a 096", 0), AttackId::A2a071ArceusExUltimateForce);
 
+        // A3a
+        m.insert(("A3a 094", 0), AttackId::A3a094JynxPsychic);
+
         // Promo
         m.insert(("P-A 012", 0), AttackId::A1196MeowthPayDay);
+        m.insert(("P-A 031", 0), AttackId::PA031CinccinoDoTheWave);
+        m.insert(("P-A 034", 0), AttackId::PA034PiplupHeal);
+        m.insert(("P-A 072", 0), AttackId::PA072AlolanGrimerPoison);
 
         m
     };

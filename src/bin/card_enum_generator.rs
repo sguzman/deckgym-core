@@ -37,6 +37,7 @@ fn main() {
             .replace("'", "")
             .replace("♀", "F")
             .replace("♂", "M")
+            .replace(":", "")
             .replace("é", "e");
         if enum_name.ends_with("ex") {
             enum_name = enum_name[..enum_name.len() - 2].to_string();
@@ -68,7 +69,7 @@ fn print_enums(
     println!("#[derive(Debug, Clone, Copy, Hash, PartialEq, Eq, Serialize, Deserialize)]");
     println!("pub enum CardId {{");
     for (name, _) in card_map.iter() {
-        println!("    {},", name);
+        println!("    {name},");
     }
     println!("}}\n");
     println!();
@@ -77,7 +78,7 @@ fn print_enums(
     println!("    pub fn from_card_id(id: &str) -> Option<Self> {{");
     println!("        match id {{");
     for (id, enum_name) in id_to_enum.iter() {
-        println!("            \"{}\" => Some(CardId::{}),", id, enum_name);
+        println!("            \"{id}\" => Some(CardId::{enum_name}),");
     }
     println!("            _ => None,");
     println!("        }}");
@@ -86,7 +87,7 @@ fn print_enums(
     println!("    pub(crate) fn from_numeric_id(id: u16) -> Option<Self> {{");
     println!("        match id {{");
     for (numeric_id, enum_name) in numeric_id_to_enum.iter() {
-        println!("            {} => Some(CardId::{}),", numeric_id, enum_name);
+        println!("            {numeric_id} => Some(CardId::{enum_name}),");
     }
     println!("            _ => None,");
     println!("        }}");
@@ -116,10 +117,7 @@ fn print_database(card_map: &IndexMap<String, Card>) {
 fn print_card(enum_name: &str, card: &Card) {
     match card {
         Card::Pokemon(pokemon_card) => {
-            println!(
-                "        CardId::{} => Card::Pokemon(PokemonCard {{",
-                enum_name
-            );
+            println!("        CardId::{enum_name} => Card::Pokemon(PokemonCard {{");
             println!("            id: \"{}\".to_string(),", pokemon_card.id);
             println!("            name: \"{}\".to_string(),", pokemon_card.name);
             println!("            stage: {},", pokemon_card.stage);
@@ -156,10 +154,7 @@ fn print_card(enum_name: &str, card: &Card) {
             println!("        }}),");
         }
         Card::Trainer(trainer_card) => {
-            println!(
-                "        CardId::{} => Card::Trainer(TrainerCard {{",
-                enum_name
-            );
+            println!("        CardId::{enum_name} => Card::Trainer(TrainerCard {{");
             println!("            id: \"{}\".to_string(),", trainer_card.id);
             println!("            numeric_id: {},", trainer_card.numeric_id);
             println!("            name: \"{}\".to_string(),", trainer_card.name);
@@ -209,7 +204,7 @@ fn print_attacks(attacks: &[Attack]) {
 
 fn to_rust_string(string: &Option<String>) -> String {
     match string {
-        Some(string) => format!("Some(\"{}\".to_string())", string),
+        Some(string) => format!("Some(\"{string}\".to_string())"),
         None => "None".to_string(),
     }
 }
@@ -224,14 +219,14 @@ fn to_rust_ability(ability: &Option<Ability>) -> String {
 }
 fn to_rust_energy(energy_type: Option<EnergyType>) -> String {
     match energy_type {
-        Some(energy_type) => format!("Some(EnergyType::{})", energy_type),
+        Some(energy_type) => format!("Some(EnergyType::{energy_type})"),
         None => "None".to_string(),
     }
 }
 fn to_rust_energy_vec(energy_types: &Vec<EnergyType>) -> String {
     let mut result = "vec![".to_string();
     for energy_type in energy_types {
-        result.push_str(&format!("EnergyType::{},", energy_type));
+        result.push_str(&format!("EnergyType::{energy_type},"));
     }
     result.push(']');
     result
