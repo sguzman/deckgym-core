@@ -200,6 +200,8 @@ fn forecast_effect_attack(
             probabilistic_damage_attack(vec![0.25, 0.5, 0.25], vec![0, 80, 160])
         }
         AttackId::A1154HitmonleeStretchKick => direct_damage(30, true),
+        AttackId::A107Jab => active_damage_doutcome(20),
+        AttackId::A107SpecialPunch => active_damage_doutcome(40),
         AttackId::A1163GrapploctKnockBack => knock_back_attack(60),
         AttackId::A1165ArbokCorner => damage_and_turn_effect_attack(index, 1),
         AttackId::A1171NidokingPoisonHorn => damage_status_attack(90, StatusCondition::Poisoned),
