@@ -236,6 +236,7 @@ fn forecast_effect_attack(
         AttackId::A2a071ArceusExUltimateForce => {
             bench_count_attack(acting_player, state, 70, 20, None)
         }
+        AttackId::A3112AbsolPrizeCount => absol_prize_count_attack(acting_player, state),
         AttackId::A2035PiplupHeal | AttackId::PA034PiplupHeal => self_heal_attack(20, index),
         AttackId::A3a094JynxPsychic => {
             damage_based_on_opponent_energy(acting_player, state, 30, 20)
@@ -700,6 +701,15 @@ fn mawile_crunch() -> (Probabilities, Mutations) {
         }),
     ];
     (probabilities, mutations)
+}
+
+fn absol_prize_count_attack(acting_player: usize, state: &State) -> (Probabilities, Mutations) {
+    let opponent = (acting_player + 1) % 2;
+    let mut damage = 20;
+    if state.prize_cards[acting_player].len() > state.prize_cards[opponent].len() {
+        damage += 20;
+    }
+    active_damage_doutcome(damage)
 }
 
 #[cfg(test)]

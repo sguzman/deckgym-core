@@ -1998,6 +1998,35 @@
   },
   {
     "Pokemon": {
+      "id": "A3 112",
+      "name": "Absol",
+      "stage": 0,
+      "evolves_from": null,
+      "hp": 70,
+      "energy_type": "Darkness",
+      "ability": null,
+      "attacks": [
+        {
+          "energy_required": ["Darkness"],
+          "title": "Bad News",
+          "fixed_damage": 0,
+          "effect": "If the number of cards in your opponent's hand is at least 6, choose a number of cards there, without looking, until your opponent has 5 cards left. Have your opponent discard the cards you chose."
+        },
+        {
+          "energy_required": ["Darkness", "Colorless"],
+          "title": "Prize Count",
+          "fixed_damage": 20,
+          "effect": "If you have more Prize cards left than your opponent, this attack does 20 damage plus 20 more damage."
+        }
+      ],
+      "weakness": "Fighting",
+      "retreat_cost": ["Colorless"],
+      "rarity": "Rare Holo",
+      "booster_pack": "EX Dragon (ex3)"
+    }
+  },
+  {
+    "Pokemon": {
       "id": "A1 086",
       "name": "Swanna",
       "stage": 1,

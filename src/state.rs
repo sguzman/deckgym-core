@@ -31,6 +31,7 @@ pub struct State {
     pub hands: [Vec<Card>; 2],
     pub decks: [Deck; 2],
     pub discard_piles: [Vec<Card>; 2],
+    pub prize_cards: [Vec<Card>; 2],
     // 0 index is the active pokemon, 1..4 are the bench
     pub in_play_pokemon: [[Option<PlayedCard>; 4]; 2],
 
@@ -53,6 +54,7 @@ impl State {
             hands: [Vec::new(), Vec::new()],
             decks: [deck_a.clone(), deck_b.clone()],
             discard_piles: [Vec::new(), Vec::new()],
+            prize_cards: [Vec::new(), Vec::new()],
             in_play_pokemon: [[None, None, None, None], [None, None, None, None]],
             has_played_support: false,
             has_retreated: false,
