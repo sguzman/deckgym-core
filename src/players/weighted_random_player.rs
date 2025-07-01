@@ -57,5 +57,6 @@ fn get_weight(action: &SimpleAction) -> u32 {
         SimpleAction::EndTurn => 1,
         SimpleAction::Heal { .. } => 5,
         SimpleAction::Activate { .. } => 1,
+        SimpleAction::PreventDamage { .. } => 5,
     }
 }

@@ -184,6 +184,8 @@ fn forecast_effect_attack(
         AttackId::A1117AlakazamPsychic => {
             damage_based_on_opponent_energy(acting_player, state, 60, 30)
         }
+        AttackId::A1010MewtwoPsychic => damage_based_on_opponent_energy(acting_player, state, 10, 10),
+        AttackId::A1010MewtwoBarrier => self_energy_discard_and_prevent_damage_attack(vec![EnergyType::Psychic]),
         AttackId::A1127JynxPsychic => damage_based_on_opponent_energy(acting_player, state, 30, 20),
         AttackId::A1128MewtwoPowerBlast => {
             self_energy_discard_attack(index, vec![EnergyType::Psychic])
@@ -489,6 +491,18 @@ fn self_energy_discard_attack(
         for energy in to_discard.iter() {
             active.discard_energy(energy);
         }
+    })
+}
+
+fn self_energy_discard_and_prevent_damage_attack(
+    to_discard: Vec<EnergyType>,
+) -> (Probabilities, Mutations) {
+    active_damage_effect_doutcome(0, move |_, state, action| {
+        let active = state.get_active_mut(action.actor);
+        for energy in to_discard.iter() {
+            active.discard_energy(energy);
+        }
+        state.move_generation_stack.push((action.actor, vec![SimpleAction::PreventDamage { amount: 0, duration: 1 }]));
     })
 }
 

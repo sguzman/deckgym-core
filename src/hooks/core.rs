@@ -35,6 +35,7 @@ pub(crate) fn to_playable_card(card: &crate::types::Card, played_this_turn: bool
         paralyzed: false,
         asleep: false,
         cards_behind: vec![],
+        damage_prevention: None,
     }
 }
 

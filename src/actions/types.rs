@@ -52,6 +52,10 @@ pub enum SimpleAction {
     Activate {
         in_play_idx: usize,
     },
+    PreventDamage {
+        amount: u32,
+        duration: u32,
+    },
 }
 
 impl fmt::Display for SimpleAction {
@@ -97,6 +101,7 @@ impl fmt::Display for SimpleAction {
                 write!(f, "ApplyDamage({targets_str})")
             }
             SimpleAction::Activate { in_play_idx } => write!(f, "Activate({in_play_idx})"),
+            SimpleAction::PreventDamage { amount, duration } => write!(f, "PreventDamage({amount}, {duration})"),
         }
     }
 }

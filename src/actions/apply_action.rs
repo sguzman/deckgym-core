@@ -46,7 +46,8 @@ pub fn forecast_action(state: &State, action: &Action) -> (Probabilities, Mutati
         | SimpleAction::Activate { .. }
         | SimpleAction::Retreat(_)
         | SimpleAction::ApplyDamage { .. }
-        | SimpleAction::Heal { .. } => (
+        | SimpleAction::Heal { .. }
+        | SimpleAction::PreventDamage { .. } => (
             vec![1.0],
             vec![Box::new({
                 |_, mutable_state, action| {
@@ -122,6 +123,12 @@ fn apply_deterministic_action(state: &mut State, action: &Action) {
         } => {
             apply_healing(action.actor, state, *in_play_idx, *amount);
         }
+        SimpleAction::PreventDamage {
+            amount,
+            duration,
+        } => {
+            apply_prevent_damage(action.actor, state, *amount, *duration);
+        }
         _ => panic!("Deterministic Action expected"),
     }
 }
@@ -131,6 +138,13 @@ fn apply_healing(acting_player: usize, state: &mut State, position: usize, amoun
         .as_mut()
         .expect("Pokemon should be there if applying potion to it");
     active.heal(amount);
+}
+
+fn apply_prevent_damage(acting_player: usize, state: &mut State, amount: u32, duration: u32) {
+    let active = state.in_play_pokemon[acting_player][0]
+        .as_mut()
+        .expect("Active Pokemon should be there if applying damage prevention");
+    active.damage_prevention = Some((amount, state.turn_count as u32 + duration as u32));
 }
 
 fn apply_retreat(acting_player: usize, state: &mut State, bench_idx: usize, is_free: bool) {
@@ -234,7 +248,8 @@ mod tests {
                 poisoned: false,
                 paralyzed: false,
                 asleep: false,
-                cards_behind: vec![mankey.clone()]
+                cards_behind: vec![mankey.clone()],
+                damage_prevention: None,
             })
         );
 
@@ -253,7 +268,8 @@ mod tests {
                 poisoned: false,
                 paralyzed: false,
                 asleep: false,
-                cards_behind: vec![mankey.clone()]
+                cards_behind: vec![mankey.clone()],
+                damage_prevention: None,
             })
         );
         assert_eq!(
@@ -269,7 +285,8 @@ mod tests {
                 poisoned: false,
                 paralyzed: false,
                 asleep: false,
-                cards_behind: vec![mankey.clone()]
+                cards_behind: vec![mankey.clone()],
+                damage_prevention: None,
             })
         );
     }
