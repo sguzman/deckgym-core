@@ -206,6 +206,7 @@ pub struct PlayedCard {
     pub paralyzed: bool,
     pub asleep: bool,
     pub cards_behind: Vec<Card>,
+    pub damage_prevention: Option<(u32, u32)>, // (amount, expires_turn)
 }
 impl PlayedCard {
     pub(crate) fn get_id(&self) -> String {
