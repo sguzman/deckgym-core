@@ -2686,19 +2686,19 @@
       "name": "Abra",
       "stage": 0,
       "evolves_from": null,
-      "hp": 60,
+      "hp": 40,
       "energy_type": "Psychic",
       "ability": null,
       "attacks": [
         {
-          "energy_required": ["Colorless"],
-          "title": "Unknown",
-          "fixed_damage": 0,
-          "effect": "Switch this Pokémon with 1 of your Benched Pokémon."
+          "energy_required": ["Psychic"],
+          "title": "Psyshock",
+          "fixed_damage": 10,
+          "effect": "Flip a coin. If heads, your opponent's Active Pokémon is now Paralyzed."
         }
       ],
-      "weakness": "Darkness",
-      "retreat_cost": ["Colorless"],
+      "weakness": "Psychic",
+      "retreat_cost": [],
       "rarity": "◊",
       "booster_pack": "Genetic Apex (A1)"
     }

@@ -177,6 +177,9 @@ fn forecast_effect_attack(
         AttackId::A1112PincurchinThunderShock => {
             damage_chance_status_attack(30, 0.5, StatusCondition::Paralyzed)
         }
+        AttackId::A1115AbraPsyshock => {
+            damage_chance_status_attack(10, 0.5, StatusCondition::Paralyzed)
+        }
         AttackId::A1115AbraTeleport => teleport_attack(),
         AttackId::A1117AlakazamPsychic => {
             damage_based_on_opponent_energy(acting_player, state, 60, 30)

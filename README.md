@@ -18,6 +18,18 @@ We already provide several example decks in the repo you can use to get started.
 cargo run simulate example_decks/venusaur-exeggutor.txt example_decks/weezing-arbok.txt --num 1000 -v
 ```
 
+## Project Status and Roadmap
+
+This project is currently in a foundational stage, with a solid framework for simulating Pokémon TCG games. However, a significant number of cards, attacks, and abilities are yet to be implemented. The following multi-phase plan outlines the roadmap for completing the project:
+
+*   **Phase 1: Foundational Card Implementation**: Implement the attacks for all Basic Pokémon.
+*   **Phase 2: Evolution Card Implementation**: Implement the attacks for all Stage 1 and Stage 2 Pokémon.
+*   **Phase 3: Ability Implementation**: Implement all Pokémon abilities (Poké-Powers and Poké-Bodies).
+*   **Phase 4: Trainer and Special Energy Card Implementation**: Implement the logic for all Trainer and Special Energy cards.
+*   **Phase 5: Full Integration and Refinement**: Ensure all cards from `res/pokemon.csv` are present in `database.json` and fully implemented in the engine, followed by thorough testing.
+
+Progress will be tracked with git commits, ensuring the project remains stable and buildable after each change.
+
 ## Contributing
 
 New to Open Source? See [CONTRIBUTING.md](./CONTRIBUTING.md).

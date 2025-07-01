@@ -39,6 +39,22 @@ This three-step process helps catch errors early and keeps the codebase clean an
 *   `tests/`: Directory containing the test suite.
 *   `res/agent.log`: Log file for agent actions.
 
+## Project Audit and Phased Implementation Plan
+
+An audit of the project has revealed a significant number of unimplemented cards, attacks, and abilities. To manage this, a multi-phase implementation plan has been developed:
+
+*   **Phase 1: Foundational Card Implementation**: Focus on implementing the attacks for all Basic Pokémon. These are generally the simplest and will provide a solid base of implemented cards.
+
+*   **Phase 2: Evolution Card Implementation**: Implement the attacks for all Stage 1 and Stage 2 Pokémon. This will build upon the work in Phase 1 and complete the attack implementation for all Pokémon.
+
+*   **Phase 3: Ability Implementation**: Implement all Pokémon abilities (Poké-Powers and Poké-Bodies). This will be a significant undertaking, as abilities often have more complex logic than attacks.
+
+*   **Phase 4: Trainer and Special Energy Card Implementation**: Implement the logic for all Trainer and Special Energy cards. This will complete the implementation of all card types.
+
+*   **Phase 5: Full Integration and Refinement**: Ensure all cards from `res/pokemon.csv` are present in `database.json` and fully implemented in the engine. Conduct thorough testing of the entire system to identify and fix any remaining bugs or inconsistencies.
+
+Progress will be tracked with git commits, ensuring that the project remains in a stable, buildable state after each change.
+
 ## Getting Started
 
 1.  Read the `README.md` and this document carefully.
