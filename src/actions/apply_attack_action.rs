@@ -236,6 +236,7 @@ fn forecast_effect_attack(
         AttackId::A2a071ArceusExUltimateForce => {
             bench_count_attack(acting_player, state, 70, 20, None)
         }
+        AttackId::A3112AbsolBadNews => absol_bad_news_attack(acting_player, state),
         AttackId::A3112AbsolPrizeCount => absol_prize_count_attack(acting_player, state),
         AttackId::A2035PiplupHeal | AttackId::PA034PiplupHeal => self_heal_attack(20, index),
         AttackId::A3a094JynxPsychic => {
@@ -710,6 +711,27 @@ fn absol_prize_count_attack(acting_player: usize, state: &State) -> (Probabiliti
         damage += 20;
     }
     active_damage_doutcome(damage)
+}
+
+fn absol_bad_news_attack(acting_player: usize, state: &State) -> (Probabilities, Mutations) {
+    let opponent = (acting_player + 1) % 2;
+    let opponent_hand_size = state.hands[opponent].len();
+    if opponent_hand_size >= 6 {
+        let cards_to_discard = opponent_hand_size - 5;
+        active_damage_effect_doutcome(0, move |rng, state, action| {
+            let opponent = (action.actor + 1) % 2;
+            for _ in 0..cards_to_discard {
+                if state.hands[opponent].is_empty() {
+                    break;
+                }
+                let rand_idx = rng.gen_range(0..state.hands[opponent].len());
+                let card = state.hands[opponent].remove(rand_idx);
+                state.discard_piles[opponent].push(card);
+            }
+        })
+    } else {
+        active_damage_doutcome(0)
+    }
 }
 
 #[cfg(test)]

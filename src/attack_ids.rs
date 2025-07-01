@@ -81,6 +81,7 @@ pub enum AttackId {
     A2049PalkiaDimensionalStorm,
     A2119DialgaExMetallicTurbo,
     A2a071ArceusExUltimateForce,
+    A3112AbsolBadNews,
     A3112AbsolPrizeCount,
     A3a094JynxPsychic,
     PA031CinccinoDoTheWave,
@@ -218,6 +219,7 @@ lazy_static::lazy_static! {
 
         // A3a
         m.insert(("A3a 094", 0), AttackId::A3a094JynxPsychic);
+        m.insert(("A3 112", 0), AttackId::A3112AbsolBadNews);
         m.insert(("A3 112", 1), AttackId::A3112AbsolPrizeCount);
 
         // Promo
